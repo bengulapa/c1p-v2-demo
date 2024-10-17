@@ -1,3 +1,9 @@
+:root {
+  --primary: #5e2d90;
+  --accent: #a3298f;
+  --light-accent: #bf69b1;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
 }
@@ -22,4 +28,9 @@ body {
 
 .ac-chip {
   width: 16%;
+}
+
+a {
+  color: var(--light-accent);
+  text-decoration: none;
 }
