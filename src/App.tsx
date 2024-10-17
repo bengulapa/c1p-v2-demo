@@ -1,25 +1,99 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Dashboard from "./views/Dashboard";
+import "./styles/utility.css";
+import "./styles/styles.css";
+import { createTheme, CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#5e2d90",
+    },
+    secondary: {
+      main: "#a3298f",
+    },
+  },
+  typography: {
+    fontFamily: "'Open Sans', sans-serif",
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        size: "medium",
+      },
+    },
+    MuiFilledInput: {
+      defaultProps: {
+        margin: "dense",
+      },
+    },
+    MuiFormControl: {
+      defaultProps: {
+        size: "small",
+      },
+    },
+    MuiFormHelperText: {
+      defaultProps: {
+        margin: "dense",
+      },
+    },
+    MuiIconButton: {
+      defaultProps: {
+        size: "small",
+      },
+    },
+    MuiInputBase: {
+      defaultProps: {
+        margin: "dense",
+      },
+    },
+    MuiInputLabel: {
+      defaultProps: {
+        margin: "dense",
+        size: "small",
+      },
+    },
+    MuiListItem: {
+      defaultProps: {
+        dense: true,
+      },
+    },
+    MuiOutlinedInput: {
+      defaultProps: {
+        size: "small",
+      },
+    },
+    MuiFab: {
+      defaultProps: {
+        size: "small",
+      },
+    },
+    MuiTable: {
+      defaultProps: {
+        size: "small",
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        margin: "dense",
+      },
+    },
+    MuiToolbar: {
+      defaultProps: {
+        variant: "dense",
+      },
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <Dashboard />
+      </ThemeProvider>
+    </>
   );
 }
 

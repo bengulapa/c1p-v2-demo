@@ -1,0 +1,25 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  margin: 0.75rem 1rem 0.5rem 1rem;
+}
+
+.list-label {
+  display: inline-block;
+  text-align: left;
+  width: 50%;
+}
+
+.list-value {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+}
+
+.ac-chip {
+  width: 16%;
+}
