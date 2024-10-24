@@ -1,8 +1,4 @@
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Box,
   Button,
   Card,
@@ -19,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import AcceptanceCriteria from "./AcceptanceCriteria";
 import Notes from "./Notes";
 import PageHeader from "./PageHeader";
 
@@ -156,152 +153,7 @@ const CreditDecision = () => {
         <Grid2 size={6}>
           <Card className="mb-3">
             <CardContent>
-              <Typography gutterBottom>Acceptance Criteria</Typography>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
-                >
-                  <div className="d-flex justify-content-between align-items-center w-100">
-                    <Typography variant="overline" className="list-label">
-                      Criteria
-                    </Typography>
-                    <Chip
-                      label="Active"
-                      color="success"
-                      className="ac-chip"
-                    ></Chip>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
-                >
-                  <div className="d-flex justify-content-between align-items-center w-100">
-                    <Typography variant="overline" className="list-label">
-                      Criteria
-                    </Typography>
-                    <Chip label="515" color="error" className="ac-chip"></Chip>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
-                >
-                  <div className="d-flex justify-content-between align-items-center w-100">
-                    <Typography variant="overline" className="list-label">
-                      Criteria
-                    </Typography>
-                    <Chip label="Unknown" className="ac-chip"></Chip>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
-                >
-                  <div className="d-flex justify-content-between align-items-center w-100">
-                    <Typography variant="overline" className="list-label">
-                      Criteria
-                    </Typography>
-                    <Chip label="-1" color="error" className="ac-chip"></Chip>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
-                >
-                  <div className="d-flex justify-content-between align-items-center w-100">
-                    <Typography variant="overline" className="list-label">
-                      Criteria
-                    </Typography>
-                    <Chip label="2021" color="error" className="ac-chip"></Chip>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
-                >
-                  <div className="d-flex justify-content-between align-items-center w-100">
-                    <Typography variant="overline" className="list-label">
-                      Criteria
-                    </Typography>
-                    <Chip
-                      label="650"
-                      color="success"
-                      className="ac-chip"
-                    ></Chip>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
-                >
-                  <div className="d-flex justify-content-between align-items-center w-100">
-                    <Typography variant="overline" className="list-label">
-                      Criteria
-                    </Typography>
-                    <Chip
-                      label="Yes"
-                      color="success"
-                      className="ac-chip"
-                    ></Chip>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </AccordionDetails>
-              </Accordion>
+              <AcceptanceCriteria />
             </CardContent>
           </Card>
 

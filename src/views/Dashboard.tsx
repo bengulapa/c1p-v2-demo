@@ -4,6 +4,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import RememberMeIcon from "@mui/icons-material/RememberMe";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -16,12 +17,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { CSSObject, styled, Theme, useTheme } from "@mui/material/styles";
 import * as React from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import ApplicationDetails from "../components/ApplicationDetails";
 import Attachments from "../components/Attachments";
 import BrokerComms from "../components/BrokerComms";
 import CreditDecision from "../components/CreditDecision";
 import CustomerDetails from "../components/CustomerDetails";
+import Overview from "../components/Overview";
+import OverviewX from "../components/OverviewX";
 import Header from "../layout/Header";
 
 const drawerWidth = 240;
@@ -82,6 +85,11 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const menuItems = [
+  {
+    text: "Overview",
+    icon: <SummarizeIcon />,
+    path: "overview",
+  },
   {
     text: "Application Details",
     icon: <CreditScoreIcon />,
@@ -178,6 +186,9 @@ const Dashboard = () => {
         <DrawerHeader />
 
         <Routes>
+          <Route path="/" element={<Navigate to="/overview" />} />
+          <Route path="/overview" element={<Overview />} />
+          <Route path="/overviewx" element={<OverviewX />} />
           <Route path="/application" element={<ApplicationDetails />} />
           <Route path="/customer" element={<CustomerDetails />} />
           <Route path="/decision" element={<CreditDecision />} />

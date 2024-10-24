@@ -49,7 +49,7 @@ const ApplicationDetails = () => {
                     <Typography variant="overline" className="list-label">
                       Product:
                     </Typography>
-                    <span className="list-value">Chattlel Mortgage</span>
+                    <span className="list-value">Chattel Mortgage</span>
                   </div>
                   <div>
                     <Typography variant="overline" className="list-label">
