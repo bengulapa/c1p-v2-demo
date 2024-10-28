@@ -18,12 +18,14 @@ import {
 import ReactSpeedometer, {
   CustomSegmentLabelPosition,
 } from "react-d3-speedometer";
-import { Link, useParams } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import AcceptanceCriteria from "./AcceptanceCriteria";
 import Checkpoints from "./Checkpoints";
+import { formatCurrency } from "../helpers/formatters";
 
 const Overview = () => {
-  const { loanId } = useParams();
+  const context: any = useOutletContext();
+  const loan = context.loan;
 
   return (
     <>
@@ -32,7 +34,7 @@ const Overview = () => {
           <Card variant="outlined">
             <CardHeader
               action={
-                <Link to={`/${loanId}/application`}>
+                <Link to={`/${loan.creditArrangementId}/application`}>
                   <IconButton aria-label="settings">
                     <ArrowOutwardIcon />
                   </IconButton>
@@ -49,7 +51,7 @@ const Overview = () => {
                 <div className="d-flex justify-content-between">
                   <Typography variant="caption">Finance amount</Typography>
                   <Typography variant="body2" color="secondary">
-                    $17,480.00
+                    {formatCurrency(loan.financeAmount)}
                   </Typography>
                 </div>
                 <div className="d-flex justify-content-between">
@@ -65,30 +67,41 @@ const Overview = () => {
                     Brokerage incl. GST (8%)
                   </Typography>
                   <Typography variant="body2" color="secondary">
-                    $1,280.00
+                    {formatCurrency(loan.brokerageAmount)}
                   </Typography>
                 </div>
                 <div className="d-flex justify-content-between">
                   <Typography variant="caption">Repayment amount</Typography>
                   <Typography variant="body2" color="secondary">
-                    $350.77 Monthly
+                    {formatCurrency(loan.repaymentAmount)}{" "}
+                    {loan.repaymentFrequency}
                   </Typography>
                 </div>
                 <div className="d-flex justify-content-between">
                   <Typography variant="caption">Base interest rate</Typography>
                   <Typography variant="body2" color="secondary">
-                    8.5%
+                    {loan.loanInterestRate}%
                   </Typography>
                 </div>
                 <Stack direction="row" sx={{ mt: 1, mr: 1 }} spacing={1}>
                   <Tooltip title="Assessment">
-                    <Chip label="Low Doc" color="success" />
+                    <Chip label={loan.assessmentType} color="success" />
                   </Tooltip>
                   <Tooltip title="Customer Strategy">
-                    <Chip label="A+" color="success" />
+                    <Chip
+                      label={loan.pricingStrategy}
+                      color={
+                        loan.pricingStrategy === "A+" ? "success" : "default"
+                      }
+                    />
                   </Tooltip>
                   <Tooltip title="Introducer Program">
-                    <Chip label="Partner" color="success" />
+                    <Chip
+                      label={loan.program.name}
+                      color={
+                        loan.program.name === "Partner" ? "success" : "default"
+                      }
+                    />
                   </Tooltip>
                 </Stack>
               </div>
@@ -99,7 +112,7 @@ const Overview = () => {
           <Card variant="outlined">
             <CardHeader
               action={
-                <Link to={`/${loanId}/application?tab=asset`}>
+                <Link to={`/${loan.creditArrangementId}/application?tab=asset`}>
                   <IconButton aria-label="more details">
                     <ArrowOutwardIcon />
                   </IconButton>
@@ -146,13 +159,26 @@ const Overview = () => {
 
                 <Stack direction="row" sx={{ mt: 1, mr: 1 }} spacing={1}>
                   <Tooltip title="Overall risk">
-                    <Chip label="High Risk" color="error" />
+                    <Chip
+                      label={loan.overallRisk}
+                      color={
+                        loan.overallRisk === "High Risk" ? "error" : "success"
+                      }
+                    />
                   </Tooltip>
                   <Tooltip title="RedBook Private">
-                    <Chip label="Private: $49,450" color="error" />
+                    <Chip
+                      label={`Private ${formatCurrency(loan.redBookValuation.private)}`}
+                      color="error"
+                      variant="outlined"
+                    />
                   </Tooltip>
                   <Tooltip title="RedBook Trade-in">
-                    <Chip label="Trade-in: $42,850" color="error" />
+                    <Chip
+                      label={`Trade-in ${formatCurrency(loan.redBookValuation.tradeIn)}`}
+                      color="error"
+                      variant="outlined"
+                    />
                   </Tooltip>
                 </Stack>
               </div>
@@ -162,7 +188,7 @@ const Overview = () => {
         <Grid2 size={4}>
           <Box className="mx-auto" sx={{ height: 170, width: 300 }}>
             <ReactSpeedometer
-              value={700}
+              value={loan.recommendationScore}
               currentValueText="Recommendation"
               customSegmentStops={[0, 333, 666, 1000]}
               customSegmentLabels={[

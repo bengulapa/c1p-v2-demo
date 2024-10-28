@@ -2,12 +2,14 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 import { Outlet, useParams } from "react-router-dom";
+import applications from "../data/applications.json";
 import { DrawerHeader } from "../layout/DrawerHeader";
 import Header from "../layout/Header";
 import SideMenu from "../layout/SideMenu";
 
 const Dashboard = () => {
-  const { loaId } = useParams();
+  const { loanId } = useParams();
+  const loan = applications.find((a) => a.creditArrangementId === loanId);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -21,7 +23,7 @@ const Dashboard = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Header open={open} handleDrawerOpen={handleDrawerOpen} />
+      <Header open={open} handleDrawerOpen={handleDrawerOpen} loan={loan} />
 
       <SideMenu
         open={open}
@@ -32,7 +34,7 @@ const Dashboard = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
 
-        <Outlet />
+        <Outlet context={{ loan: loan }} />
       </Box>
     </Box>
   );

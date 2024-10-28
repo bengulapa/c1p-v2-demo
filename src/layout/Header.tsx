@@ -1,14 +1,6 @@
-import {
-  Avatar,
-  IconButton,
-  styled,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { IconButton, styled, Toolbar, Typography } from "@mui/material";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import AccountSettings from "../components/AccountSettings";
 
 const drawerWidth = 240;
@@ -16,6 +8,7 @@ const drawerWidth = 240;
 interface AppBarProps extends MuiAppBarProps {
   open: boolean;
   handleDrawerOpen?: () => void;
+  loan?: any;
 }
 
 const AppBar = styled(MuiAppBar, {
@@ -41,7 +34,7 @@ const AppBar = styled(MuiAppBar, {
   ],
 }));
 
-const Header = ({ open, handleDrawerOpen }: AppBarProps) => {
+const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
   return (
     <AppBar position="fixed" open={open} color="primary">
       <Toolbar>
@@ -60,7 +53,9 @@ const Header = ({ open, handleDrawerOpen }: AppBarProps) => {
           <MenuIcon />
         </IconButton>
         <div className="d-flex justify-content-between align-items-center w-100">
-          <Typography variant="h6">CA0000000000 - Gula Patisserie</Typography>
+          <Typography variant="h6">
+            {loan.creditArrangementId} - {loan.entityName}
+          </Typography>
 
           <div className="d-flex">
             <Typography variant="caption" className="mr-3">
