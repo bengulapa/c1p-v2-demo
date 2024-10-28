@@ -2,9 +2,11 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Card, CardContent, Grid2, Tab, Typography } from "@mui/material";
 import React from "react";
 import PageHeader from "./PageHeader";
+import { useQuery } from "../hooks/useQuery";
 
 const ApplicationDetails = () => {
-  const [value, setValue] = React.useState("1");
+  let query = useQuery();
+  const [value, setValue] = React.useState(query.get("tab") || "loan");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -16,10 +18,10 @@ const ApplicationDetails = () => {
 
       <TabContext value={value}>
         <TabList onChange={handleChange}>
-          <Tab label="Loan" value="1" />
-          <Tab label="Assets" value="2" />
+          <Tab label="Loan" value="loan" />
+          <Tab label="Asset" value="asset" />
         </TabList>
-        <TabPanel value="1">
+        <TabPanel value="loan">
           <Grid2 container spacing={2}>
             <Grid2 size={6}>
               <Card>
@@ -181,7 +183,7 @@ const ApplicationDetails = () => {
             </Grid2>
           </Grid2>
         </TabPanel>
-        <TabPanel value="2">
+        <TabPanel value="asset">
           <Grid2 container spacing={2}>
             <Grid2 size={6}>
               <Card>
@@ -239,6 +241,12 @@ const ApplicationDetails = () => {
               <Card>
                 <CardContent>
                   <Typography gutterBottom>Valuations</Typography>
+
+                  <img
+                    className="w-100"
+                    src={`${process.env.PUBLIC_URL}/assets/images/redbook-valuation-cert-sample.png`}
+                    alt="red book valuation"
+                  />
                 </CardContent>
               </Card>
             </Grid2>
