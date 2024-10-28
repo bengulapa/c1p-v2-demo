@@ -14,6 +14,7 @@ import React from "react";
 
 interface IProps {
   updateScore: (value: number) => void;
+  loan: any;
 }
 
 const assetChecklist = [
@@ -22,6 +23,7 @@ const assetChecklist = [
   "Is asset backed?",
   "Is asset age at EOT allowed?",
   "Is the supplier accredited?",
+  "Is Asset Aligned to Business Activity?",
 ];
 
 const guarantorChecklist = [
@@ -34,7 +36,22 @@ const guarantorChecklist = [
   "Velocity",
 ];
 
-const Checkpoints = ({ updateScore }: IProps) => {
+const applicantChecklist = [
+  "Is ABN Active?",
+  "Minimum required ABN > 24 months?",
+  "Minimum GST registration > 1 year?",
+  "Minimum borrower Veda score > 500?",
+];
+
+const arrangementChecklist = [
+  "Total obligor exposure less than threshold?",
+  "Minimum required deposit rate at least 10%?",
+  "Skilled trade?",
+];
+
+const biometricsChecklist = ["Biometrics passed?"];
+
+const Checkpoints = ({ updateScore, loan }: IProps) => {
   const [checked, setChecked] = React.useState([""]);
 
   const handleToggle = (value: string) => () => {
@@ -52,6 +69,11 @@ const Checkpoints = ({ updateScore }: IProps) => {
     setChecked(newChecked);
   };
 
+  const getCheckedTotal = (prefix: string): number => {
+    const x = checked.filter((v) => v.startsWith(prefix)).length * 20;
+    return x;
+  };
+
   return (
     <>
       <Typography gutterBottom>Checkpoints</Typography>
@@ -62,7 +84,11 @@ const Checkpoints = ({ updateScore }: IProps) => {
             <Typography variant="overline" className="list-label">
               Qualify Asset
             </Typography>
-            <Chip label="PASS" color="success" className="ac-chip"></Chip>
+            <Chip
+              label={getCheckedTotal("a") > 50 ? "PASS" : "FAIL"}
+              color={getCheckedTotal("a") > 50 ? "success" : "error"}
+              className="ac-chip"
+            ></Chip>
           </div>
         </AccordionSummary>
         <AccordionDetails>
@@ -93,7 +119,10 @@ const Checkpoints = ({ updateScore }: IProps) => {
             <Typography variant="overline" className="list-label">
               KYC & Guarantor Check
             </Typography>
-            <Chip label="PASS" color="success"></Chip>
+            <Chip
+              label={getCheckedTotal("g") > 60 ? "PASS" : "FAIL"}
+              color={getCheckedTotal("g") > 60 ? "success" : "error"}
+            ></Chip>
           </div>
         </AccordionSummary>
         <AccordionDetails>
@@ -124,31 +153,32 @@ const Checkpoints = ({ updateScore }: IProps) => {
             <Typography variant="overline" className="list-label">
               Applicant Check
             </Typography>
-            <Chip label="PASS" color="success" className="ac-chip"></Chip>
+            <Chip
+              label={getCheckedTotal("b") >= 40 ? "PASS" : "FAIL"}
+              color={getCheckedTotal("b") >= 40 ? "success" : "error"}
+              className="ac-chip"
+            ></Chip>
           </div>
         </AccordionSummary>
         <AccordionDetails>
           <List dense disablePadding>
-            <ListItem
-              secondaryAction={<Chip label="Active" color="success"></Chip>}
-            >
-              <ListItemText primary="Is ABN Active?" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="32 months" color="success"></Chip>}
-            >
-              <ListItemText primary="Minimum required ABN (24 months)" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="1.2 years" color="success"></Chip>}
-            >
-              <ListItemText primary="Minimum GST registration (1 year)" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="650" color="success"></Chip>}
-            >
-              <ListItemText primary="Minimum borrower Veda score (500)" />
-            </ListItem>
+            {applicantChecklist.map((v, i) => {
+              const key = "b" + i;
+              return (
+                <ListItem
+                  key={key}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      onChange={handleToggle(key)}
+                      checked={checked.includes(key)}
+                    />
+                  }
+                >
+                  <ListItemText primary={v} />
+                </ListItem>
+              );
+            })}
           </List>
         </AccordionDetails>
       </Accordion>
@@ -158,48 +188,72 @@ const Checkpoints = ({ updateScore }: IProps) => {
             <Typography variant="overline" className="list-label">
               Arrangement Check
             </Typography>
-            <Chip label="PASS" color="success" className="ac-chip"></Chip>
+            <Chip
+              label={getCheckedTotal("l") >= 40 ? "PASS" : "FAIL"}
+              color={getCheckedTotal("l") >= 40 ? "success" : "error"}
+              className="ac-chip"
+            ></Chip>
           </div>
         </AccordionSummary>
         <AccordionDetails>
           <List dense disablePadding>
-            <ListItem
-              secondaryAction={<Chip label="$25,411.02" color="success"></Chip>}
-            >
-              <ListItemText primary="Total obligor exposure" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="$5,411.02" color="success"></Chip>}
-            >
-              <ListItemText primary="Minimum required deposit rate (10%)" />
-            </ListItem>
+            {arrangementChecklist.map((v, i) => {
+              const key = "l" + i;
+              return (
+                <ListItem
+                  key={key}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      onChange={handleToggle(key)}
+                      checked={checked.includes(key)}
+                    />
+                  }
+                >
+                  <ListItemText primary={v} />
+                </ListItem>
+              );
+            })}
           </List>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <div className="d-flex justify-content-between align-items-center w-100">
-            <Typography variant="overline" className="list-label">
-              Biometrics Check
-            </Typography>
-            <Chip label="PASS" color="success" className="ac-chip"></Chip>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          <List dense disablePadding>
-            <ListItem
-              secondaryAction={<Chip label="$25,411.02" color="success"></Chip>}
-            >
-              <ListItemText primary="Total obligor exposure" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="$5,411.02" color="success"></Chip>}
-            >
-              <ListItemText primary="Minimum required deposit rate (10%)" />
-            </ListItem>
-          </List>
-        </AccordionDetails>
-      </Accordion>
+      {loan.overallRisk === "High Risk" && (
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <div className="d-flex justify-content-between align-items-center w-100">
+              <Typography variant="overline" className="list-label">
+                Biometrics Check
+              </Typography>
+              <Chip
+                label={getCheckedTotal("bio") >= 20 ? "PASS" : "FAIL"}
+                color={getCheckedTotal("bio") >= 20 ? "success" : "error"}
+                className="ac-chip"
+              ></Chip>
+            </div>
+          </AccordionSummary>
+          <AccordionDetails>
+            <List dense disablePadding>
+              {biometricsChecklist.map((v, i) => {
+                const key = "bio" + i;
+                return (
+                  <ListItem
+                    key={key}
+                    secondaryAction={
+                      <Checkbox
+                        edge="end"
+                        onChange={handleToggle(key)}
+                        checked={checked.includes(key)}
+                      />
+                    }
+                  >
+                    <ListItemText primary={v} />
+                  </ListItem>
+                );
+              })}
+            </List>
+          </AccordionDetails>
+        </Accordion>
+      )}
     </>
   );
 };

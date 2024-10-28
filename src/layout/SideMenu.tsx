@@ -19,7 +19,7 @@ import {
   Theme,
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { DrawerHeader } from "./DrawerHeader";
 
 interface IProps {
@@ -94,6 +94,9 @@ const menuItems = [
 ];
 
 const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
+  const { pathname } = useLocation();
+  console.log(pathname);
+
   return (
     <>
       <Drawer variant="permanent" open={open}>
@@ -111,6 +114,7 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
           {menuItems.map((item, index) => (
             <ListItem key={index} disablePadding sx={{ display: "block" }}>
               <ListItemButton
+                selected={pathname.includes(item.path)}
                 component={Link}
                 to={item.path}
                 sx={[

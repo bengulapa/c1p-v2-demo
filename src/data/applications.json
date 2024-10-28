@@ -277,7 +277,8 @@
       "tradeIn": 42850
     },
     "recommendationScore": 777,
-    "assessmentType": "Low Doc"
+    "assessmentType": "Low Doc",
+    "creditStatus": "Under Assessment"
   },
   {
     "creditArrangementId": "CA02",
@@ -540,6 +541,7 @@
       "private": 59450,
       "tradeIn": 662850
     },
-    "recommendationScore": 300
+    "recommendationScore": 300,
+    "creditStatus": "Missing Information"
   }
 ]

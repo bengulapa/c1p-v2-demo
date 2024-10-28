@@ -1,7 +1,18 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import { IconButton, styled, Toolbar, Typography } from "@mui/material";
+import {
+  Badge,
+  Box,
+  Drawer,
+  IconButton,
+  styled,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import AccountSettings from "../components/AccountSettings";
+import React from "react";
+import PendingIcon from "@mui/icons-material/Pending";
+import ProcessList from "../components/ProcessList";
 
 const drawerWidth = 240;
 
@@ -35,6 +46,12 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
+  const [openDrawer, setOpenDrawer] = React.useState(false);
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpenDrawer(newOpen);
+  };
+
   return (
     <AppBar position="fixed" open={open} color="primary">
       <Toolbar>
@@ -67,10 +84,28 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
               <br /> Status: Credit Status / Settlement Status
             </Typography>
 
+            <IconButton
+              color="secondary"
+              className="d-flex flex-column"
+              onClick={toggleDrawer(!openDrawer)}
+            >
+              <Badge badgeContent={2} color="error">
+                <PendingIcon />
+              </Badge>
+            </IconButton>
+
             <AccountSettings />
           </div>
         </div>
       </Toolbar>
+      <Drawer open={openDrawer} onClose={toggleDrawer(false)} anchor="right">
+        <Box
+          sx={{ width: 320, mt: 5, pt: 5, px: 1, height: "100%" }}
+          role="presentation"
+        >
+          <ProcessList />
+        </Box>
+      </Drawer>
     </AppBar>
   );
 };

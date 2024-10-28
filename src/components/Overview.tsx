@@ -1,16 +1,12 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
   Chip,
   Grid2,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
   Stack,
   Tooltip,
   Typography,
@@ -22,6 +18,7 @@ import ReactSpeedometer, {
 import { Link, useOutletContext } from "react-router-dom";
 import { formatCurrency } from "../helpers/formatters";
 import AcceptanceCriteria from "./AcceptanceCriteria";
+import Actions from "./Actions";
 import Checkpoints from "./Checkpoints";
 
 const Overview = () => {
@@ -223,44 +220,14 @@ const Overview = () => {
         <Grid2 size={3}>
           <Card>
             <CardContent>
-              <Typography gutterBottom>Actions</Typography>
-
-              <List dense>
-                <ListItem
-                  secondaryAction={
-                    <Button variant="outlined" size="small" color="secondary">
-                      Update
-                    </Button>
-                  }
-                >
-                  <ListItemText primary="Status" />
-                </ListItem>
-                <ListItem
-                  secondaryAction={
-                    <Button variant="outlined" size="small" color="secondary">
-                      Set
-                    </Button>
-                  }
-                >
-                  <ListItemText primary="Conditions" />
-                </ListItem>
-                <ListItem
-                  secondaryAction={
-                    <Button variant="outlined" size="small" color="secondary">
-                      Update
-                    </Button>
-                  }
-                >
-                  <ListItemText primary="ANZSIC Codes" secondary="Not set" />
-                </ListItem>
-              </List>
+              <Actions loan={loan} />
             </CardContent>
           </Card>
         </Grid2>
         <Grid2 size={5}>
           <Card>
             <CardContent>
-              <Checkpoints updateScore={updateScore} />
+              <Checkpoints loan={loan} updateScore={updateScore} />
             </CardContent>
           </Card>
         </Grid2>

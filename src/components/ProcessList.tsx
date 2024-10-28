@@ -10,16 +10,27 @@ import {
 } from "@mui/material";
 import React from "react";
 
+const inProgressList = [
+  "ID authentication service triggered",
+  "IDMatrix report rerun",
+];
+
+const doneList = [
+  "Equifax Apply enquiry requested",
+  "IDMatrix report requested",
+  "Third-party service triggered",
+];
+
 const ProcessList = () => {
   return (
     <>
       <Typography>In Progress</Typography>
       <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        {[3, 4].map((value) => {
-          const labelId = `checkbox-list-label-${value}`;
+        {inProgressList.map((value, index) => {
+          const labelId = `checkbox-list-label-${index}`;
 
           return (
-            <ListItem key={value} disablePadding>
+            <ListItem key={index} disablePadding>
               <ListItemButton role={undefined} dense>
                 <ListItemIcon>
                   <Checkbox
@@ -30,7 +41,7 @@ const ProcessList = () => {
                     inputProps={{ "aria-labelledby": labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={`Process ${value + 1}`} />
+                <ListItemText id={labelId} primary={value} />
               </ListItemButton>
             </ListItem>
           );
@@ -40,11 +51,11 @@ const ProcessList = () => {
 
       <Typography>Done</Typography>
       <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        {[0, 1, 2].map((value) => {
-          const labelId = `checkbox-list-label-${value}`;
+        {doneList.map((value, index) => {
+          const labelId = `checkbox-list-label-${index}`;
 
           return (
-            <ListItem key={value} disablePadding>
+            <ListItem key={index} disablePadding>
               <ListItemButton role={undefined} dense>
                 <ListItemIcon>
                   <Checkbox
@@ -55,7 +66,7 @@ const ProcessList = () => {
                     inputProps={{ "aria-labelledby": labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={`Process ${value + 1}`} />
+                <ListItemText id={labelId} primary={value} />
               </ListItemButton>
             </ListItem>
           );
