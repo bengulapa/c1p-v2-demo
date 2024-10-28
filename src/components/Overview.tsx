@@ -15,17 +15,23 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import React from "react";
 import ReactSpeedometer, {
   CustomSegmentLabelPosition,
 } from "react-d3-speedometer";
 import { Link, useOutletContext } from "react-router-dom";
+import { formatCurrency } from "../helpers/formatters";
 import AcceptanceCriteria from "./AcceptanceCriteria";
 import Checkpoints from "./Checkpoints";
-import { formatCurrency } from "../helpers/formatters";
 
 const Overview = () => {
   const context: any = useOutletContext();
   const loan = context.loan;
+  const [score, setScore] = React.useState(loan.recommendationScore);
+
+  const updateScore = (value: number) => {
+    setScore(score + value);
+  };
 
   return (
     <>
@@ -188,7 +194,7 @@ const Overview = () => {
         <Grid2 size={4}>
           <Box className="mx-auto" sx={{ height: 170, width: 300 }}>
             <ReactSpeedometer
-              value={loan.recommendationScore}
+              value={score}
               currentValueText="Recommendation"
               customSegmentStops={[0, 333, 666, 1000]}
               customSegmentLabels={[
@@ -254,7 +260,7 @@ const Overview = () => {
         <Grid2 size={5}>
           <Card>
             <CardContent>
-              <Checkpoints />
+              <Checkpoints updateScore={updateScore} />
             </CardContent>
           </Card>
         </Grid2>

@@ -3,14 +3,55 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Checkbox,
   Chip,
   List,
   ListItem,
   ListItemText,
   Typography,
 } from "@mui/material";
+import React from "react";
 
-const Checkpoints = () => {
+interface IProps {
+  updateScore: (value: number) => void;
+}
+
+const assetChecklist = [
+  "Is industry allowed?",
+  "Is asset allowed?",
+  "Is asset backed?",
+  "Is asset age at EOT allowed?",
+  "Is the supplier accredited?",
+];
+
+const guarantorChecklist = [
+  "Is score above minimum?",
+  "KYC result",
+  "DVS pass",
+  "Fraud Check",
+  "Politically Exposed Person",
+  "Sanctions",
+  "Velocity",
+];
+
+const Checkpoints = ({ updateScore }: IProps) => {
+  const [checked, setChecked] = React.useState([""]);
+
+  const handleToggle = (value: string) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+      updateScore(20);
+    } else {
+      newChecked.splice(currentIndex, 1);
+      updateScore(-20);
+    }
+
+    setChecked(newChecked);
+  };
+
   return (
     <>
       <Typography gutterBottom>Checkpoints</Typography>
@@ -26,31 +67,23 @@ const Checkpoints = () => {
         </AccordionSummary>
         <AccordionDetails>
           <List dense disablePadding>
-            <ListItem
-              secondaryAction={<Chip label="No" color="success"></Chip>}
-            >
-              <ListItemText primary="Is industry restricted?" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="No" color="success"></Chip>}
-            >
-              <ListItemText primary="Is asset restricted?" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Yes" color="success"></Chip>}
-            >
-              <ListItemText primary="Is asset backed?" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Yes" color="success"></Chip>}
-            >
-              <ListItemText primary="Is asset age at EOT allowed?" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Yes" color="success"></Chip>}
-            >
-              <ListItemText primary="Is the supplier accredited?" />
-            </ListItem>
+            {assetChecklist.map((v, i) => {
+              const key = "a" + i;
+              return (
+                <ListItem
+                  key={key}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      onChange={handleToggle(key)}
+                      checked={checked.includes(key)}
+                    />
+                  }
+                >
+                  <ListItemText primary={v} />
+                </ListItem>
+              );
+            })}
           </List>
         </AccordionDetails>
       </Accordion>
@@ -65,41 +98,23 @@ const Checkpoints = () => {
         </AccordionSummary>
         <AccordionDetails>
           <List dense disablePadding>
-            <ListItem
-              secondaryAction={<Chip label="Yes" color="success"></Chip>}
-            >
-              <ListItemText primary="Is score above minimum?" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Pass" color="success"></Chip>}
-            >
-              <ListItemText primary="KYC result" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Pass" color="success"></Chip>}
-            >
-              <ListItemText primary="DVS pass" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Pass" color="success"></Chip>}
-            >
-              <ListItemText primary="Fraud Check" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Pass" color="success"></Chip>}
-            >
-              <ListItemText primary="Politically Exposed Person" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Pass" color="success"></Chip>}
-            >
-              <ListItemText primary="Sanctions" />
-            </ListItem>
-            <ListItem
-              secondaryAction={<Chip label="Pass" color="success"></Chip>}
-            >
-              <ListItemText primary="Velocity" />
-            </ListItem>
+            {guarantorChecklist.map((v, i) => {
+              const key = "g" + i;
+              return (
+                <ListItem
+                  key={key}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      onChange={handleToggle(key)}
+                      checked={checked.includes(key)}
+                    />
+                  }
+                >
+                  <ListItemText primary={v} />
+                </ListItem>
+              );
+            })}
           </List>
         </AccordionDetails>
       </Accordion>
