@@ -20,6 +20,7 @@ import { formatCurrency } from "../helpers/formatters";
 import AcceptanceCriteria from "./AcceptanceCriteria";
 import Actions from "./Actions";
 import Checkpoints from "./Checkpoints";
+import GaugeChart from "./GaugeChart";
 
 const Overview = () => {
   const context: any = useOutletContext();
@@ -190,28 +191,7 @@ const Overview = () => {
         </Grid2>
         <Grid2 size={4}>
           <Box className="mx-auto" sx={{ height: 170, width: 300 }}>
-            <ReactSpeedometer
-              value={score}
-              currentValueText="Recommendation"
-              customSegmentStops={[0, 333, 666, 1000]}
-              customSegmentLabels={[
-                {
-                  text: "Decline",
-                  position: CustomSegmentLabelPosition.Outside,
-                  color: "#555",
-                },
-                {
-                  text: "Review",
-                  position: CustomSegmentLabelPosition.Outside,
-                  color: "#555",
-                },
-                {
-                  text: "Approve",
-                  position: CustomSegmentLabelPosition.Outside,
-                  color: "#555",
-                },
-              ]}
-            />
+            <GaugeChart score={score} />
           </Box>
         </Grid2>
       </Grid2>

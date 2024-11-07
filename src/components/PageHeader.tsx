@@ -1,19 +1,11 @@
-import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import { Box, Button, Drawer, Typography } from "@mui/material";
-import React from "react";
-import AuditLogs from "./AuditLogs";
+import { Box, Typography } from "@mui/material";
+import GaugeChart from "./GaugeChart";
 
 interface IProps {
   title: string;
 }
 
 const PageHeader = ({ title }: IProps) => {
-  const [open, setOpen] = React.useState(false);
-
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
-  };
-
   return (
     <>
       <Box className="d-flex justify-content-between align-items-center pr-3">
@@ -22,24 +14,11 @@ const PageHeader = ({ title }: IProps) => {
         </Typography>
 
         <div className="d-flex ">
-          <Button
-            color="secondary"
-            className="d-flex flex-column"
-            onClick={toggleDrawer(true)}
-          >
-            <ReceiptLongIcon />
-            <span>Audit Logs</span>
-          </Button>
+          <Box className="mx-auto" sx={{ height: 150, width: 150 }}>
+            <GaugeChart score={100} width={170} height={170} />
+          </Box>
         </div>
       </Box>
-      <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
-        <Box
-          sx={{ width: 320, mt: 5, pt: 5, px: 1, height: "100%" }}
-          role="presentation"
-        >
-          <AuditLogs />
-        </Box>
-      </Drawer>
     </>
   );
 };

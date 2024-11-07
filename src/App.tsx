@@ -10,7 +10,6 @@ import BrokerComms from "./components/BrokerComms";
 import CreditDecision from "./components/CreditDecision";
 import CustomerDetails from "./components/CustomerDetails";
 import Overview from "./components/Overview";
-import OverviewX from "./components/OverviewX";
 import SearchLoan from "./views/SearchLoan";
 
 const theme = createTheme({
@@ -105,7 +104,6 @@ function App() {
           <Route path="/search" element={<SearchLoan />} />
           <Route path="/:loanId" element={<Dashboard />}>
             <Route path="overview" element={<Overview />} />
-            <Route path="overviewx" element={<OverviewX />} />
             <Route path="application" element={<ApplicationDetails />} />
             <Route path="customer" element={<CustomerDetails />} />
             <Route path="decision" element={<CreditDecision />} />

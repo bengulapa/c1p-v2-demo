@@ -40,12 +40,21 @@ const Actions = ({ loan }: IProps) => {
         <ListItem
           disablePadding
           secondaryAction={
-            <Button variant="outlined" size="small" color="secondary">
-              Set
-            </Button>
+            <a
+              href="https://gbg-greenid.com/solutions/identity-verification/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button variant="outlined" size="small" color="secondary">
+                Send
+              </Button>
+            </a>
           }
         >
-          <ListItemText primary="Conditions" />
+          <ListItemText
+            primary="Verify Identity"
+            secondary="Send greenID Link"
+          />
         </ListItem>
         <ListItem
           disablePadding

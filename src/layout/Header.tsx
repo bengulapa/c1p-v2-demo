@@ -12,7 +12,9 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import AccountSettings from "../components/AccountSettings";
 import React from "react";
 import PendingIcon from "@mui/icons-material/Pending";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ProcessList from "../components/ProcessList";
+import AuditLogs from "../components/AuditLogs";
 
 const drawerWidth = 240;
 
@@ -47,9 +49,14 @@ const AppBar = styled(MuiAppBar, {
 
 const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [openAuditLogs, setOpenAuditLogs] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpenDrawer(newOpen);
+  };
+
+  const toggleAuditLogs = (newOpen: boolean) => () => {
+    setOpenAuditLogs(newOpen);
   };
 
   return (
@@ -94,6 +101,14 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
               </Badge>
             </IconButton>
 
+            <IconButton
+              color="secondary"
+              className="d-flex flex-column"
+              onClick={toggleAuditLogs(!openAuditLogs)}
+            >
+              <ReceiptLongIcon />
+            </IconButton>
+
             <AccountSettings />
           </div>
         </div>
@@ -104,6 +119,14 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
           role="presentation"
         >
           <ProcessList />
+        </Box>
+      </Drawer>
+      <Drawer open={openAuditLogs} onClose={toggleDrawer(false)} anchor="right">
+        <Box
+          sx={{ width: 320, mt: 5, pt: 5, px: 1, height: "100%" }}
+          role="presentation"
+        >
+          <AuditLogs />
         </Box>
       </Drawer>
     </AppBar>

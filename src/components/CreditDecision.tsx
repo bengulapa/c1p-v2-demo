@@ -11,12 +11,9 @@ import {
   MenuItem,
   Select,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
 import AcceptanceCriteria from "./AcceptanceCriteria";
-import Notes from "./Notes";
 import PageHeader from "./PageHeader";
 
 const statusList = [
@@ -30,12 +27,6 @@ const statusList = [
 ];
 
 const CreditDecision = () => {
-  const [value, setValue] = React.useState("1");
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
-
   return (
     <>
       <PageHeader title="Credit Decision" />
@@ -66,7 +57,7 @@ const CreditDecision = () => {
                 <span className="list-value">Unassigned</span>
               </div>
 
-              <Box className="">
+              <Box>
                 {statusList.map((status) => (
                   <Chip
                     key={status}
@@ -126,42 +117,11 @@ const CreditDecision = () => {
               </Button>
             </CardContent>
           </Card>
-
-          <Card>
-            <CardContent>
-              <Typography gutterBottom>Analyst Notes</Typography>
-
-              <Notes />
-
-              <Divider className="my-2" />
-
-              <TextField
-                className="w-100 mb-2"
-                label="Add a note"
-                multiline
-                rows={4}
-                variant="filled"
-              />
-
-              <Button className="mr-2" variant="contained">
-                Save
-              </Button>
-              <Button variant="outlined">Cancel</Button>
-            </CardContent>
-          </Card>
         </Grid2>
         <Grid2 size={6}>
           <Card className="mb-3">
             <CardContent>
               <AcceptanceCriteria />
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent>
-              <Typography gutterBottom>Broker Notes</Typography>
-
-              <Notes />
             </CardContent>
           </Card>
         </Grid2>
