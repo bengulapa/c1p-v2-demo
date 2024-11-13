@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import AcceptanceCriteria from "./AcceptanceCriteria";
 import PageHeader from "./PageHeader";
+import DetailCardHeader from "./DetailCardHeader";
 
 const statusList = [
   "Under Assessment",
@@ -73,19 +74,15 @@ const CreditDecision = () => {
 
           <Card className="mb-3">
             <CardContent>
-              <Typography gutterBottom>ANZSIC Codes</Typography>
+              <DetailCardHeader
+                title="ANZSIC Codes"
+                canEdit={false}
+              ></DetailCardHeader>
 
-              <Stack spacing={2}>
+              <Stack className="mt-2" spacing={2}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Industry code
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={10}
-                    label="ANZSIC industry code"
-                  >
+                  <InputLabel>Industry code</InputLabel>
+                  <Select value={10} label="ANZSIC industry code">
                     <MenuItem value={10}>
                       A - Agriculture, Forestry and Fishing
                     </MenuItem>
@@ -95,9 +92,7 @@ const CreditDecision = () => {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Industry sub code
-                  </InputLabel>
+                  <InputLabel>Industry sub code</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"

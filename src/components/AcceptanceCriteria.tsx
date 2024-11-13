@@ -6,11 +6,15 @@ import {
   Chip,
   Typography,
 } from "@mui/material";
+import DetailCardHeader from "./DetailCardHeader";
 
 const AcceptanceCriteria = () => {
   return (
     <>
-      <Typography gutterBottom>Acceptance Criteria</Typography>
+      <DetailCardHeader
+        title="Acceptance Criteria"
+        canEdit={false}
+      ></DetailCardHeader>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <div className="d-flex justify-content-between align-items-center w-100">

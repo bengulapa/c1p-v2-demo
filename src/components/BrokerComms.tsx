@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import Notes from "./Notes";
 import PageHeader from "./PageHeader";
+import DetailCardHeader from "./DetailCardHeader";
 
 const BrokerComms = () => {
   return (
@@ -19,7 +20,10 @@ const BrokerComms = () => {
         <Grid2 size={6}>
           <Card>
             <CardContent>
-              <Typography gutterBottom>Broker Notes</Typography>
+              <DetailCardHeader
+                title="Broker Notes"
+                canEdit={false}
+              ></DetailCardHeader>
 
               <Notes />
 
@@ -82,7 +86,10 @@ const BrokerComms = () => {
         <Grid2 size={6}>
           <Card>
             <CardContent>
-              <Typography gutterBottom>Analyst Notes</Typography>
+              <DetailCardHeader
+                title="Analyst Notes"
+                canEdit={false}
+              ></DetailCardHeader>
 
               <Notes />
 

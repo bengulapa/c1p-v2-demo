@@ -13,7 +13,7 @@ const PageHeader = ({ title }: IProps) => {
           variant="h6"
           className="mb-3"
           textTransform="uppercase"
-          color="textPrimary"
+          color="primary"
         >
           {title}
         </Typography>

@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import PageHeader from "./PageHeader";
+import DetailCardHeader from "./DetailCardHeader";
 
 function createData(asset: string, description: string, value: number) {
   return { asset, description, value };
@@ -32,6 +33,7 @@ const assetsRows = [
 
 const CustomerDetails = () => {
   const [value, setValue] = React.useState("1");
+  const [isEditMode, setIsEditMode] = React.useState(false);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -46,67 +48,73 @@ const CustomerDetails = () => {
           <Tab label="Customer" value="1" />
           <Tab label="Assets & Liabilities" value="2" />
         </TabList>
-        <TabPanel value="1">
+        <TabPanel className="px-0" value="1">
           <Grid2 container spacing={2}>
             <Grid2 size={6}>
               <Card className="mb-3">
                 <CardContent>
-                  <Typography gutterBottom>Applicant</Typography>
+                  <DetailCardHeader
+                    title="Applicant"
+                    onEdit={() => setIsEditMode(true)}
+                  ></DetailCardHeader>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       ABN:
                     </Typography>
                     <span className="list-value">22605215227</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Entity name:
                     </Typography>
                     <span className="list-value">GULA PATISSERIE</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Legal name
                     </Typography>
                     <span className="list-value">GULA PATISSERIE</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Incorporation date
                     </Typography>
                     <span className="list-value">05/06/2023</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Entity type:
                     </Typography>
                     <span className="list-value">Private Company</span>
                   </div>
 
-                  <Divider className="my-2" />
+                  <Divider className="my-2 mb-3" />
 
-                  <Typography gutterBottom>Previous ABN</Typography>
+                  <DetailCardHeader
+                    title="Previous ABN"
+                    onEdit={() => setIsEditMode(true)}
+                  ></DetailCardHeader>
 
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       ABN:
                     </Typography>
                     <span className="list-value">22605215227</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Entity name:
                     </Typography>
                     <span className="list-value">GULAPA, BEN</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Incorporation date
                     </Typography>
                     <span className="list-value">05/06/2024</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Entity type:
                     </Typography>
                     <span className="list-value">Individual</span>
@@ -116,27 +124,30 @@ const CustomerDetails = () => {
 
               <Card>
                 <CardContent>
-                  <Typography gutterBottom>Beneficial Owners</Typography>
+                  <DetailCardHeader
+                    title="Beneficial Owners"
+                    onEdit={() => setIsEditMode(true)}
+                  ></DetailCardHeader>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Name:
                     </Typography>
                     <span className="list-value">Ben Gulapa</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Date of birth:
                     </Typography>
                     <span className="list-value">01/01/1991</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Nationality:
                     </Typography>
                     <span className="list-value">Philippines</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Email address:
                     </Typography>
                     <span className="list-value">
@@ -144,13 +155,13 @@ const CustomerDetails = () => {
                     </span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Phone number:
                     </Typography>
                     <span className="list-value">041235647878</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Address:
                     </Typography>
                     <span className="list-value">
@@ -158,13 +169,13 @@ const CustomerDetails = () => {
                     </span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Home status:
                     </Typography>
                     <span className="list-value">Owning</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Properties:
                     </Typography>
                     <span className="list-value">5</span>
@@ -175,27 +186,30 @@ const CustomerDetails = () => {
             <Grid2 size={6}>
               <Card>
                 <CardContent>
-                  <Typography gutterBottom>Guarantor Details</Typography>
+                  <DetailCardHeader
+                    title="Guarantor Details"
+                    onEdit={() => setIsEditMode(true)}
+                  ></DetailCardHeader>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Name:
                     </Typography>
                     <span className="list-value">Ben Gulapa</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Date of birth:
                     </Typography>
                     <span className="list-value">01/01/1991</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Nationality:
                     </Typography>
                     <span className="list-value">Philippines</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Email address:
                     </Typography>
                     <span className="list-value">
@@ -203,13 +217,13 @@ const CustomerDetails = () => {
                     </span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Phone number:
                     </Typography>
                     <span className="list-value">041235647878</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Address:
                     </Typography>
                     <span className="list-value">
@@ -217,13 +231,13 @@ const CustomerDetails = () => {
                     </span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Home status:
                     </Typography>
                     <span className="list-value">Owning</span>
                   </div>
                   <div>
-                    <Typography variant="overline" className="list-label">
+                    <Typography variant="caption" className="list-label">
                       Properties:
                     </Typography>
                     <span className="list-value">5</span>
@@ -233,12 +247,15 @@ const CustomerDetails = () => {
             </Grid2>
           </Grid2>
         </TabPanel>
-        <TabPanel value="2">
+        <TabPanel className="px-0" value="2">
           <Grid2 container spacing={2}>
             <Grid2 size={6}>
               <Card>
                 <CardContent>
-                  <Typography gutterBottom>Assets</Typography>
+                  <DetailCardHeader
+                    title="Assets"
+                    onEdit={() => setIsEditMode(true)}
+                  ></DetailCardHeader>
 
                   <TableContainer component={Paper}>
                     <Table
@@ -274,7 +291,10 @@ const CustomerDetails = () => {
 
                   <Divider className="mt-3 my-2" />
 
-                  <Typography gutterBottom>Liabilities</Typography>
+                  <DetailCardHeader
+                    title="Liabilities"
+                    onEdit={() => setIsEditMode(true)}
+                  ></DetailCardHeader>
 
                   <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} size="small">
@@ -309,7 +329,10 @@ const CustomerDetails = () => {
             <Grid2 size={6}>
               <Card>
                 <CardContent>
-                  <Typography gutterBottom>Mortgage Statements</Typography>
+                  <DetailCardHeader
+                    title="Mortgage Statements"
+                    onEdit={() => setIsEditMode(true)}
+                  ></DetailCardHeader>
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox defaultChecked />}
@@ -326,14 +349,16 @@ const CustomerDetails = () => {
                     label="Details"
                     multiline
                     rows={4}
-                    variant="standard"
+                    variant="filled"
                   />
 
                   <Divider className="my-2" />
 
-                  <Typography gutterBottom>
-                    Asset Finance Credit Reference
-                  </Typography>
+                  <DetailCardHeader
+                    title="Asset Finance Credit Reference"
+                    canEdit={false}
+                    onEdit={() => setIsEditMode(true)}
+                  ></DetailCardHeader>
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox defaultChecked />}
@@ -356,7 +381,7 @@ const CustomerDetails = () => {
                     label="Details"
                     multiline
                     rows={4}
-                    variant="standard"
+                    variant="filled"
                   />
                 </CardContent>
               </Card>
