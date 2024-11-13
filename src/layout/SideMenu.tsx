@@ -21,6 +21,7 @@ import {
 import MuiDrawer from "@mui/material/Drawer";
 import { Link, useLocation } from "react-router-dom";
 import { DrawerHeader } from "./DrawerHeader";
+import { Color } from "../styles/colors";
 
 interface IProps {
   open: boolean;
@@ -28,7 +29,7 @@ interface IProps {
   theme: Theme;
 }
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -37,6 +38,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
+  background: Color.lightGray,
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -95,7 +97,6 @@ const menuItems = [
 
 const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   return (
     <>
@@ -110,7 +111,7 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List dense disablePadding>
           {menuItems.map((item, index) => (
             <ListItem key={index} disablePadding sx={{ display: "block" }}>
               <ListItemButton
@@ -119,8 +120,8 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                 to={item.path}
                 sx={[
                   {
-                    minHeight: 48,
-                    px: 2.5,
+                    minHeight: 36,
+                    px: 2,
                   },
                   open
                     ? {
@@ -136,10 +137,11 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                     {
                       minWidth: 0,
                       justifyContent: "center",
+                      alignItems: "center",
                     },
                     open
                       ? {
-                          mr: 3,
+                          mr: 2,
                         }
                       : {
                           mr: "auto",
@@ -151,6 +153,9 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                 <ListItemText
                   primary={item.text}
                   sx={[
+                    {
+                      textTransform: "uppercase",
+                    },
                     open
                       ? {
                           opacity: 1,

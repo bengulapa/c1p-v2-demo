@@ -8,14 +8,19 @@ interface IProps {
 const PageHeader = ({ title }: IProps) => {
   return (
     <>
-      <Box className="d-flex justify-content-between align-items-center pr-3">
-        <Typography variant="h6" className="mb-3">
+      <Box className="d-flex justify-content-between align-items-center mt-n4">
+        <Typography
+          variant="h6"
+          className="mb-3"
+          textTransform="uppercase"
+          color="textPrimary"
+        >
           {title}
         </Typography>
 
-        <div className="d-flex ">
-          <Box className="mx-auto" sx={{ height: 150, width: 150 }}>
-            <GaugeChart score={100} width={170} height={170} />
+        <div className="d-flex">
+          <Box>
+            <GaugeChart score={100} width={160} height={108} fontSize="10px" />
           </Box>
         </div>
       </Box>

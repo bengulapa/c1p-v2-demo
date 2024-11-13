@@ -33,7 +33,7 @@ const Overview = () => {
 
   return (
     <>
-      <Grid2 container spacing={2} className="mb-3">
+      <Grid2 container spacing={1} className="mb-2">
         <Grid2 size={4}>
           <Card variant="outlined">
             <CardHeader
@@ -191,12 +191,12 @@ const Overview = () => {
         </Grid2>
         <Grid2 size={4}>
           <Box className="mx-auto" sx={{ height: 170, width: 300 }}>
-            <GaugeChart score={score} />
+            <GaugeChart score={score} showLabels={true} />
           </Box>
         </Grid2>
       </Grid2>
 
-      <Grid2 container spacing={2}>
+      <Grid2 container spacing={1}>
         <Grid2 size={3}>
           <Card>
             <CardContent>

@@ -6,6 +6,7 @@ import {
   IconButton,
   styled,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -16,7 +17,7 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ProcessList from "../components/ProcessList";
 import AuditLogs from "../components/AuditLogs";
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 interface AppBarProps extends MuiAppBarProps {
   open: boolean;
@@ -91,23 +92,26 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
               <br /> Status: Credit Status / Settlement Status
             </Typography>
 
-            <IconButton
-              color="secondary"
-              className="d-flex flex-column"
-              onClick={toggleDrawer(!openDrawer)}
-            >
-              <Badge badgeContent={2} color="error">
-                <PendingIcon />
-              </Badge>
-            </IconButton>
-
-            <IconButton
-              color="secondary"
-              className="d-flex flex-column"
-              onClick={toggleAuditLogs(!openAuditLogs)}
-            >
-              <ReceiptLongIcon />
-            </IconButton>
+            <Tooltip title="Automation">
+              <IconButton
+                color="secondary"
+                className="d-flex flex-column"
+                onClick={toggleDrawer(!openDrawer)}
+              >
+                <Badge badgeContent={2} color="error">
+                  <PendingIcon />
+                </Badge>
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Audit Logs">
+              <IconButton
+                color="secondary"
+                className="d-flex flex-column"
+                onClick={toggleAuditLogs(!openAuditLogs)}
+              >
+                <ReceiptLongIcon />
+              </IconButton>
+            </Tooltip>
 
             <AccountSettings />
           </div>

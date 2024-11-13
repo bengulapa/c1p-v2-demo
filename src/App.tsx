@@ -20,9 +20,18 @@ const theme = createTheme({
     secondary: {
       main: "#a3298f",
     },
+    error: {
+      main: "#e3454d",
+    },
+    success: {
+      main: "#78ba03",
+    },
+    warning: {
+      main: "#f4ce5c",
+    },
   },
   typography: {
-    fontFamily: "'Open Sans', sans-serif",
+    fontFamily: "'Poppins', sans-serif",
   },
   components: {
     MuiButton: {
