@@ -7,6 +7,7 @@ import RememberMeIcon from "@mui/icons-material/RememberMe";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import {
+  Box,
   CSSObject,
   Divider,
   IconButton,
@@ -22,6 +23,7 @@ import MuiDrawer from "@mui/material/Drawer";
 import { Link, useLocation } from "react-router-dom";
 import { DrawerHeader } from "./DrawerHeader";
 import { Color } from "../styles/colors";
+import GaugeChart from "../components/GaugeChart";
 
 interface IProps {
   open: boolean;
@@ -111,64 +113,77 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List dense disablePadding>
-          {menuItems.map((item, index) => (
-            <ListItem key={index} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                selected={pathname.includes(item.path)}
-                component={Link}
-                to={item.path}
-                sx={[
-                  {
-                    minHeight: 36,
-                    px: 2,
-                  },
-                  open
-                    ? {
-                        justifyContent: "initial",
-                      }
-                    : {
-                        justifyContent: "center",
-                      },
-                ]}
-              >
-                <ListItemIcon
+        <Box className="d-flex flex-column justify-content-between h-100">
+          <List dense disablePadding>
+            {menuItems.map((item, index) => (
+              <ListItem key={index} disablePadding sx={{ display: "block" }}>
+                <ListItemButton
+                  selected={pathname.includes(item.path)}
+                  component={Link}
+                  to={item.path}
                   sx={[
                     {
-                      minWidth: 0,
-                      justifyContent: "center",
-                      alignItems: "center",
+                      minHeight: 36,
+                      px: 2,
                     },
                     open
                       ? {
-                          mr: 2,
+                          justifyContent: "initial",
                         }
                       : {
-                          mr: "auto",
+                          justifyContent: "center",
                         },
                   ]}
                 >
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.text}
-                  sx={[
-                    {
-                      textTransform: "uppercase",
-                    },
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+                  <ListItemIcon
+                    sx={[
+                      {
+                        minWidth: 0,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      },
+                      open
+                        ? {
+                            mr: 2,
+                          }
+                        : {
+                            mr: "auto",
+                          },
+                    ]}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    sx={[
+                      {
+                        textTransform: "uppercase",
+                      },
+                      open
+                        ? {
+                            opacity: 1,
+                          }
+                        : {
+                            opacity: 0,
+                          },
+                    ]}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+
+          {!pathname?.toLocaleLowerCase().includes("overview") && (
+            <Box className="mx-auto mb-4">
+              <GaugeChart
+                score={100}
+                width={160}
+                height={108}
+                fontSize="10px"
+              />
+            </Box>
+          )}
+        </Box>
       </Drawer>
     </>
   );

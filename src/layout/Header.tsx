@@ -62,7 +62,7 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
 
   return (
     <AppBar position="fixed" open={open} color="primary">
-      <Toolbar>
+      <Toolbar className="px-3">
         <IconButton
           color="inherit"
           aria-label="open drawer"
