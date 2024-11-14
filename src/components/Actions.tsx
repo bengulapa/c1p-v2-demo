@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import CardTitleHeader from "./CardTitleHeader";
 
 interface IProps {
   loan: any;
@@ -16,7 +17,7 @@ const Actions = ({ loan }: IProps) => {
   return (
     <>
       <div className="d-flex justify-content-between">
-        <Typography gutterBottom>Actions</Typography>
+        <CardTitleHeader title="Actions" />
 
         <Chip
           label={loan.creditStatus}

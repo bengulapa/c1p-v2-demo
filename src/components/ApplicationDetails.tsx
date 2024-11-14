@@ -8,7 +8,7 @@ import EditForm from "./EditForm";
 
 const ApplicationDetails = () => {
   let query = useQuery();
-  const [value, setValue] = React.useState(query.get("tab") || "loan");
+  const [value, setValue] = React.useState(query.get("tab") || "arrangement");
   const [isEditMode, setIsEditMode] = React.useState<{
     key: string;
     edit: boolean;
@@ -28,16 +28,16 @@ const ApplicationDetails = () => {
           textColor="primary"
           indicatorColor="primary"
         >
-          <Tab label="Loan" value="loan" />
+          <Tab label="Arrangement" value="arrangement" />
           <Tab label="Asset" value="asset" />
         </TabList>
-        <TabPanel className="px-0" value="loan">
+        <TabPanel className="px-0" value="arrangement">
           <Grid2 container spacing={1}>
             <Grid2 size={6}>
               <Card>
                 <CardContent>
                   <DetailCardHeader
-                    title="Loan Details"
+                    title="Arrangement Details"
                     showEdit={true}
                     onEdit={() =>
                       setIsEditMode({ key: "loanDetails", edit: true })
@@ -121,7 +121,7 @@ const ApplicationDetails = () => {
               <Card>
                 <CardContent>
                   <DetailCardHeader
-                    title="Loan, Repayments, & Exposure"
+                    title="Repayments & Exposure"
                     onEdit={() =>
                       setIsEditMode({ key: "repayment", edit: true })
                     }

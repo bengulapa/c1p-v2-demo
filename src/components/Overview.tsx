@@ -21,6 +21,7 @@ import AcceptanceCriteria from "./AcceptanceCriteria";
 import Actions from "./Actions";
 import Checkpoints from "./Checkpoints";
 import GaugeChart from "./GaugeChart";
+import CardTitleHeader from "./CardTitleHeader";
 
 const Overview = () => {
   const context: any = useOutletContext();
@@ -44,7 +45,7 @@ const Overview = () => {
                   </IconButton>
                 </Link>
               }
-              subheader="Loan"
+              subheader={<CardTitleHeader title="Arrangement" />}
               sx={{ pb: 0 }}
             />
             <CardContent
@@ -53,25 +54,27 @@ const Overview = () => {
             >
               <div className="w-100">
                 <div className="d-flex justify-content-between">
+                  <Typography variant="caption">Product</Typography>
+                  <Typography variant="body2" color="secondary">
+                    Chattel Mortgage
+                  </Typography>
+                </div>
+                <div className="d-flex justify-content-between">
                   <Typography variant="caption">Finance amount</Typography>
                   <Typography variant="body2" color="secondary">
                     {formatCurrency(loan.financeAmount)}
                   </Typography>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <Typography variant="caption">
-                    Repayment Term & Timing
-                  </Typography>
+                  <Typography variant="caption">Term</Typography>
                   <Typography variant="body2" color="secondary">
-                    5 Years, In Advance
+                    5 Years
                   </Typography>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <Typography variant="caption">
-                    Brokerage incl. GST (8%)
-                  </Typography>
+                  <Typography variant="caption">Timing</Typography>
                   <Typography variant="body2" color="secondary">
-                    {formatCurrency(loan.brokerageAmount)}
+                    In Advance
                   </Typography>
                 </div>
                 <div className="d-flex justify-content-between">
@@ -122,7 +125,7 @@ const Overview = () => {
                   </IconButton>
                 </Link>
               }
-              subheader="Asset"
+              subheader={<CardTitleHeader title="Asset" />}
               sx={{ pb: 0 }}
             />
             <CardContent
@@ -131,21 +134,21 @@ const Overview = () => {
             >
               <div className="w-100">
                 <div className="d-flex justify-content-between">
-                  <Typography variant="caption">Product</Typography>
+                  <Typography variant="caption">Type</Typography>
                   <Typography variant="body2" color="secondary">
-                    Chattel Mortgage
+                    Van
+                  </Typography>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <Typography variant="caption">Group</Typography>
+                  <Typography variant="body2" color="secondary">
+                    Motor vehicle up to 4.5t
                   </Typography>
                 </div>
                 <div className="d-flex justify-content-between">
                   <Typography variant="caption">Class</Typography>
                   <Typography variant="body2" color="secondary">
                     Primary
-                  </Typography>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <Typography variant="caption">Type</Typography>
-                  <Typography variant="body2" color="secondary">
-                    Motor vehicle up to 4.5t
                   </Typography>
                 </div>
                 <div className="d-flex justify-content-between">

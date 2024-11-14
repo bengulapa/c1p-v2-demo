@@ -1,6 +1,6 @@
-import { Box, IconButton, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import React from "react";
+import { Box, IconButton } from "@mui/material";
+import CardTitleHeader from "./CardTitleHeader";
 
 interface IProps {
   title: string;
@@ -18,14 +18,7 @@ const DetailCardHeader = ({
   return (
     <>
       <Box className="d-flex justify-content-between align-items-center mb-2">
-        <Typography
-          variant="subtitle2"
-          textTransform="uppercase"
-          color="secondary"
-          gutterBottom
-        >
-          {title}
-        </Typography>
+        <CardTitleHeader title={title} />
 
         {canEdit && showEdit && (
           <IconButton

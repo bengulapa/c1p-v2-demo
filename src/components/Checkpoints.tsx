@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import CardTitleHeader from "./CardTitleHeader";
 
 interface IProps {
   updateScore: (value: number) => void;
@@ -76,7 +77,7 @@ const Checkpoints = ({ updateScore, loan }: IProps) => {
 
   return (
     <>
-      <Typography gutterBottom>Checkpoints</Typography>
+      <CardTitleHeader title="Checkpoints" />
 
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
