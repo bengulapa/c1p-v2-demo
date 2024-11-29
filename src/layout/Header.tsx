@@ -14,6 +14,8 @@ import AccountSettings from "../components/AccountSettings";
 import React from "react";
 import PendingIcon from "@mui/icons-material/Pending";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import AlternateEmailSharpIcon from "@mui/icons-material/AlternateEmailSharp";
+import CallSharpIcon from "@mui/icons-material/CallSharp";
 import ProcessList from "../components/ProcessList";
 import AuditLogs from "../components/AuditLogs";
 
@@ -82,36 +84,31 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
             {loan.creditArrangementId} - {loan.entityName}
           </Typography>
 
-          <div className="d-flex">
-            <Typography variant="caption" className="mr-3">
-              Broker: Klein Moretti <a href="tel:0400000000">+0400000000</a>{" "}
-              &lt;
-              <a href="email:mr.fool@lotm.com">mr.fool@lotm.com</a>&gt;
-              <br />
-              BDM: Ben Gulapa
-              <br /> Status: Credit Status / Settlement Status
-            </Typography>
-
-            <Tooltip title="Automation">
-              <IconButton
-                color="secondary"
-                className="d-flex flex-column"
-                onClick={toggleDrawer(!openDrawer)}
-              >
-                <Badge badgeContent={2} color="error">
-                  <PendingIcon />
-                </Badge>
-              </IconButton>
-            </Tooltip>
+          <div className="d-flex align-items-center">
             <Tooltip title="Audit Logs">
               <IconButton
                 color="secondary"
-                className="d-flex flex-column"
+                className="mr-3"
                 onClick={toggleAuditLogs(!openAuditLogs)}
               >
                 <ReceiptLongIcon />
               </IconButton>
             </Tooltip>
+            <Typography variant="caption" className="mr-3">
+              Broker: Klein Moretti{" "}
+              <Tooltip title="Email">
+                <a href="tel:0400000000">
+                  <CallSharpIcon sx={{ fontSize: 12 }} />
+                </a>
+              </Tooltip>{" "}
+              <Tooltip title="Call">
+                <a href="email:mr.fool@lotm.com">
+                  <AlternateEmailSharpIcon sx={{ fontSize: 12 }} />
+                </a>
+              </Tooltip>
+              <br />
+              BDM: Ben Gulapa
+            </Typography>
 
             <AccountSettings />
           </div>
