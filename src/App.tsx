@@ -1,16 +1,15 @@
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline } from "@mui/material";
-import "./styles/styles.css";
-import "./styles/utility.css";
-import Dashboard from "./views/Dashboard";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import ApplicationDetails from "./components/ApplicationDetails";
-import Attachments from "./components/Attachments";
-import BrokerComms from "./components/BrokerComms";
 import CreditDecision from "./components/CreditDecision";
 import CustomerDetails from "./components/CustomerDetails";
 import Overview from "./components/Overview";
-import SearchLoan from "./views/SearchLoan";
+import Tasks from "./components/Tasks";
+import "./styles/styles.css";
+import "./styles/utility.css";
+import Dashboard from "./views/Dashboard";
+import Search from "./views/Search";
 
 const theme = createTheme({
   palette: {
@@ -110,16 +109,15 @@ function App() {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path="/" element={<Navigate to="/search" />} />
-          <Route path="/search" element={<SearchLoan />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/:loanId" element={<Dashboard />}>
             <Route path="overview" element={<Overview />} />
             <Route path="application" element={<ApplicationDetails />} />
             <Route path="customer" element={<CustomerDetails />} />
             <Route path="decision" element={<CreditDecision />} />
-            <Route path="broker-comms" element={<BrokerComms />} />
-            <Route path="attachments" element={<Attachments />} />
+            <Route path="tasks" element={<Tasks />} />
           </Route>
-          <Route path="*" element={<SearchLoan />} />
+          <Route path="*" element={<Search />} />
         </Routes>
       </ThemeProvider>
     </>
