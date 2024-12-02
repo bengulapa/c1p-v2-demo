@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import AcceptanceCriteria from "./AcceptanceCriteria";
-import PageHeader from "./PageHeader";
+import PageTitle from "./PageTitle";
 import DetailCardHeader from "./DetailCardHeader";
 
 const statusList = [
@@ -30,7 +30,7 @@ const statusList = [
 const CreditDecision = () => {
   return (
     <>
-      <PageHeader title="Credit Decision" />
+      <PageTitle title="Credit Decision" />
 
       <Grid2 container spacing={2}>
         <Grid2 size={6}>

@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 import { Outlet, useParams } from "react-router-dom";
+import PageHeader from "../components/PageHeader";
 import applications from "../data/applications.json";
 import { DrawerHeader } from "../layout/DrawerHeader";
 import Header from "../layout/Header";
@@ -34,6 +35,8 @@ const Dashboard = () => {
 
       <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
         <DrawerHeader />
+
+        <PageHeader loan={loan} />
 
         <Outlet context={{ loan: loan }} />
       </Box>

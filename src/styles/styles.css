@@ -34,3 +34,8 @@ a {
   color: var(--light-accent);
   text-decoration: none;
 }
+
+.header-box {
+  min-height: 180px;
+  height: 180px;
+}

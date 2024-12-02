@@ -1,7 +1,7 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Card, CardContent, Grid2, Tab, Typography } from "@mui/material";
 import React from "react";
-import PageHeader from "./PageHeader";
+import PageTitle from "./PageTitle";
 import { useQuery } from "../hooks/useQuery";
 import DetailCardHeader from "./DetailCardHeader";
 import EditForm from "./EditForm";
@@ -20,7 +20,7 @@ const ApplicationDetails = () => {
 
   return (
     <>
-      <PageHeader title="Application Details" />
+      <PageTitle title="Application Details" />
 
       <TabContext value={value}>
         <TabList
