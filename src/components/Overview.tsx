@@ -1,9 +1,9 @@
 import { Card, CardContent, Grid2 } from "@mui/material";
 import React from "react";
 import { useOutletContext } from "react-router-dom";
-import AcceptanceCriteria from "./AcceptanceCriteria";
-import Actions from "./Actions";
 import Checkpoints from "./Checkpoints";
+import MandatoryChecklist from "./MandatoryChecklist";
+import StatusCard from "./StatusCard";
 
 const Overview = () => {
   const context: any = useOutletContext();
@@ -16,25 +16,16 @@ const Overview = () => {
 
   return (
     <>
+      <StatusCard loan={loan} />
+
       <Grid2 container spacing={1}>
-        <Grid2 size={3}>
-          <Card>
-            <CardContent>
-              <Actions loan={loan} />
-            </CardContent>
-          </Card>
+        <Grid2 size={6}>
+          <MandatoryChecklist loan={loan} />
         </Grid2>
-        <Grid2 size={5}>
+        <Grid2 size={6}>
           <Card>
             <CardContent>
               <Checkpoints loan={loan} updateScore={updateScore} />
-            </CardContent>
-          </Card>
-        </Grid2>
-        <Grid2 size={4}>
-          <Card>
-            <CardContent>
-              <AcceptanceCriteria />
             </CardContent>
           </Card>
         </Grid2>
