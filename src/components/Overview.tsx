@@ -1,7 +1,7 @@
-import { Card, CardContent, Grid2 } from "@mui/material";
+import { Grid2 } from "@mui/material";
 import React from "react";
 import { useOutletContext } from "react-router-dom";
-import Checkpoints from "./Checkpoints";
+import GoalsChecklist from "./GoalsChecklist";
 import MandatoryChecklist from "./MandatoryChecklist";
 import StatusCard from "./StatusCard";
 
@@ -23,11 +23,7 @@ const Overview = () => {
           <MandatoryChecklist loan={loan} />
         </Grid2>
         <Grid2 size={6}>
-          <Card>
-            <CardContent>
-              <Checkpoints loan={loan} updateScore={updateScore} />
-            </CardContent>
-          </Card>
+          <GoalsChecklist loan={loan} />
         </Grid2>
       </Grid2>
     </>
