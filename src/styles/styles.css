@@ -39,3 +39,26 @@ a {
   min-height: 180px;
   height: 180px;
 }
+
+.status-done-progress {
+  position: relative;
+}
+
+.status-done-progress::before {
+  content: "⬤";
+  position: absolute;
+  top: -10px;
+  left: -2px;
+  color: blue;
+}
+
+.status-box {
+  height: 40px;
+  width: 20%;
+  border: 1px solid #ccc;
+}
+
+.status-future-progress {
+  height: 0;
+  border-top: 4px dashed gray;
+}
