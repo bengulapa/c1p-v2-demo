@@ -64,6 +64,21 @@ a {
   height: 40px;
   width: 20%;
   border: 1px solid #ccc;
+  border-right: 0;
+}
+
+.arrow-right,
+.arrow-right-inactive {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+
+  border-left: 20px solid green;
+}
+
+.arrow-right-inactive {
+  border-left: 20px solid gray;
 }
 
 .status-future-progress {

@@ -29,16 +29,21 @@ const StatusCard = ({ loan }: IProps) => {
       <CardContent>
         <div className="d-flex w-100 mb-3">
           {status.map((s, i) => (
-            <Box
-              key={i}
-              sx={{
-                background: i > 1 ? "inherit" : "green",
-                color: i > 1 ? "inherit" : "white",
-              }}
-              className="status-box d-flex align-items-center justify-content-center"
-            >
-              <Typography variant="caption">{s}</Typography>
-            </Box>
+            <>
+              <Box
+                key={i}
+                sx={{
+                  background: i > 1 ? "gray" : "green",
+                  color: "white",
+                }}
+                className="status-box d-flex align-items-center justify-content-center"
+              >
+                <Typography variant="caption">{s}</Typography>
+              </Box>
+              <Box
+                className={i > 1 ? "arrow-right-inactive" : "arrow-right"}
+              ></Box>
+            </>
           ))}
         </div>
 
