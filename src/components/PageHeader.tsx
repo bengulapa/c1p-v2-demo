@@ -13,6 +13,10 @@ import { Link } from "react-router-dom";
 import { formatCurrency } from "../helpers/formatters";
 import CardTitleHeader from "./CardTitleHeader";
 import GaugeChart from "./GaugeChart";
+import PaidIcon from "@mui/icons-material/Paid";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import EmergencyIcon from "@mui/icons-material/Emergency";
+import RecommendIcon from "@mui/icons-material/Recommend";
 
 interface IProps {
   loan?: any;
@@ -30,13 +34,7 @@ const PageHeader = ({ loan }: IProps) => {
       <Grid2 size={3}>
         <Card variant="outlined" className="header-box">
           <CardHeader
-            action={
-              <Link to={`/${loan.creditArrangementId}/application`}>
-                <IconButton aria-label="settings">
-                  <ArrowOutwardIcon />
-                </IconButton>
-              </Link>
-            }
+            action={<PaidIcon />}
             subheader={<CardTitleHeader title="The Deal" />}
             sx={{ pb: 0 }}
           />
@@ -62,13 +60,7 @@ const PageHeader = ({ loan }: IProps) => {
       <Grid2 size={3}>
         <Card variant="outlined" className="header-box">
           <CardHeader
-            action={
-              <Link to={`/${loan.creditArrangementId}/application?tab=asset`}>
-                <IconButton aria-label="more details">
-                  <ArrowOutwardIcon />
-                </IconButton>
-              </Link>
-            }
+            action={<DirectionsCarIcon />}
             subheader={<CardTitleHeader title="The Asset" />}
             sx={{ pb: 0 }}
           />
@@ -90,13 +82,7 @@ const PageHeader = ({ loan }: IProps) => {
       <Grid2 size={3}>
         <Card variant="outlined" className="header-box">
           <CardHeader
-            action={
-              <Link to={`/${loan.creditArrangementId}/application?tab=asset`}>
-                <IconButton aria-label="more details">
-                  <ArrowOutwardIcon />
-                </IconButton>
-              </Link>
-            }
+            action={<EmergencyIcon color="primary" />}
             subheader={<CardTitleHeader title="The Strategy" />}
             sx={{ pb: 0 }}
           />
@@ -118,12 +104,19 @@ const PageHeader = ({ loan }: IProps) => {
       <Grid2 size={3}>
         <Card variant="outlined" className="header-box">
           <CardHeader
+            action={<RecommendIcon color="primary" />}
             subheader={<CardTitleHeader title="The Recommendation" />}
             sx={{ pb: 0 }}
           />
-          <CardContent>
-            <Box className="mx-auto" sx={{ width: 240, height: 120 }}>
-              <GaugeChart score={score} showLabels={true} width={220} />
+          <CardContent
+            className="d-flex justify-content-between"
+            sx={{ pt: 1 }}
+          >
+            <Typography variant="h6" color="success">
+              Approve
+            </Typography>
+            <Box sx={{ width: 100, height: 120 }}>
+              <GaugeChart score={score} showLabels={true} width={120} />
             </Box>
           </CardContent>
         </Card>
