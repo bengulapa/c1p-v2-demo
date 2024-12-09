@@ -24,6 +24,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Task, TaskStatus } from "../models/task.model";
+import { Color } from "../styles/colors";
 import CardTitleHeader from "./CardTitleHeader";
 import TaskForm from "./TaskForm";
 
@@ -85,19 +86,19 @@ const Tasks = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case TaskStatus.NotStarted:
-        return "gray";
+        return Color.red;
       case TaskStatus.InProgress:
-        return "blue";
+        return Color.darkOrange;
       case TaskStatus.Done:
-        return "green";
+        return Color.green;
     }
   };
 
   const getSLAColor = (sla: string) => {
     if (sla.includes("overdue")) {
-      return "red";
+      return Color.red;
     } else if (sla.includes("to go")) {
-      return "blue";
+      return Color.darkOrange;
     } else {
       return "inherit";
     }
@@ -107,10 +108,10 @@ const Tasks = () => {
     <>
       <Card variant="outlined" className="mb-2">
         <CardContent sx={{ pt: 1 }}>
-          <div className="d-flex justify-content-between align-items-center mb-2">
+          <div className="d-flex align-items-center mb-2">
             <CardTitleHeader title="Tasks" />
 
-            <div className="d-flex justify-content-between align-items-center mb-2">
+            <div className="d-flex justify-content-between align-items-center ml-5">
               <Button variant="contained" onClick={() => toggleDialog(true)}>
                 New Task
               </Button>

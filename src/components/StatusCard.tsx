@@ -1,3 +1,4 @@
+import HistoryIcon from "@mui/icons-material/History";
 import {
   Box,
   Card,
@@ -6,6 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Color } from "../styles/colors";
 import CardTitleHeader from "./CardTitleHeader";
 
 interface IProps {
@@ -18,6 +20,7 @@ const StatusCard = ({ loan }: IProps) => {
   return (
     <Card variant="outlined" className="mb-2">
       <CardHeader
+        action={<HistoryIcon color="primary" />}
         subheader={
           <CardTitleHeader title={"The Progress: " + loan.creditStatus} />
         }
@@ -39,17 +42,18 @@ const StatusCard = ({ loan }: IProps) => {
           ))}
         </div>
 
-        <Stack direction="row" alignItems="center">
+        <Stack direction="row" alignItems="center" justifyContent="start">
           <Box
             className="status-done-progress"
-            sx={{ width: "30%", height: 4, background: "blue" }}
+            sx={{ width: "30%", height: 4, background: Color.darkOrange }}
           >
             &nbsp;
           </Box>
-          <Typography sx={{ width: "20%", textAlign: "center" }}>
-            {loan.creditStatus}
-          </Typography>{" "}
-          <Box className="status-future-progress" sx={{ width: "50%" }}></Box>
+          <Typography sx={{ mx: 1 }}>{loan.creditStatus}</Typography>
+          <Box
+            className="status-future-progress"
+            sx={{ flex: "1 1 auto" }}
+          ></Box>
         </Stack>
       </CardContent>
     </Card>

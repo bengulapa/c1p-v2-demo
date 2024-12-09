@@ -1,6 +1,7 @@
 import ReactSpeedometer, {
   CustomSegmentLabelPosition,
 } from "react-d3-speedometer";
+import { Color } from "../styles/colors";
 
 interface IProps {
   score: number;
@@ -44,11 +45,11 @@ const GaugeChart = ({
       valueTextFontSize={fontSize}
       maxSegmentLabels={0}
       customSegmentStops={[0, 333, 666, 1000]}
-      segmentColors={["#FF0000", "#FF8C00", "#008000"]}
+      segmentColors={[Color.red, Color.darkOrange, Color.green]}
       customSegmentLabels={showLabels ? customSegmentLabels : []}
       ringWidth={10}
       needleHeightRatio={0.6}
-      needleColor="#FF8C00"
+      needleColor={Color.darkOrange}
     />
   );
 };
