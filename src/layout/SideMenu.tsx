@@ -154,7 +154,7 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                   <ListItemText
                     primary={
                       item.badgeContent ? (
-                        <Badge badgeContent={4} color="error">
+                        <Badge variant="dot" color="error">
                           {item.text}
                         </Badge>
                       ) : (

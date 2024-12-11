@@ -6,6 +6,7 @@ import CreditDecision from "./components/CreditDecision";
 import CustomerDetails from "./components/CustomerDetails";
 import Overview from "./components/Overview";
 import Tasks from "./components/Tasks";
+import { Color } from "./styles/colors";
 import "./styles/styles.css";
 import "./styles/utility.css";
 import Dashboard from "./views/Dashboard";
@@ -23,7 +24,7 @@ const theme = createTheme({
       main: "#e3454d",
     },
     success: {
-      main: "#78ba03",
+      main: Color.green,
     },
     warning: {
       main: "#f4ce5c",

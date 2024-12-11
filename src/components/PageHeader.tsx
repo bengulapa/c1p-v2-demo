@@ -34,7 +34,7 @@ const PageHeader = ({ loan }: IProps) => {
       <Grid2 size={3}>
         <Card variant="outlined" className="header-box">
           <CardHeader
-            action={<PaidIcon />}
+            action={<PaidIcon color="primary" />}
             subheader={<CardTitleHeader title="The Deal" />}
             sx={{ pb: 0 }}
           />
@@ -60,7 +60,7 @@ const PageHeader = ({ loan }: IProps) => {
       <Grid2 size={3}>
         <Card variant="outlined" className="header-box">
           <CardHeader
-            action={<DirectionsCarIcon />}
+            action={<DirectionsCarIcon color="primary" />}
             subheader={<CardTitleHeader title="The Asset" />}
             sx={{ pb: 0 }}
           />
@@ -115,8 +115,8 @@ const PageHeader = ({ loan }: IProps) => {
             <Typography variant="h6" color="success">
               Approve
             </Typography>
-            <Box sx={{ width: 100, height: 120 }}>
-              <GaugeChart score={score} showLabels={true} width={120} />
+            <Box sx={{ width: 160, height: 120 }}>
+              <GaugeChart score={score} showLabels={true} width={160} />
             </Box>
           </CardContent>
         </Card>

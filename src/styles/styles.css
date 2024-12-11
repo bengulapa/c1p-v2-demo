@@ -40,7 +40,9 @@ a {
   height: 180px;
 }
 
-.status-done-progress {
+.status-done-progress,
+.sub-status-done-progress {
+  height: 4px;
   position: relative;
 }
 
@@ -52,7 +54,7 @@ a {
   color: #ff8c00;
 }
 
-.status-done-progress::after {
+.sub-status-done-progress::after {
   content: "▶";
   position: absolute;
   top: -10px;
@@ -62,38 +64,45 @@ a {
 
 .status-box {
   height: 40px;
-  width: 20%;
-  border: 1px solid #ccc;
-  border-right: 0;
+  width: 19%;
+  position: relative;
+  margin-right: 1%;
 }
 
-.arrow-right,
-.arrow-right-inactive {
+.status-box:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
   width: 0;
   height: 0;
+  border-left: 20px solid white;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
-
-  border-left: 20px solid green;
 }
 
-.arrow-right-inactive {
-  border-left: 20px solid gray;
+.status-box:before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  z-index: 99;
 }
 
-.status-future-progress {
+.status-future-progress,
+.sub-status-future-progress {
   height: 0;
   border-top: 4px dashed gray;
   position: relative;
-  margin-right: 14px;
 }
 
-.status-future-progress::before {
-  content: "⬤";
-  position: absolute;
-  top: -14px;
-  left: -4px;
-  color: gray;
+.status-future-progress {
+  margin-right: 14px;
 }
 
 .status-future-progress::after {
@@ -101,5 +110,17 @@ a {
   position: absolute;
   top: -14px;
   right: -18px;
+  color: gray;
+}
+
+.sub-status-future-progress {
+  margin-right: 4px;
+}
+
+.sub-status-future-progress::before {
+  content: "⬤";
+  position: absolute;
+  top: -14px;
+  left: -4px;
   color: gray;
 }
