@@ -1,22 +1,20 @@
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import EmergencyIcon from "@mui/icons-material/Emergency";
+import PaidIcon from "@mui/icons-material/Paid";
+import RecommendIcon from "@mui/icons-material/Recommend";
 import {
   Box,
   Card,
   CardContent,
   CardHeader,
   Grid2,
-  IconButton,
   Typography,
 } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
 import { formatCurrency } from "../helpers/formatters";
+import { Color } from "../styles/colors";
 import CardTitleHeader from "./CardTitleHeader";
 import GaugeChart from "./GaugeChart";
-import PaidIcon from "@mui/icons-material/Paid";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import EmergencyIcon from "@mui/icons-material/Emergency";
-import RecommendIcon from "@mui/icons-material/Recommend";
 
 interface IProps {
   loan?: any;
@@ -32,20 +30,21 @@ const PageHeader = ({ loan }: IProps) => {
   return (
     <Grid2 container spacing={1} className="mb-2">
       <Grid2 size={3}>
-        <Card variant="outlined" className="header-box">
+        <Card
+          variant="outlined"
+          className="header-box"
+          sx={{ background: Color.secondary, color: Color.white }}
+        >
           <CardHeader
             action={<PaidIcon color="primary" />}
-            subheader={<CardTitleHeader title="The Deal" />}
+            subheader={<CardTitleHeader title="The Deal" color="white" />}
             sx={{ pb: 0 }}
           />
-          <CardContent
-            className="d-flex justify-content-between"
-            sx={{ pt: 1 }}
-          >
-            <div className="w-100">
-              <Typography variant="h6" color="primary">
-                {formatCurrency(loan.financeAmount)}
-              </Typography>
+          <CardContent sx={{ pt: 1 }}>
+            <Typography variant="h6">
+              {formatCurrency(loan.financeAmount)}
+            </Typography>
+            <Box sx={{ color: Color.lightGray }}>
               <Typography variant="body2">
                 {formatCurrency(loan.repaymentAmount)} {loan.repaymentFrequency}
               </Typography>
@@ -53,7 +52,7 @@ const PageHeader = ({ loan }: IProps) => {
                 {loan.loanInterestRate}% Base interest rate
               </Typography>
               <Typography variant="body2">5 Years Term, In Advance</Typography>
-            </div>
+            </Box>
           </CardContent>
         </Card>
       </Grid2>

@@ -15,19 +15,19 @@ import Search from "./views/Search";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#5e2d90",
+      main: Color.primary,
     },
     secondary: {
-      main: "#a3298f",
+      main: Color.secondary,
     },
     error: {
-      main: "#e3454d",
+      main: Color.red,
     },
     success: {
       main: Color.green,
     },
     warning: {
-      main: "#f4ce5c",
+      main: Color.amber,
     },
   },
   typography: {

@@ -40,7 +40,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
-  background: Color.lightGray,
+  background: Color.darkPrimary,
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -123,6 +123,9 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                     {
                       minHeight: 36,
                       px: 2,
+                      color: pathname.includes(item.path)
+                        ? Color.white
+                        : Color.textGray,
                     },
                     open
                       ? {
@@ -139,6 +142,7 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                         minWidth: 0,
                         justifyContent: "center",
                         alignItems: "center",
+                        color: "inherit",
                       },
                       open
                         ? {
