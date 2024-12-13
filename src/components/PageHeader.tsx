@@ -45,13 +45,18 @@ const PageHeader = ({ loan }: IProps) => {
               {formatCurrency(loan.financeAmount)}
             </Typography>
             <Box sx={{ color: Color.lightGray }}>
-              <Typography variant="body2">
+              <Typography variant="caption" component="p">
                 {formatCurrency(loan.repaymentAmount)} {loan.repaymentFrequency}
               </Typography>
-              <Typography variant="body2">
+              <Typography variant="caption" component="p">
                 {loan.loanInterestRate}% Base interest rate
               </Typography>
-              <Typography variant="body2">5 Years Term, In Advance</Typography>
+              <Typography variant="caption" component="p">
+                5 Years Term, In Advance
+              </Typography>
+              <Typography variant="caption" component="p">
+                $794,442.75 total obligor exposure
+              </Typography>
             </Box>
           </CardContent>
         </Card>
