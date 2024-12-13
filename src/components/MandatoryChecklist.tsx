@@ -19,6 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import ABNRegistrationDetails from "./ABNRegistrationDetails";
 import CardTitleHeader from "./CardTitleHeader";
 import EKYCDetails from "./EKYCDetails";
 
@@ -109,7 +110,7 @@ const MandatoryChecklist = ({ loan }: IProps) => {
       </Card>
 
       <Dialog
-        maxWidth="sm"
+        maxWidth="md"
         fullWidth={true}
         open={openDialog}
         onClose={() => toggleDialog(false)}
@@ -118,6 +119,9 @@ const MandatoryChecklist = ({ loan }: IProps) => {
         <DialogContent>
           <Typography gutterBottom>Checkpoint - {checkpoint}</Typography>
           {checkpoint === "eKYC" && <EKYCDetails loan={loan} />}
+          {checkpoint === "ABN Registration" && (
+            <ABNRegistrationDetails loan={loan} />
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => toggleDialog(false)} variant="contained">
