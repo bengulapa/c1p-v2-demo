@@ -1,4 +1,4 @@
-import { Grid2 } from "@mui/material";
+import { Button, Grid2, Stack } from "@mui/material";
 import React from "react";
 import { useOutletContext } from "react-router-dom";
 import GoalsChecklist from "./GoalsChecklist";
@@ -26,6 +26,15 @@ const Overview = () => {
           <GoalsChecklist loan={loan} />
         </Grid2>
       </Grid2>
+
+      <Stack direction="row" justifyContent="end" spacing={1}>
+        <Button variant="contained" disabled>
+          Approve
+        </Button>
+        <Button variant="contained" color="error">
+          Decline
+        </Button>
+      </Stack>
     </>
   );
 };
