@@ -1,10 +1,10 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Card, CardContent, Grid2, Tab, Typography } from "@mui/material";
 import React from "react";
-import PageTitle from "./PageTitle";
-import { useQuery } from "../hooks/useQuery";
-import DetailCardHeader from "./DetailCardHeader";
-import EditForm from "./EditForm";
+import PageTitle from "../../components/PageTitle";
+import { useQuery } from "../../hooks/useQuery";
+import DetailCardHeader from "../../components/DetailCardHeader";
+import EditForm from "../../components/EditForm";
 
 const ApplicationDetails = () => {
   let query = useQuery();

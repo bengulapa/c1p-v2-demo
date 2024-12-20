@@ -23,9 +23,9 @@ import {
   Tooltip,
 } from "@mui/material";
 import React from "react";
-import { Task, TaskStatus } from "../models/task.model";
-import { Color } from "../styles/colors";
-import CardTitleHeader from "./CardTitleHeader";
+import CardTitleHeader from "../../components/CardTitleHeader";
+import { Task, TaskStatus } from "../../models/task.model";
+import { Color } from "../../styles/colors";
 import TaskForm from "./TaskForm";
 
 const tasks: Task[] = [

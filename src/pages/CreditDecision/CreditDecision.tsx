@@ -13,9 +13,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import AcceptanceCriteria from "./AcceptanceCriteria";
-import PageTitle from "./PageTitle";
-import DetailCardHeader from "./DetailCardHeader";
+import AcceptanceCriteria from "../../components/AcceptanceCriteria";
+import PageTitle from "../../components/PageTitle";
+import DetailCardHeader from "../../components/DetailCardHeader";
 
 const statusList = [
   "Under Assessment",

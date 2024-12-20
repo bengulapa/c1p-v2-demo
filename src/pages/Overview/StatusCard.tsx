@@ -7,8 +7,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Color } from "../styles/colors";
-import CardTitleHeader from "./CardTitleHeader";
+import { Color } from "../../styles/colors";
+import CardTitleHeader from "../../components/CardTitleHeader";
 
 interface IProps {
   loan?: any;

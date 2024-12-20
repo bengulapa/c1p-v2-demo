@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import AssetQualification from "./AssetQualification";
-import CardTitleHeader from "./CardTitleHeader";
+import CardTitleHeader from "../../components/CardTitleHeader";
 
 interface IProps {
   loan?: any;

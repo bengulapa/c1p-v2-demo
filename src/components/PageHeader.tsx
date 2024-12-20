@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { formatCurrency } from "../helpers/formatters";
+import { formatCurrency } from "../utils/formatters";
 import { Color } from "../styles/colors";
 import CardTitleHeader from "./CardTitleHeader";
 import GaugeChart from "./GaugeChart";

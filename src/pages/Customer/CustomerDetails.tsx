@@ -19,8 +19,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import PageTitle from "./PageTitle";
-import DetailCardHeader from "./DetailCardHeader";
+import PageTitle from "../../components/PageTitle";
+import DetailCardHeader from "../../components/DetailCardHeader";
 
 function createData(asset: string, description: string, value: number) {
   return { asset, description, value };

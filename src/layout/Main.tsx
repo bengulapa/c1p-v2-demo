@@ -4,12 +4,12 @@ import * as React from "react";
 import { Outlet, useParams } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import applications from "../data/applications.json";
-import { DrawerHeader } from "../layout/DrawerHeader";
-import Header from "../layout/Header";
-import SideMenu from "../layout/SideMenu";
+import { DrawerHeader } from "./DrawerHeader";
+import Header from "./Header";
+import SideBar from "./SideBar";
 import { Color } from "../styles/colors";
 
-const Dashboard = () => {
+const Main = () => {
   const { loanId } = useParams();
   const loan = applications.find((a) => a.creditArrangementId === loanId);
   const theme = useTheme();
@@ -27,7 +27,7 @@ const Dashboard = () => {
     <Box sx={{ display: "flex", backgroundColor: Color.lightPrimary }}>
       <Header open={open} handleDrawerOpen={handleDrawerOpen} loan={loan} />
 
-      <SideMenu
+      <SideBar
         open={open}
         handleDrawerClose={handleDrawerClose}
         theme={theme}
@@ -44,4 +44,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Main;

@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import ABNRegistrationDetails from "./ABNRegistrationDetails";
-import CardTitleHeader from "./CardTitleHeader";
+import CardTitleHeader from "../../components/CardTitleHeader";
 import EKYCDetails from "./EKYCDetails";
 
 interface IProps {

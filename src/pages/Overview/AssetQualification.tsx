@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { formatCurrency } from "../helpers/formatters";
+import { formatCurrency } from "../../utils/formatters";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 interface IProps {

@@ -1,9 +1,9 @@
 import { Button, Grid2, Stack } from "@mui/material";
 import React from "react";
 import { useOutletContext } from "react-router-dom";
-import GoalsChecklist from "./GoalsChecklist";
 import MandatoryChecklist from "./MandatoryChecklist";
 import StatusCard from "./StatusCard";
+import GoalsChecklist from "./GoalsChecklist";
 
 const Overview = () => {
   const context: any = useOutletContext();

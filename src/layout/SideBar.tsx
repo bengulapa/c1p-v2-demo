@@ -21,7 +21,6 @@ import {
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import { Link, useLocation } from "react-router-dom";
-import GaugeChart from "../components/GaugeChart";
 import { Color } from "../styles/colors";
 import { DrawerHeader } from "./DrawerHeader";
 
@@ -80,7 +79,7 @@ const Drawer = styled(MuiDrawer, {
   ],
 }));
 
-const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
+const SideBar = ({ open, handleDrawerClose, theme }: IProps) => {
   const { pathname } = useLocation();
   const menuItems = [
     {
@@ -188,4 +187,4 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
   );
 };
 
-export default SideMenu;
+export default SideBar;
