@@ -10,6 +10,12 @@ export enum TaskStatus {
   Done = "Done",
 }
 
+export enum TaskType {
+  General,
+  Internal,
+  CreditCondition,
+}
+
 export interface Task {
   task: string;
   status: TaskStatus;
@@ -17,4 +23,7 @@ export interface Task {
   dateCreated: string;
   sla: string;
   attachments: Attachment[];
+  isCondition?: boolean;
+  conditionMet?: boolean;
+  taskType: TaskType;
 }

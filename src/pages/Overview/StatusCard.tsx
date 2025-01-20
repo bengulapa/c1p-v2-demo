@@ -7,8 +7,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Color } from "../../styles/colors";
 import CardTitleHeader from "../../components/CardTitleHeader";
+import { Color } from "../../styles/colors";
 
 interface IProps {
   loan?: any;
@@ -29,20 +29,18 @@ const StatusCard = ({ loan }: IProps) => {
       <CardContent>
         <div className="d-flex w-100 mb-3">
           {status.map((s, i) => (
-            <>
-              <Box
-                key={i}
-                sx={{
-                  background: i > 1 ? "gray" : "green",
-                  color: i > 1 ? "gray" : "green",
-                }}
-                className="status-box d-flex align-items-center justify-content-center"
-              >
-                <Typography variant="caption" sx={{ color: "white" }}>
-                  {s}
-                </Typography>
-              </Box>
-            </>
+            <Box
+              key={i}
+              sx={{
+                background: i > 1 ? "gray" : "green",
+                color: i > 1 ? "gray" : "green",
+              }}
+              className="status-box d-flex align-items-center justify-content-center"
+            >
+              <Typography variant="caption" sx={{ color: "white" }}>
+                {s}
+              </Typography>
+            </Box>
           ))}
         </div>
 

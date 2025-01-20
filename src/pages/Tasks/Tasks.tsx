@@ -1,6 +1,9 @@
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
+import TaskIcon from "@mui/icons-material/Task";
 import {
   Button,
   Card,
@@ -24,7 +27,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import CardTitleHeader from "../../components/CardTitleHeader";
-import { Task, TaskStatus } from "../../models/task.model";
+import { Task, TaskStatus, TaskType } from "../../models/task.model";
 import { Color } from "../../styles/colors";
 import TaskForm from "./TaskForm";
 
@@ -42,6 +45,7 @@ const tasks: Task[] = [
         type: "pdf",
       },
     ],
+    taskType: TaskType.Internal,
   },
   {
     task: "Request bank statement",
@@ -61,6 +65,7 @@ const tasks: Task[] = [
         type: "pdf",
       },
     ],
+    taskType: TaskType.Internal,
   },
   {
     task: "Confirm applicant address",
@@ -69,14 +74,55 @@ const tasks: Task[] = [
     dateCreated: new Date().toLocaleDateString(),
     sla: "",
     attachments: [],
+    taskType: TaskType.Internal,
+  },
+  {
+    task: "Condition 1",
+    status: TaskStatus.Done,
+    assignedTo: "Klein Moretti",
+    dateCreated: new Date().toLocaleDateString(),
+    sla: "",
+    attachments: [],
+    taskType: TaskType.CreditCondition,
+    conditionMet: true,
+  },
+  {
+    task: "Condition 2",
+    status: TaskStatus.InProgress,
+    assignedTo: "Klein Moretti",
+    dateCreated: new Date().toLocaleDateString(),
+    sla: "1 day to go",
+    attachments: [],
+    taskType: TaskType.CreditCondition,
+    conditionMet: false,
+  },
+  {
+    task: "Condition 3",
+    status: TaskStatus.InProgress,
+    assignedTo: "Klein Moretti",
+    dateCreated: new Date().toLocaleDateString(),
+    sla: "1 day to go",
+    attachments: [],
+    taskType: TaskType.CreditCondition,
+    conditionMet: false,
+  },
+  {
+    task: "Condition 4",
+    status: TaskStatus.InProgress,
+    assignedTo: "Klein Moretti",
+    dateCreated: new Date().toLocaleDateString(),
+    sla: "1 day to go",
+    attachments: [],
+    taskType: TaskType.CreditCondition,
+    conditionMet: false,
   },
 ];
 
 const Tasks = () => {
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [selectedTask, setSelectedTask] = React.useState<Task | null>();
+  const [selectedTask, setSelectedTask] = React.useState<Task>();
 
-  const toggleDialog = (open: boolean, selectedTask?: Task | null) => {
+  const toggleDialog = (open: boolean, selectedTask?: Task) => {
     setOpenDialog(open);
     setTimeout(() => {
       setSelectedTask(selectedTask);
@@ -108,31 +154,34 @@ const Tasks = () => {
     <>
       <Card variant="outlined" className="mb-2">
         <CardContent sx={{ pt: 1 }}>
-          <div className="d-flex align-items-center mb-2">
-            <CardTitleHeader title="Tasks" />
+          <div className="d-flex align-items-center justify-content-between mb-2">
+            <div className="d-flex align-items-center">
+              <CardTitleHeader title="Tasks" />
 
-            <div className="d-flex justify-content-between align-items-center ml-5">
-              <Button variant="contained" onClick={() => toggleDialog(true)}>
-                New Task
-              </Button>
+              <div className="d-flex justify-content-between align-items-center ml-5">
+                <Button variant="contained" onClick={() => toggleDialog(true)}>
+                  New Task
+                </Button>
 
-              <FormControl
-                variant="standard"
-                sx={{ m: 1, mt: 3, width: "25ch" }}
-              >
-                <Input
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <SearchIcon />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
+                <FormControl
+                  variant="standard"
+                  sx={{ m: 1, mt: 3, width: "25ch" }}
+                >
+                  <Input
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <SearchIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              </div>
             </div>
+            <TaskIcon color="primary" />
           </div>
 
           <TableContainer component={Paper}>
-            <Table size="small" aria-label="a dense table">
+            <Table size="small">
               <TableHead>
                 <TableRow>
                   <TableCell>Task</TableCell>
@@ -142,6 +191,7 @@ const Tasks = () => {
                   <TableCell>Date created</TableCell>
                   <TableCell>SLA</TableCell>
                   <TableCell>Attachments</TableCell>
+                  <TableCell>Condition Met</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -180,9 +230,20 @@ const Tasks = () => {
                       {t.sla}
                     </TableCell>
                     <TableCell>
-                      {t.attachments.map((a) => (
-                        <AttachFileIcon />
+                      {t.attachments.map((a, i) => (
+                        <AttachFileIcon key={i} />
                       ))}
+                    </TableCell>
+                    <TableCell>
+                      {t.taskType === TaskType.CreditCondition ? (
+                        t.conditionMet ? (
+                          <CheckBoxIcon />
+                        ) : (
+                          <CheckBoxOutlineBlankIcon />
+                        )
+                      ) : (
+                        ""
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -200,18 +261,18 @@ const Tasks = () => {
       >
         <DialogTitle>{selectedTask ? "Edit" : "Add"} Task</DialogTitle>
         <DialogContent>
-          <TaskForm />
+          <TaskForm task={selectedTask} />
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={() => toggleDialog(false, null)}
+            onClick={() => toggleDialog(false, undefined)}
             variant="contained"
             color="secondary"
           >
             {selectedTask ? "Task Done" : "Add Task"}
           </Button>
           <Button
-            onClick={() => toggleDialog(false, null)}
+            onClick={() => toggleDialog(false, undefined)}
             variant="contained"
             color="inherit"
           >

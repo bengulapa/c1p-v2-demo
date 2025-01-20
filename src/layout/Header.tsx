@@ -1,6 +1,8 @@
+import AlternateEmailSharpIcon from "@mui/icons-material/AlternateEmailSharp";
+import CallSharpIcon from "@mui/icons-material/CallSharp";
 import MenuIcon from "@mui/icons-material/Menu";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import {
-  Badge,
   Box,
   Drawer,
   IconButton,
@@ -10,14 +12,10 @@ import {
   Typography,
 } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import AccountSettings from "../components/AccountSettings";
 import React from "react";
-import PendingIcon from "@mui/icons-material/Pending";
-import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import AlternateEmailSharpIcon from "@mui/icons-material/AlternateEmailSharp";
-import CallSharpIcon from "@mui/icons-material/CallSharp";
-import ProcessList from "../components/ProcessList";
+import AccountSettings from "../components/AccountSettings";
 import AuditLogs from "../components/AuditLogs";
+import ProcessList from "../components/ProcessList";
 
 const drawerWidth = 220;
 
