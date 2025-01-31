@@ -13,9 +13,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import AcceptanceCriteria from "./AcceptanceCriteria";
-import PageHeader from "./PageHeader";
-import DetailCardHeader from "./DetailCardHeader";
+import AcceptanceCriteria from "../../components/AcceptanceCriteria";
+import PageTitle from "../../components/PageTitle";
+import DetailCardHeader from "../../components/DetailCardHeader";
 
 const statusList = [
   "Under Assessment",
@@ -30,7 +30,7 @@ const statusList = [
 const CreditDecision = () => {
   return (
     <>
-      <PageHeader title="Credit Decision" />
+      <PageTitle title="Credit Decision" />
 
       <Grid2 container spacing={2}>
         <Grid2 size={6}>

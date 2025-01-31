@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import applications from "../data/applications.json";
 
-const SearchLoan = () => {
+const Search = () => {
   const [value, setValue] = React.useState("");
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
@@ -60,4 +60,4 @@ const SearchLoan = () => {
   );
 };
 
-export default SearchLoan;
+export default Search;

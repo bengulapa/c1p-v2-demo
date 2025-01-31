@@ -1,12 +1,12 @@
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import RememberMeIcon from "@mui/icons-material/RememberMe";
 import SummarizeIcon from "@mui/icons-material/Summarize";
-import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import TaskIcon from "@mui/icons-material/Task";
 import {
+  Badge,
   Box,
   CSSObject,
   Divider,
@@ -21,9 +21,8 @@ import {
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import { Link, useLocation } from "react-router-dom";
-import { DrawerHeader } from "./DrawerHeader";
 import { Color } from "../styles/colors";
-import GaugeChart from "../components/GaugeChart";
+import { DrawerHeader } from "./DrawerHeader";
 
 interface IProps {
   open: boolean;
@@ -40,7 +39,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
-  background: Color.lightGray,
+  background: Color.darkPrimary,
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -80,25 +79,23 @@ const Drawer = styled(MuiDrawer, {
   ],
 }));
 
-const menuItems = [
-  {
-    text: "Overview",
-    icon: <SummarizeIcon />,
-    path: `overview`,
-  },
-  {
-    text: "Application Details",
-    icon: <CreditScoreIcon />,
-    path: `application`,
-  },
-  { text: "Customer Details", icon: <RememberMeIcon />, path: "customer" },
-  { text: "Credit Decision", icon: <ChecklistIcon />, path: "decision" },
-  { text: "Broker Comms", icon: <SupportAgentIcon />, path: "broker-comms" },
-  { text: "Attachments", icon: <AttachFileIcon />, path: "attachments" },
-];
-
-const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
+const SideBar = ({ open, handleDrawerClose, theme }: IProps) => {
   const { pathname } = useLocation();
+  const menuItems = [
+    {
+      text: "Overview",
+      icon: <SummarizeIcon />,
+      path: `overview`,
+    },
+    {
+      text: "Application Details",
+      icon: <CreditScoreIcon />,
+      path: `application`,
+    },
+    { text: "Customer Details", icon: <RememberMeIcon />, path: "customer" },
+    { text: "Credit Decision", icon: <ChecklistIcon />, path: "decision" },
+    { text: "Tasks", icon: <TaskIcon />, path: "tasks", badgeContent: 4 },
+  ];
 
   return (
     <>
@@ -125,6 +122,9 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                     {
                       minHeight: 36,
                       px: 2,
+                      color: pathname.includes(item.path)
+                        ? Color.white
+                        : Color.textGray,
                     },
                     open
                       ? {
@@ -141,6 +141,7 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                         minWidth: 0,
                         justifyContent: "center",
                         alignItems: "center",
+                        color: "inherit",
                       },
                       open
                         ? {
@@ -154,7 +155,15 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
                     {item.icon}
                   </ListItemIcon>
                   <ListItemText
-                    primary={item.text}
+                    primary={
+                      item.badgeContent ? (
+                        <Badge variant="dot" color="error">
+                          {item.text}
+                        </Badge>
+                      ) : (
+                        item.text
+                      )
+                    }
                     sx={[
                       {
                         textTransform: "uppercase",
@@ -172,21 +181,10 @@ const SideMenu = ({ open, handleDrawerClose, theme }: IProps) => {
               </ListItem>
             ))}
           </List>
-
-          {!pathname?.toLocaleLowerCase().includes("overview") && (
-            <Box className="mx-auto mb-4">
-              <GaugeChart
-                score={100}
-                width={160}
-                height={108}
-                fontSize="10px"
-              />
-            </Box>
-          )}
         </Box>
       </Drawer>
     </>
   );
 };
 
-export default SideMenu;
+export default SideBar;

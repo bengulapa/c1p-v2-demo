@@ -8,13 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import Notes from "./Notes";
-import PageHeader from "./PageHeader";
+import PageTitle from "./PageTitle";
 import DetailCardHeader from "./DetailCardHeader";
 
 const BrokerComms = () => {
   return (
     <>
-      <PageHeader title="Broker Comms" />
+      <PageTitle title="Broker Comms" />
 
       <Grid2 container spacing={2}>
         <Grid2 size={6}>

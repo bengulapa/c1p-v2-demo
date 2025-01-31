@@ -9,14 +9,14 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
-import PageHeader from "./PageHeader";
+import PageTitle from "./PageTitle";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const Attachments = () => {
   return (
     <>
-      <PageHeader title="Attachments" />
+      <PageTitle title="Attachments" />
 
       <Card>
         <CardContent>

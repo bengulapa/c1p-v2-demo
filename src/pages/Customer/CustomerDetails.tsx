@@ -19,8 +19,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import PageHeader from "./PageHeader";
-import DetailCardHeader from "./DetailCardHeader";
+import PageTitle from "../../components/PageTitle";
+import DetailCardHeader from "../../components/DetailCardHeader";
 
 function createData(asset: string, description: string, value: number) {
   return { asset, description, value };
@@ -41,7 +41,7 @@ const CustomerDetails = () => {
 
   return (
     <>
-      <PageHeader title="Customer Details" />
+      <PageTitle title="Customer Details" />
 
       <TabContext value={value}>
         <TabList onChange={handleChange}>
