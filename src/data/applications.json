@@ -168,7 +168,6 @@
         "fullName": "Nathan Evans"
       }
     ],
-    "whiteLabelAssocation": "Transport",
     "companyRiskStatus": "",
     "companyRiskReviewRequired": false,
     "entitiesWithHighRisk": [],
@@ -278,7 +277,56 @@
     },
     "recommendationScore": 777,
     "assessmentType": "Low Doc",
-    "creditStatus": "Under Assessment"
+    "creditStatus": "Under Assessment",
+    "checklists": [
+      {
+        "checkpoint": "eKYC",
+        "outcome": "FAIL",
+        "criteriaList": [
+          {
+            "key": "KYC",
+            "text": "KYC Result",
+            "value": "Pass",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "DVS",
+            "text": "DVS pass",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": true
+          },
+          {
+            "key": "ID",
+            "text": "ID Ownership",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": true
+          }
+        ]
+      },
+      {
+        "checkpoint": "Fraud Assessment",
+        "outcome": "FAIL",
+        "criteriaList": []
+      },
+      {
+        "checkpoint": "Veda",
+        "outcome": "PASS",
+        "criteriaList": []
+      },
+      {
+        "checkpoint": "ABN Registration",
+        "outcome": "PASS",
+        "criteriaList": []
+      },
+      {
+        "checkpoint": "GST Registration",
+        "outcome": "PASS",
+        "criteriaList": []
+      }
+    ]
   },
   {
     "creditArrangementId": "CA02",
@@ -453,7 +501,6 @@
         "fullName": "mharick cando"
       }
     ],
-    "whiteLabelAssocation": "Transport",
     "companyRiskStatus": "",
     "companyRiskReviewRequired": false,
     "entitiesWithHighRisk": [],
@@ -542,6 +589,55 @@
       "tradeIn": 662850
     },
     "recommendationScore": 300,
-    "creditStatus": "Missing Information"
+    "creditStatus": "Missing Information",
+    "checklists": [
+      {
+        "checkpoint": "eKYC",
+        "outcome": "FAIL",
+        "criteriaList": [
+          {
+            "key": "KYC",
+            "text": "KYC Result",
+            "value": "Pass",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "DVS",
+            "text": "DVS pass",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": true
+          },
+          {
+            "key": "ID",
+            "text": "ID Ownership",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": true
+          }
+        ]
+      },
+      {
+        "checkpoint": "Fraud Assessment",
+        "outcome": "FAIL",
+        "criteriaList": []
+      },
+      {
+        "checkpoint": "Veda",
+        "outcome": "PASS",
+        "criteriaList": []
+      },
+      {
+        "checkpoint": "ABN Registration",
+        "outcome": "PASS",
+        "criteriaList": []
+      },
+      {
+        "checkpoint": "GST Registration",
+        "outcome": "PASS",
+        "criteriaList": []
+      }
+    ]
   }
 ]

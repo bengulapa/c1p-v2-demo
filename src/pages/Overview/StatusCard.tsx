@@ -9,12 +9,10 @@ import {
 } from "@mui/material";
 import CardTitleHeader from "../../components/CardTitleHeader";
 import { Color } from "../../styles/colors";
+import { useLoanStore } from "../../state";
 
-interface IProps {
-  loan?: any;
-}
-
-const StatusCard = ({ loan }: IProps) => {
+const StatusCard = () => {
+  const loan = useLoanStore((state) => state.loan);
   const status = ["Submitted", "Assessing", "Pending", "Decisioned", "Settled"];
 
   return (
@@ -22,7 +20,7 @@ const StatusCard = ({ loan }: IProps) => {
       <CardHeader
         action={<HistoryIcon color="primary" />}
         subheader={
-          <CardTitleHeader title={"The Progress: " + loan.creditStatus} />
+          <CardTitleHeader title={"The Progress: " + loan?.creditStatus} />
         }
         sx={{ pb: 0 }}
       />
@@ -63,7 +61,7 @@ const StatusCard = ({ loan }: IProps) => {
             </Box>
 
             <Typography className="mx-2" variant="caption">
-              {loan.creditStatus}
+              {loan?.creditStatus}
             </Typography>
 
             <Box

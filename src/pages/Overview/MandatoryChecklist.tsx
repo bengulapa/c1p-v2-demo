@@ -19,45 +19,22 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import ABNRegistrationDetails from "./ABNRegistrationDetails";
 import CardTitleHeader from "../../components/CardTitleHeader";
+import { Checklist } from "../../models/loan.models";
+import { useLoanStore } from "../../state";
+import ABNRegistrationDetails from "./ABNRegistrationDetails";
 import EKYCDetails from "./EKYCDetails";
+import FraudAssessmentDetails from "./FraudAssessmentDetails";
 
-interface IProps {
-  loan?: any;
-}
-
-const MandatoryChecklist = ({ loan }: IProps) => {
+const MandatoryChecklist = () => {
+  const loan = useLoanStore((state) => state.loan);
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [checkpoint, setCheckpoint] = React.useState("");
+  const [checklist, setChecklist] = React.useState<Checklist | null>(null);
 
-  const toggleDialog = (open: boolean, checkpoint?: string) => {
+  const toggleDialog = (open: boolean, checklist: Checklist | null = null) => {
     setOpenDialog(open);
-    checkpoint && setCheckpoint(checkpoint);
+    setChecklist(checklist);
   };
-
-  const checklist = [
-    {
-      checkpoint: "eKYC",
-      outcome: "FAIL",
-    },
-    {
-      checkpoint: "Fraud Assessment",
-      outcome: "FAIL",
-    },
-    {
-      checkpoint: "Veda",
-      outcome: "PASS",
-    },
-    {
-      checkpoint: "ABN Registration",
-      outcome: "PASS",
-    },
-    {
-      checkpoint: "GST Registration",
-      outcome: "PASS",
-    },
-  ];
 
   return (
     <>
@@ -79,7 +56,7 @@ const MandatoryChecklist = ({ loan }: IProps) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {checklist.map((row, index) => (
+                {loan?.checklists.map((row, index) => (
                   <TableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -95,9 +72,7 @@ const MandatoryChecklist = ({ loan }: IProps) => {
                       )}
                     </TableCell>
                     <TableCell>
-                      <Button
-                        onClick={() => toggleDialog(true, row.checkpoint)}
-                      >
+                      <Button onClick={() => toggleDialog(true, row)}>
                         Details
                       </Button>
                     </TableCell>
@@ -117,9 +92,14 @@ const MandatoryChecklist = ({ loan }: IProps) => {
       >
         <DialogTitle>Mandatory Compliance</DialogTitle>
         <DialogContent>
-          <Typography gutterBottom>Checkpoint - {checkpoint}</Typography>
-          {checkpoint === "eKYC" && <EKYCDetails loan={loan} />}
-          {checkpoint === "ABN Registration" && (
+          <Typography gutterBottom>
+            Checkpoint - {checklist?.checkpoint}
+          </Typography>
+          {checklist?.checkpoint === "eKYC" && <EKYCDetails />}
+          {checklist?.checkpoint === "Fraud Assessment" && (
+            <FraudAssessmentDetails />
+          )}
+          {checklist?.checkpoint === "ABN Registration" && (
             <ABNRegistrationDetails loan={loan} />
           )}
         </DialogContent>

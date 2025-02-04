@@ -41,11 +41,14 @@ const Search = () => {
           sx={{ p: "10px" }}
           aria-label="search"
           onClick={() => {
-            let loan = applications.find(
+            const loan = applications.find(
               (a) => a.creditArrangementId === value
             );
+
             if (!loan) {
-              setError("No CA found with that ID. Please try another.");
+              setError(
+                "No application found with that ID. Please try another."
+              );
             } else {
               navigate(`/${value}/overview`, { state: loan });
             }

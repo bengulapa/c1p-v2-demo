@@ -4,15 +4,17 @@ import * as React from "react";
 import { Outlet, useParams } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import applications from "../data/applications.json";
+import { useLoanStore } from "../state";
+import { Color } from "../styles/colors";
 import { DrawerHeader } from "./DrawerHeader";
 import Header from "./Header";
 import SideBar from "./SideBar";
-import { Color } from "../styles/colors";
 
 const Main = () => {
   const { loanId } = useParams();
-  const loan = applications.find((a) => a.creditArrangementId === loanId);
   const theme = useTheme();
+  const setLoan = useLoanStore((state) => state.setLoan);
+  const loan = useLoanStore((state) => state.loan);
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -23,23 +25,35 @@ const Main = () => {
     setOpen(false);
   };
 
+  React.useEffect(() => {
+    const loan = applications.find((a) => a.creditArrangementId === loanId);
+
+    if (loan) {
+      setLoan(loan);
+    }
+  }, [loanId]);
+
   return (
     <Box sx={{ display: "flex", backgroundColor: Color.lightPrimary }}>
-      <Header open={open} handleDrawerOpen={handleDrawerOpen} loan={loan} />
+      {loan && (
+        <>
+          <Header open={open} handleDrawerOpen={handleDrawerOpen} loan={loan} />
 
-      <SideBar
-        open={open}
-        handleDrawerClose={handleDrawerClose}
-        theme={theme}
-      />
+          <SideBar
+            open={open}
+            handleDrawerClose={handleDrawerClose}
+            theme={theme}
+          />
 
-      <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
-        <DrawerHeader />
+          <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
+            <DrawerHeader />
 
-        <PageHeader loan={loan} />
+            <PageHeader loan={loan} />
 
-        <Outlet context={{ loan: loan }} />
-      </Box>
+            <Outlet />
+          </Box>
+        </>
+      )}
     </Box>
   );
 };

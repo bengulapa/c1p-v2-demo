@@ -1,17 +1,37 @@
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button, Grid2, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Criteria } from "../../models/interfaces";
+import { useLoanStore } from "../../state";
+import CriteriaRow from "./Criteria";
 
-interface IProps {
-  loan?: any;
-}
+const EKYCDetails = () => {
+  const checkpoint = "eKYC";
 
-const EKYCDetails = ({ loan }: IProps) => {
-  const guarantorChecklist = [
-    "Fraud Check",
-    "Politically Exposed Person",
-    "Sanctions",
-    "Velocity",
-  ];
+  const loan = useLoanStore((state) => state.loan)!;
+  const setLoan = useLoanStore((state) => state.setLoan);
+  const [checklist, setChecklist] = useState(
+    loan.checklists.find((c) => c.checkpoint === checkpoint)!
+  );
+
+  const updateCriteria = (criteria: Criteria) => {
+    setChecklist({
+      ...checklist,
+      criteriaList: checklist.criteriaList.map((c) =>
+        c.key === criteria.key ? criteria : c
+      ),
+    });
+  };
+
+  useEffect(() => {
+    setLoan({
+      ...loan,
+      checklists: loan.checklists.map((c) =>
+        c.checkpoint === checkpoint ? checklist : c
+      ),
+    });
+
+    console.log(checklist);
+  }, [checklist]);
 
   return (
     <>
@@ -19,39 +39,20 @@ const EKYCDetails = ({ loan }: IProps) => {
       <Grid2 container spacing={1} className="mb-3">
         <Grid2 size={6}>
           <div className="d-flex justify-content-between">
-            <Typography variant="caption">Equifax File No:</Typography>
+            <Typography variant="body2">Equifax File No:</Typography>
             <Typography variant="body2" color="secondary">
               194578932
             </Typography>
           </div>
-          <div className="d-flex justify-content-between">
-            <Typography variant="caption">KYC Result:</Typography>
-            <Typography variant="body2" color="success">
-              Pass
-            </Typography>
-          </div>
-          <div className="d-flex justify-content-between">
-            <Typography variant="caption">DVS pass:</Typography>
-            <Typography variant="body2" color="error">
-              Fail
-            </Typography>
-          </div>
-          <div className="d-flex justify-content-between mb-2">
-            <Typography variant="caption">Fraud Assessment:</Typography>
-            <Typography variant="body2" color="success">
-              Pass
-            </Typography>
-          </div>
-          <div className="ml-3">
-            {guarantorChecklist.map((c, i) => (
-              <div key={i} className="d-flex justify-content-between">
-                <Typography variant="caption">{c}:</Typography>
-                <Typography variant="body2" color="success">
-                  <CheckCircleIcon fontSize="small" />
-                </Typography>
-              </div>
-            ))}
-          </div>
+
+          <CriteriaRow
+            criteria={checklist?.criteriaList.find((c) => c.key === "KYC")!}
+            updateCriteria={updateCriteria}
+          />
+          <CriteriaRow
+            criteria={checklist?.criteriaList.find((c) => c.key === "DVS")!}
+            updateCriteria={updateCriteria}
+          />
         </Grid2>
         <Grid2 size={6}>
           <Stack alignItems="start" className="ml-5">
@@ -66,19 +67,15 @@ const EKYCDetails = ({ loan }: IProps) => {
         <Grid2 size={6}>
           <Typography gutterBottom>BIOMETRICS</Typography>
           <div className="d-flex justify-content-between">
-            <Typography variant="caption">
-              BioID PhotoVerify File No:
-            </Typography>
+            <Typography variant="body2">BioID PhotoVerify File No:</Typography>
             <Typography variant="body2" color="secondary">
               194578932
             </Typography>
           </div>
-          <div className="d-flex justify-content-between">
-            <Typography variant="caption">ID Ownership:</Typography>
-            <Typography variant="body2" color="success">
-              Pass
-            </Typography>
-          </div>
+          <CriteriaRow
+            criteria={checklist?.criteriaList.find((c) => c.key === "ID")!}
+            updateCriteria={updateCriteria}
+          />
         </Grid2>
         <Grid2 size={6}>
           <Button className="ml-5">VIEW BioID Report</Button>

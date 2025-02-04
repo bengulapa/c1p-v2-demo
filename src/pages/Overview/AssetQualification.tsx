@@ -10,17 +10,19 @@ import {
 } from "@mui/material";
 import { formatCurrency } from "../../utils/formatters";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { Criteria } from "../../models/interfaces";
+import CriteriaRow from "./Criteria";
 
 interface IProps {
   loan?: any;
 }
 
 const AssetQualification = ({ loan }: IProps) => {
-  const acceptanceCriteria = [
+  const acceptanceCriteria: Criteria[] = [
     {
       key: "LVR",
       text: "Loan to Value Ratio",
-      value: 73.67,
+      value: "73.67",
       result: "PASS",
       isOverridden: false,
     },
@@ -102,25 +104,7 @@ const AssetQualification = ({ loan }: IProps) => {
       <Typography gutterBottom>ACCEPTANCE CRITERIA</Typography>
       <Box>
         {acceptanceCriteria.map((ac) => (
-          <Stack direction="row" key={ac.key} spacing={3} alignItems="center">
-            <Typography variant="caption" sx={{ width: 240 }}>
-              {ac.text}:
-            </Typography>
-            <Typography variant="body2" color="secondary" sx={{ width: 40 }}>
-              {ac.value}
-            </Typography>
-            {ac.result === "PASS" ? (
-              <CheckCircleIcon color="success" fontSize="small" />
-            ) : (
-              <CancelIcon color="error" fontSize="small" />
-            )}
-            {ac.result === "FAIL" && (
-              <FormControlLabel
-                control={<Checkbox checked={ac.isOverridden} size="small" />}
-                label="Override?"
-              />
-            )}
-          </Stack>
+          <CriteriaRow criteria={ac} />
         ))}
       </Box>
     </>
