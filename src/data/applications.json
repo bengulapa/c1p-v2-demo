@@ -309,7 +309,36 @@
       {
         "checkpoint": "Fraud Assessment",
         "outcome": "FAIL",
-        "criteriaList": []
+        "criteriaList": [
+          {
+            "key": "FraudCheck",
+            "text": "Fraud Check",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": false
+          },
+          {
+            "key": "PEP",
+            "text": "Politically Exposed Person",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": false
+          },
+          {
+            "key": "Sanctions",
+            "text": "Sanctions",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": false
+          },
+          {
+            "key": "Velocity",
+            "text": "Fraud Check",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": false
+          }
+        ]
       },
       {
         "checkpoint": "Veda",
@@ -621,7 +650,36 @@
       {
         "checkpoint": "Fraud Assessment",
         "outcome": "FAIL",
-        "criteriaList": []
+        "criteriaList": [
+          {
+            "key": "FraudCheck",
+            "text": "Fraud Check",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": false
+          },
+          {
+            "key": "FraudCheck",
+            "text": "Politically Exposed Person",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": false
+          },
+          {
+            "key": "FraudCheck",
+            "text": "Sanctions",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": false
+          },
+          {
+            "key": "Velocity",
+            "text": "Fraud Check",
+            "value": "Fail",
+            "result": "FAIL",
+            "isOverridden": false
+          }
+        ]
       },
       {
         "checkpoint": "Veda",

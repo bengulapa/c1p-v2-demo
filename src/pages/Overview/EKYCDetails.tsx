@@ -29,8 +29,6 @@ const EKYCDetails = () => {
         c.checkpoint === checkpoint ? checklist : c
       ),
     });
-
-    console.log(checklist);
   }, [checklist]);
 
   return (

@@ -1,38 +1,35 @@
 import { Box, Typography } from "@mui/material";
 import { Criteria } from "../../models/interfaces";
 import CriteriaRow from "./Criteria";
+import { useState, useEffect } from "react";
+import { useLoanStore } from "../../state";
 
 const FraudAssessmentDetails = () => {
-  const fraudAssessments: Criteria[] = [
-    {
-      key: "FraudCheck",
-      text: "Fraud Check",
-      value: "Fail",
-      result: "FAIL",
-      isOverridden: false,
-    },
-    {
-      key: "FraudCheck",
-      text: "Politically Exposed Person",
-      value: "Fail",
-      result: "FAIL",
-      isOverridden: false,
-    },
-    {
-      key: "FraudCheck",
-      text: "Sanctions",
-      value: "Fail",
-      result: "FAIL",
-      isOverridden: false,
-    },
-    {
-      key: "Velocity",
-      text: "Fraud Check",
-      value: "Fail",
-      result: "FAIL",
-      isOverridden: false,
-    },
-  ];
+  const checkpoint = "Fraud Assessment";
+
+  const loan = useLoanStore((state) => state.loan)!;
+  const setLoan = useLoanStore((state) => state.setLoan);
+  const [checklist, setChecklist] = useState(
+    loan.checklists.find((c) => c.checkpoint === checkpoint)!
+  );
+
+  const updateCriteria = (criteria: Criteria) => {
+    setChecklist({
+      ...checklist,
+      criteriaList: checklist.criteriaList.map((c) =>
+        c.key === criteria.key ? criteria : c
+      ),
+    });
+  };
+
+  useEffect(() => {
+    setLoan({
+      ...loan,
+      checklists: loan.checklists.map((c) =>
+        c.checkpoint === checkpoint ? checklist : c
+      ),
+    });
+  }, [checklist]);
 
   return (
     <Box className="w-75">
@@ -43,8 +40,8 @@ const FraudAssessmentDetails = () => {
         </Typography>
       </div>
       <div className="ml-3">
-        {fraudAssessments.map((c) => (
-          <CriteriaRow criteria={c} />
+        {checklist.criteriaList.map((c) => (
+          <CriteriaRow criteria={c} updateCriteria={updateCriteria} />
         ))}
       </div>
     </Box>
