@@ -396,7 +396,22 @@
       {
         "checkpoint": "GST Registration",
         "outcome": "PASS",
-        "criteriaList": []
+        "criteriaList": [
+          {
+            "key": "1",
+            "text": "GST Registration",
+            "value": "Registered",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "2",
+            "text": "GST Registration Length",
+            "value": "2",
+            "result": "FAIL",
+            "isOverridden": true
+          }
+        ]
       }
     ]
   },

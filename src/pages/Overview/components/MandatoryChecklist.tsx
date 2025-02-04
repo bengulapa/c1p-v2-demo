@@ -26,6 +26,7 @@ import ABNRegistrationDetails from "./ABNRegistrationDetails";
 import EKYCDetails from "./EKYCDetails";
 import FraudAssessmentDetails from "./FraudAssessmentDetails";
 import VedaDetails from "./VedaDetails";
+import GSTRegistrationDetails from "./GSTRegistrationDetails";
 
 const MandatoryChecklist = () => {
   const loan = useLoanStore((state) => state.loan);
@@ -101,6 +102,9 @@ const MandatoryChecklist = () => {
             <FraudAssessmentDetails />
           )}
           {checklist?.checkpoint === "Veda" && <VedaDetails />}
+          {checklist?.checkpoint === "GST Registration" && (
+            <GSTRegistrationDetails />
+          )}
           {checklist?.checkpoint === "ABN Registration" && (
             <ABNRegistrationDetails loan={loan} />
           )}
