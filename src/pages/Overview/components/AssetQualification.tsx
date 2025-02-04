@@ -8,9 +8,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { formatCurrency } from "../../utils/formatters";
+import { formatCurrency } from "../../../utils/formatters";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Criteria } from "../../models/interfaces";
+import { Criteria } from "../../../models/interfaces";
 import CriteriaRow from "./Criteria";
 
 interface IProps {

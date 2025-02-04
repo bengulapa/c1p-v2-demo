@@ -343,7 +343,50 @@
       {
         "checkpoint": "Veda",
         "outcome": "PASS",
-        "criteriaList": []
+        "criteriaList": [
+          {
+            "key": "1",
+            "text": "Score",
+            "value": "555",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "3",
+            "text": "Number of unpaid or unsettled judgements in the last 60 months",
+            "value": "0",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "4",
+            "text": "Number of insolvencies on file",
+            "value": "0",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "5",
+            "text": "Number of consumer defaults/SCI in the last 12 months",
+            "value": "0",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "6",
+            "text": "Age of file",
+            "value": "5",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "2",
+            "text": "Total count of consumer and commercial enquiries in less than 12 months",
+            "value": "2",
+            "result": "PASS",
+            "isOverridden": false
+          }
+        ]
       },
       {
         "checkpoint": "ABN Registration",

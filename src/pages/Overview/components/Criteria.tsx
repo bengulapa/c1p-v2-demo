@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { Criteria } from "../../models/interfaces";
+import { Criteria } from "../../../models/interfaces";
 
 interface IProps {
   criteria: Criteria;

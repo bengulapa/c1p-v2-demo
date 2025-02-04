@@ -1,6 +1,6 @@
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import GradingIcon from "@mui/icons-material/Grading";
 import {
   Button,
   Card,
@@ -19,52 +19,32 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import AssetQualification from "./AssetQualification";
-import CardTitleHeader from "../../components/CardTitleHeader";
+import CardTitleHeader from "../../../components/CardTitleHeader";
+import { Checklist } from "../../../models/loan.models";
+import { useLoanStore } from "../../../state";
+import ABNRegistrationDetails from "./ABNRegistrationDetails";
+import EKYCDetails from "./EKYCDetails";
+import FraudAssessmentDetails from "./FraudAssessmentDetails";
+import VedaDetails from "./VedaDetails";
 
-interface IProps {
-  loan?: any;
-}
-const GoalsChecklist = ({ loan }: IProps) => {
+const MandatoryChecklist = () => {
+  const loan = useLoanStore((state) => state.loan);
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [checkpoint, setCheckpoint] = React.useState("");
+  const [checklist, setChecklist] = React.useState<Checklist | null>(null);
 
-  const toggleDialog = (open: boolean, checkpoint?: string) => {
+  const toggleDialog = (open: boolean, checklist: Checklist | null = null) => {
     setOpenDialog(open);
-    checkpoint && setCheckpoint(checkpoint);
+    setChecklist(checklist);
   };
-
-  const checklist = [
-    {
-      checkpoint: "Asset Qualification",
-      outcome: "PASS",
-    },
-    {
-      checkpoint: "Arrangement Check",
-      outcome: "FAIL",
-    },
-    {
-      checkpoint: "Serviceability Evident",
-      outcome: "PASS",
-    },
-    {
-      checkpoint: "LVR",
-      outcome: "FAIL",
-    },
-    {
-      checkpoint: "DSC Ratio",
-      outcome: "PASS",
-    },
-  ];
 
   return (
     <>
       <Card variant="outlined" className="mb-2">
         <CardContent sx={{ pt: 1 }}>
           <div className="d-flex justify-content-between mb-2">
-            <CardTitleHeader title="OA Goals Checklist" />
+            <CardTitleHeader title="Mandatory Compliance Checklist" />
 
-            <GradingIcon />
+            <AccountBalanceIcon />
           </div>
 
           <TableContainer component={Paper}>
@@ -77,7 +57,7 @@ const GoalsChecklist = ({ loan }: IProps) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {checklist.map((row, index) => (
+                {loan?.checklists.map((row, index) => (
                   <TableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -93,9 +73,7 @@ const GoalsChecklist = ({ loan }: IProps) => {
                       )}
                     </TableCell>
                     <TableCell>
-                      <Button
-                        onClick={() => toggleDialog(true, row.checkpoint)}
-                      >
+                      <Button onClick={() => toggleDialog(true, row)}>
                         Details
                       </Button>
                     </TableCell>
@@ -108,16 +86,23 @@ const GoalsChecklist = ({ loan }: IProps) => {
       </Card>
 
       <Dialog
-        maxWidth="sm"
+        maxWidth="md"
         fullWidth={true}
         open={openDialog}
         onClose={() => toggleDialog(false)}
       >
-        <DialogTitle>OA Goals Checklist</DialogTitle>
+        <DialogTitle>Mandatory Compliance</DialogTitle>
         <DialogContent>
-          <Typography gutterBottom>Checkpoint - {checkpoint}</Typography>
-          {checkpoint === "Asset Qualification" && (
-            <AssetQualification loan={loan} />
+          <Typography gutterBottom>
+            Checkpoint - {checklist?.checkpoint}
+          </Typography>
+          {checklist?.checkpoint === "eKYC" && <EKYCDetails />}
+          {checklist?.checkpoint === "Fraud Assessment" && (
+            <FraudAssessmentDetails />
+          )}
+          {checklist?.checkpoint === "Veda" && <VedaDetails />}
+          {checklist?.checkpoint === "ABN Registration" && (
+            <ABNRegistrationDetails loan={loan} />
           )}
         </DialogContent>
         <DialogActions>
@@ -130,4 +115,4 @@ const GoalsChecklist = ({ loan }: IProps) => {
   );
 };
 
-export default GoalsChecklist;
+export default MandatoryChecklist;

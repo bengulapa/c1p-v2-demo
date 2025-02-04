@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import { Criteria } from "../../models/interfaces";
+import { Criteria } from "../../../models/interfaces";
 import CriteriaRow from "./Criteria";
 import { useState, useEffect } from "react";
-import { useLoanStore } from "../../state";
+import { useLoanStore } from "../../../state";
 
 const FraudAssessmentDetails = () => {
   const checkpoint = "Fraud Assessment";

@@ -1,6 +1,6 @@
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import GradingIcon from "@mui/icons-material/Grading";
 import {
   Button,
   Card,
@@ -19,31 +19,52 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import CardTitleHeader from "../../components/CardTitleHeader";
-import { Checklist } from "../../models/loan.models";
-import { useLoanStore } from "../../state";
-import ABNRegistrationDetails from "./ABNRegistrationDetails";
-import EKYCDetails from "./EKYCDetails";
-import FraudAssessmentDetails from "./FraudAssessmentDetails";
+import AssetQualification from "./AssetQualification";
+import CardTitleHeader from "../../../components/CardTitleHeader";
 
-const MandatoryChecklist = () => {
-  const loan = useLoanStore((state) => state.loan);
+interface IProps {
+  loan?: any;
+}
+const GoalsChecklist = ({ loan }: IProps) => {
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [checklist, setChecklist] = React.useState<Checklist | null>(null);
+  const [checkpoint, setCheckpoint] = React.useState("");
 
-  const toggleDialog = (open: boolean, checklist: Checklist | null = null) => {
+  const toggleDialog = (open: boolean, checkpoint?: string) => {
     setOpenDialog(open);
-    setChecklist(checklist);
+    checkpoint && setCheckpoint(checkpoint);
   };
+
+  const checklist = [
+    {
+      checkpoint: "Asset Qualification",
+      outcome: "PASS",
+    },
+    {
+      checkpoint: "Arrangement Check",
+      outcome: "FAIL",
+    },
+    {
+      checkpoint: "Serviceability Evident",
+      outcome: "PASS",
+    },
+    {
+      checkpoint: "LVR",
+      outcome: "FAIL",
+    },
+    {
+      checkpoint: "DSC Ratio",
+      outcome: "PASS",
+    },
+  ];
 
   return (
     <>
       <Card variant="outlined" className="mb-2">
         <CardContent sx={{ pt: 1 }}>
           <div className="d-flex justify-content-between mb-2">
-            <CardTitleHeader title="Mandatory Compliance Checklist" />
+            <CardTitleHeader title="OA Goals Checklist" />
 
-            <AccountBalanceIcon />
+            <GradingIcon />
           </div>
 
           <TableContainer component={Paper}>
@@ -56,7 +77,7 @@ const MandatoryChecklist = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {loan?.checklists.map((row, index) => (
+                {checklist.map((row, index) => (
                   <TableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -72,7 +93,9 @@ const MandatoryChecklist = () => {
                       )}
                     </TableCell>
                     <TableCell>
-                      <Button onClick={() => toggleDialog(true, row)}>
+                      <Button
+                        onClick={() => toggleDialog(true, row.checkpoint)}
+                      >
                         Details
                       </Button>
                     </TableCell>
@@ -85,22 +108,16 @@ const MandatoryChecklist = () => {
       </Card>
 
       <Dialog
-        maxWidth="md"
+        maxWidth="sm"
         fullWidth={true}
         open={openDialog}
         onClose={() => toggleDialog(false)}
       >
-        <DialogTitle>Mandatory Compliance</DialogTitle>
+        <DialogTitle>OA Goals Checklist</DialogTitle>
         <DialogContent>
-          <Typography gutterBottom>
-            Checkpoint - {checklist?.checkpoint}
-          </Typography>
-          {checklist?.checkpoint === "eKYC" && <EKYCDetails />}
-          {checklist?.checkpoint === "Fraud Assessment" && (
-            <FraudAssessmentDetails />
-          )}
-          {checklist?.checkpoint === "ABN Registration" && (
-            <ABNRegistrationDetails loan={loan} />
+          <Typography gutterBottom>Checkpoint - {checkpoint}</Typography>
+          {checkpoint === "Asset Qualification" && (
+            <AssetQualification loan={loan} />
           )}
         </DialogContent>
         <DialogActions>
@@ -113,4 +130,4 @@ const MandatoryChecklist = () => {
   );
 };
 
-export default MandatoryChecklist;
+export default GoalsChecklist;

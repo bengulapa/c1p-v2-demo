@@ -7,9 +7,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import CardTitleHeader from "../../components/CardTitleHeader";
-import { Color } from "../../styles/colors";
-import { useLoanStore } from "../../state";
+import CardTitleHeader from "../../../components/CardTitleHeader";
+import { Color } from "../../../styles/colors";
+import { useLoanStore } from "../../../state";
 
 const StatusCard = () => {
   const loan = useLoanStore((state) => state.loan);

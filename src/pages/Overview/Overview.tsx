@@ -1,7 +1,7 @@
 import { Button, Grid2, Stack } from "@mui/material";
-import GoalsChecklist from "./GoalsChecklist";
-import MandatoryChecklist from "./MandatoryChecklist";
-import StatusCard from "./StatusCard";
+import GoalsChecklist from "./components/GoalsChecklist";
+import MandatoryChecklist from "./components/MandatoryChecklist";
+import StatusCard from "./components/StatusCard";
 
 const Overview = () => {
   return (

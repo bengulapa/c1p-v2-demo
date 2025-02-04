@@ -1,7 +1,7 @@
 import { Button, Grid2, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Criteria } from "../../models/interfaces";
-import { useLoanStore } from "../../state";
+import { Criteria } from "../../../models/interfaces";
+import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
 
 const EKYCDetails = () => {
