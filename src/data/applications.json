@@ -284,10 +284,19 @@
         "outcome": "FAIL",
         "criteriaList": [
           {
+            "key": "File",
+            "text": "Equifax File No:",
+            "value": "194578932",
+            "result": "",
+            "section": "equifax",
+            "isOverridden": false
+          },
+          {
             "key": "KYC",
             "text": "KYC Result",
             "value": "Pass",
             "result": "PASS",
+            "section": "equifax",
             "isOverridden": false
           },
           {
@@ -295,13 +304,23 @@
             "text": "DVS pass",
             "value": "Fail",
             "result": "FAIL",
+            "section": "equifax",
             "isOverridden": true
+          },
+          {
+            "key": "Bio",
+            "text": "BioID PhotoVerify File No:",
+            "value": "A212134",
+            "result": "",
+            "section": "biometrics",
+            "isOverridden": false
           },
           {
             "key": "ID",
             "text": "ID Ownership",
             "value": "Fail",
             "result": "FAIL",
+            "section": "biometrics",
             "isOverridden": true
           }
         ]
@@ -391,7 +410,80 @@
       {
         "checkpoint": "ABN Registration",
         "outcome": "PASS",
-        "criteriaList": []
+        "criteriaList": [
+          {
+            "key": "1",
+            "text": "ABN",
+            "value": "42600819010",
+            "result": "",
+            "section": "abn",
+            "isOverridden": false
+          },
+          {
+            "key": "2",
+            "text": "Status",
+            "value": "Active from 01 Jul 2024",
+            "result": "PASS",
+            "section": "abn",
+            "isOverridden": false
+          },
+          {
+            "key": "3",
+            "text": "ABN Registration Length",
+            "value": "1 year",
+            "result": "FAIL",
+            "section": "abn",
+            "isOverridden": true
+          },
+          {
+            "key": "4",
+            "text": "Entity name",
+            "value": "BEN's BAKERY",
+            "result": "",
+            "section": "abn",
+            "isOverridden": false
+          },
+          {
+            "key": "5",
+            "text": "Entity type",
+            "value": "Public Company",
+            "result": "",
+            "section": "abn",
+            "isOverridden": false
+          },
+          {
+            "key": "6",
+            "text": "Main Business Location",
+            "value": "NSW 2000",
+            "result": "",
+            "section": "abn",
+            "isOverridden": false
+          },
+          {
+            "key": "7",
+            "text": "ABN",
+            "value": "42600819010",
+            "result": "",
+            "section": "previous",
+            "isOverridden": false
+          },
+          {
+            "key": "8",
+            "text": "Status",
+            "value": "Cancelled from 01 Jul 2003",
+            "result": "",
+            "section": "previous",
+            "isOverridden": true
+          },
+          {
+            "key": "9",
+            "text": "ABN Registration Length",
+            "value": "24 years",
+            "result": "",
+            "section": "previous",
+            "isOverridden": false
+          }
+        ]
       },
       {
         "checkpoint": "GST Registration",
@@ -400,14 +492,14 @@
           {
             "key": "1",
             "text": "GST Registration",
-            "value": "Registered",
+            "value": "Registered from 01 Jul 2024",
             "result": "PASS",
             "isOverridden": false
           },
           {
             "key": "2",
             "text": "GST Registration Length",
-            "value": "2",
+            "value": "1 Year",
             "result": "FAIL",
             "isOverridden": true
           }

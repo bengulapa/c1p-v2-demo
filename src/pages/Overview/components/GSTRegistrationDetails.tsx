@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Criteria } from "../../../models/interfaces";
 import { useLoanStore } from "../../../state";
@@ -35,7 +35,11 @@ const GSTRegistrationDetails = () => {
     <Box className="w-75">
       <div className="ml-3">
         {checklist.criteriaList.map((c) => (
-          <CriteriaRow criteria={c} updateCriteria={updateCriteria} />
+          <CriteriaRow
+            key={c.key}
+            criteria={c}
+            updateCriteria={updateCriteria}
+          />
         ))}
       </div>
     </Box>

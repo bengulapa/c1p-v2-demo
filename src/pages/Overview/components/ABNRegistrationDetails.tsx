@@ -2,79 +2,70 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Button, Grid2, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import LaunchIcon from "@mui/icons-material/Launch";
+import { useState, useEffect } from "react";
+import { Criteria } from "../../../models/interfaces";
+import { useLoanStore } from "../../../state";
+import CriteriaRow from "./Criteria";
 
-interface IProps {
-  loan?: any;
-}
+const ABNRegistrationDetails = () => {
+  const checkpoint = "ABN Registration";
 
-const ABNRegistrationDetails = ({ loan }: IProps) => {
+  const loan = useLoanStore((state) => state.loan)!;
+  const setLoan = useLoanStore((state) => state.setLoan);
+  const [checklist, setChecklist] = useState(
+    loan.checklists.find((c) => c.checkpoint === checkpoint)!
+  );
+
+  const updateCriteria = (criteria: Criteria) => {
+    setChecklist({
+      ...checklist,
+      criteriaList: checklist.criteriaList.map((c) =>
+        c.key === criteria.key ? criteria : c
+      ),
+    });
+  };
+
+  useEffect(() => {
+    setLoan({
+      ...loan,
+      checklists: loan.checklists.map((c) =>
+        c.checkpoint === checkpoint ? checklist : c
+      ),
+    });
+  }, [checklist]);
+
   return (
     <>
-      <Grid2 container spacing={1} className="mb-3">
-        <Grid2 size={4}>
-          <Typography variant="body2">ABN:</Typography>
-          <Typography variant="body2">Status:</Typography>
-          <Typography variant="body2">ABN Registration Length:</Typography>
-          <Typography variant="body2">Entity name:</Typography>
-          <Typography variant="body2">Entity type:</Typography>
-          <Typography variant="body2" gutterBottom>
-            Main Business Location:
-          </Typography>
-          <Typography variant="body2">GST Registration:</Typography>
-          <Typography variant="body2" gutterBottom>
-            GST Registration Length:
-          </Typography>
-          <Typography variant="body1">Previous ABN</Typography>
-          <Typography variant="body2">ABN:</Typography>
-          <Typography variant="body2">Status:</Typography>
-          <Typography variant="body2">ABN Registration Length:</Typography>
-        </Grid2>
-        <Grid2 size={4}>
-          <Typography variant="body2" color="secondary">
-            {loan.abn}
-          </Typography>
-          <div className="d-flex justify-content-between">
-            <Typography variant="body2">Active from 28 Mar 2000</Typography>
-            <CheckCircleOutlineIcon color="success" fontSize="small" />
+      <Grid2 container spacing={1}>
+        <Grid2 size={9}>
+          <Typography gutterBottom>CURRENT</Typography>
+          <div className="ml-3 mb-3">
+            {checklist.criteriaList
+              .filter((c) => c.section === "abn")
+              .map((c) => (
+                <CriteriaRow
+                  key={c.key}
+                  criteria={c}
+                  updateCriteria={updateCriteria}
+                />
+              ))}
           </div>
-          <div className="d-flex justify-content-between">
-            <Typography variant="body2">24 years</Typography>
-            <CheckCircleOutlineIcon color="success" fontSize="small" />
+
+          <Typography gutterBottom>PREVIOUS</Typography>
+          <div className="ml-3">
+            {checklist.criteriaList
+              .filter((c) => c.section === "previous")
+              .map((c) => (
+                <CriteriaRow
+                  key={c.key}
+                  criteria={c}
+                  updateCriteria={updateCriteria}
+                />
+              ))}
           </div>
-          <Typography variant="body2" color="secondary">
-            {loan.entityName}
-          </Typography>
-          <Typography variant="body2" color="secondary">
-            {loan.entityType}
-          </Typography>
-          <Typography variant="body2" color="secondary" gutterBottom>
-            NSW 2000
-          </Typography>
-          <div className="d-flex justify-content-between">
-            <Typography variant="body2">Registered from 01 Jul 2000</Typography>
-            <CheckCircleOutlineIcon color="success" fontSize="small" />
-          </div>
-          <div className="d-flex justify-content-between">
-            <Typography variant="body2" gutterBottom>
-              24 years
-            </Typography>
-            <CheckCircleOutlineIcon color="success" fontSize="small" />
-          </div>
-          <Typography variant="body1" color="secondary">
-            &nbsp;
-          </Typography>
-          <Typography variant="body2" color="secondary">
-            65103457485
-          </Typography>
-          <Typography variant="body2" color="secondary">
-            Cancelled from 28 Jan 2000
-          </Typography>
-          <Typography variant="body2" color="secondary">
-            2 years
-          </Typography>
         </Grid2>
 
-        <Grid2 size={4}>
+        <Grid2 size={3}>
           <Button className="ml-5" endIcon={<LaunchIcon />}>
             <Link
               target="_blank"

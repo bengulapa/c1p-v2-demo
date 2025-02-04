@@ -33,15 +33,13 @@ const FraudAssessmentDetails = () => {
 
   return (
     <Box className="w-75">
-      <div className="d-flex justify-content-between mb-2">
-        <Typography variant="body2">Fraud Assessment:</Typography>
-        <Typography variant="body2" color="success">
-          Fail
-        </Typography>
-      </div>
       <div className="ml-3">
         {checklist.criteriaList.map((c) => (
-          <CriteriaRow criteria={c} updateCriteria={updateCriteria} />
+          <CriteriaRow
+            key={c.key}
+            criteria={c}
+            updateCriteria={updateCriteria}
+          />
         ))}
       </div>
     </Box>

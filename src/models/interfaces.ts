@@ -5,6 +5,7 @@ export interface Criteria {
   text: string;
   value: string;
   result: string;
+  section?: string;
   isOverridden: boolean;
 }
 

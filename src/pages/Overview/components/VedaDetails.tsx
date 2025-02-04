@@ -16,7 +16,7 @@ const VedaDetails = () => {
       <Box className="w-100">
         <div className="ml-3">
           {checklist.criteriaList.map((c) => (
-            <CriteriaRow criteria={c} />
+            <CriteriaRow key={c.key} criteria={c} />
           ))}
         </div>
       </Box>

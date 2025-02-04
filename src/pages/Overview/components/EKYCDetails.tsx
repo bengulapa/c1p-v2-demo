@@ -36,21 +36,17 @@ const EKYCDetails = () => {
       <Typography gutterBottom>EQUIFAX</Typography>
       <Grid2 container spacing={1} className="mb-3">
         <Grid2 size={6}>
-          <div className="d-flex justify-content-between">
-            <Typography variant="body2">Equifax File No:</Typography>
-            <Typography variant="body2" color="secondary">
-              194578932
-            </Typography>
+          <div className="ml-3">
+            {checklist.criteriaList
+              .filter((c) => c.section === "equifax")
+              .map((c) => (
+                <CriteriaRow
+                  key={c.key}
+                  criteria={c}
+                  updateCriteria={updateCriteria}
+                />
+              ))}
           </div>
-
-          <CriteriaRow
-            criteria={checklist?.criteriaList.find((c) => c.key === "KYC")!}
-            updateCriteria={updateCriteria}
-          />
-          <CriteriaRow
-            criteria={checklist?.criteriaList.find((c) => c.key === "DVS")!}
-            updateCriteria={updateCriteria}
-          />
         </Grid2>
         <Grid2 size={6}>
           <Stack alignItems="start" className="ml-5">
@@ -64,16 +60,17 @@ const EKYCDetails = () => {
       <Grid2 container spacing={1}>
         <Grid2 size={6}>
           <Typography gutterBottom>BIOMETRICS</Typography>
-          <div className="d-flex justify-content-between">
-            <Typography variant="body2">BioID PhotoVerify File No:</Typography>
-            <Typography variant="body2" color="secondary">
-              194578932
-            </Typography>
+          <div className="ml-3">
+            {checklist.criteriaList
+              .filter((c) => c.section === "biometrics")
+              .map((c) => (
+                <CriteriaRow
+                  key={c.key}
+                  criteria={c}
+                  updateCriteria={updateCriteria}
+                />
+              ))}
           </div>
-          <CriteriaRow
-            criteria={checklist?.criteriaList.find((c) => c.key === "ID")!}
-            updateCriteria={updateCriteria}
-          />
         </Grid2>
         <Grid2 size={6}>
           <Button className="ml-5">VIEW BioID Report</Button>

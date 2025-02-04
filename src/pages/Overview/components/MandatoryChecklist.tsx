@@ -106,7 +106,7 @@ const MandatoryChecklist = () => {
             <GSTRegistrationDetails />
           )}
           {checklist?.checkpoint === "ABN Registration" && (
-            <ABNRegistrationDetails loan={loan} />
+            <ABNRegistrationDetails />
           )}
         </DialogContent>
         <DialogActions>

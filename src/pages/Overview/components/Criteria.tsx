@@ -25,25 +25,27 @@ const CriteriaRow = ({ criteria, updateCriteria }: IProps) => {
   };
 
   return (
-    <Grid2 container key={criteria.key} alignItems="center">
-      <Grid2 size={5}>
+    <Grid2 container alignItems="center">
+      <Grid2 size={4}>
         <Typography variant="body2">{criteria.text}:</Typography>
       </Grid2>
-      <Grid2 size={2}>
+      <Grid2 size={4}>
         <Typography variant="body2" color="secondary">
           {criteria.value}
         </Typography>
       </Grid2>
-      <Grid2 size={1}>
+      <Grid2 size={2}>
         <Box className="pt-1 text-l">
           {criteria.result === "PASS" || criteria.isOverridden ? (
             <CheckCircleIcon color="success" fontSize="small" />
-          ) : (
+          ) : criteria.result === "FAIL" ? (
             <CancelIcon color="error" fontSize="small" />
+          ) : (
+            ""
           )}
         </Box>
       </Grid2>
-      <Grid2 size={4}>
+      <Grid2 size={2}>
         <Box className="text-right">
           {criteria.result === "FAIL" && (
             <FormControlLabel
