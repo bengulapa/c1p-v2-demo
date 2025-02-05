@@ -1,46 +1,46 @@
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Grid2,
-  Stack,
-  Typography,
-} from "@mui/material";
-import { formatCurrency } from "../../../utils/formatters";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { Box, Button, Grid2, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { Criteria } from "../../../models/interfaces";
+import { useLoanStore } from "../../../state";
+import { formatCurrency } from "../../../utils/formatters";
 import CriteriaRow from "./Criteria";
 
-interface IProps {
-  loan?: any;
-}
+const AssetQualification = () => {
+  const checkpoint = "Asset Qualification";
 
-const AssetQualification = ({ loan }: IProps) => {
-  const acceptanceCriteria: Criteria[] = [
-    {
-      key: "LVR",
-      text: "Loan to Value Ratio",
-      value: "73.67",
-      result: "PASS",
-      isOverridden: false,
-    },
-    {
-      key: "AssetBacked",
-      text: "Asset Backed",
-      value: "No",
-      result: "PASS",
-      isOverridden: false,
-    },
-    {
-      key: "AssetAligned",
-      text: "Asset Aligned to Business Activity",
-      value: "No",
-      result: "FAIL",
-      isOverridden: false,
-    },
-  ];
+  const loan = useLoanStore((state) => state.loan)!;
+  const setLoan = useLoanStore((state) => state.setLoan);
+  const [checklist, setChecklist] = useState(
+    loan.checklists.find((c) => c.checkpoint === checkpoint)!
+  );
+
+  const updateCriteria = (criteria: Criteria) => {
+    setChecklist({
+      ...checklist,
+      criteriaList: checklist.criteriaList.map((c) =>
+        c.key === criteria.key ? criteria : c
+      ),
+    });
+  };
+
+  useEffect(() => {
+    setLoan({
+      ...loan,
+      checklists: loan.checklists.map((c) =>
+        c.checkpoint === checkpoint
+          ? {
+              ...checklist,
+              // If 1 criteria failed, outcome is already failed
+              outcome: checklist.criteriaList.some(
+                (c) => c.result === "FAIL" && !c.isOverridden
+              )
+                ? "FAIL"
+                : "PASS",
+            }
+          : c
+      ),
+    });
+  }, [checklist]);
 
   return (
     <>
@@ -103,8 +103,12 @@ const AssetQualification = ({ loan }: IProps) => {
 
       <Typography gutterBottom>ACCEPTANCE CRITERIA</Typography>
       <Box>
-        {acceptanceCriteria.map((ac) => (
-          <CriteriaRow criteria={ac} />
+        {checklist.criteriaList.map((ac) => (
+          <CriteriaRow
+            key={ac.key}
+            criteria={ac}
+            updateCriteria={updateCriteria}
+          />
         ))}
       </Box>
     </>

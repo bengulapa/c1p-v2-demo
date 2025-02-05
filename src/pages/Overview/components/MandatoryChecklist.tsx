@@ -58,28 +58,30 @@ const MandatoryChecklist = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {loan?.checklists.map((row, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.checkpoint}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row.outcome === "PASS" ? (
-                        <CheckCircleIcon color="success" />
-                      ) : (
-                        <CancelIcon color="error" />
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <Button onClick={() => toggleDialog(true, row)}>
-                        Details
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {loan?.checklists
+                  .filter((c) => c.section === "mandatory")
+                  .map((row, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {row.checkpoint}
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.outcome === "PASS" ? (
+                          <CheckCircleIcon color="success" />
+                        ) : (
+                          <CancelIcon color="error" />
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Button onClick={() => toggleDialog(true, row)}>
+                          Details
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>

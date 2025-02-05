@@ -19,43 +19,20 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import AssetQualification from "./AssetQualification";
 import CardTitleHeader from "../../../components/CardTitleHeader";
+import { Checklist } from "../../../models/loan.models";
+import { useLoanStore } from "../../../state";
+import AssetQualification from "./AssetQualification";
 
-interface IProps {
-  loan?: any;
-}
-const GoalsChecklist = ({ loan }: IProps) => {
+const GoalsChecklist = () => {
+  const loan = useLoanStore((state) => state.loan);
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [checkpoint, setCheckpoint] = React.useState("");
+  const [checklist, setChecklist] = React.useState<Checklist | null>(null);
 
-  const toggleDialog = (open: boolean, checkpoint?: string) => {
+  const toggleDialog = (open: boolean, checklist: Checklist | null = null) => {
     setOpenDialog(open);
-    checkpoint && setCheckpoint(checkpoint);
+    setChecklist(checklist);
   };
-
-  const checklist = [
-    {
-      checkpoint: "Asset Qualification",
-      outcome: "PASS",
-    },
-    {
-      checkpoint: "Arrangement Check",
-      outcome: "FAIL",
-    },
-    {
-      checkpoint: "Serviceability Evident",
-      outcome: "PASS",
-    },
-    {
-      checkpoint: "LVR",
-      outcome: "FAIL",
-    },
-    {
-      checkpoint: "DSC Ratio",
-      outcome: "PASS",
-    },
-  ];
 
   return (
     <>
@@ -77,30 +54,30 @@ const GoalsChecklist = ({ loan }: IProps) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {checklist.map((row, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.checkpoint}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row.outcome === "PASS" ? (
-                        <CheckCircleIcon color="success" />
-                      ) : (
-                        <CancelIcon color="error" />
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        onClick={() => toggleDialog(true, row.checkpoint)}
-                      >
-                        Details
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {loan?.checklists
+                  .filter((c) => c.section === "goals")
+                  .map((row, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {row.checkpoint}
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.outcome === "PASS" ? (
+                          <CheckCircleIcon color="success" />
+                        ) : (
+                          <CancelIcon color="error" />
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Button onClick={() => toggleDialog(true, row)}>
+                          Details
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
@@ -108,16 +85,18 @@ const GoalsChecklist = ({ loan }: IProps) => {
       </Card>
 
       <Dialog
-        maxWidth="sm"
+        maxWidth="md"
         fullWidth={true}
         open={openDialog}
         onClose={() => toggleDialog(false)}
       >
         <DialogTitle>OA Goals Checklist</DialogTitle>
         <DialogContent>
-          <Typography gutterBottom>Checkpoint - {checkpoint}</Typography>
-          {checkpoint === "Asset Qualification" && (
-            <AssetQualification loan={loan} />
+          <Typography gutterBottom>
+            Checkpoint - {checklist?.checkpoint}
+          </Typography>
+          {checklist?.checkpoint === "Asset Qualification" && (
+            <AssetQualification />
           )}
         </DialogContent>
         <DialogActions>

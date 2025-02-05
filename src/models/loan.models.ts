@@ -81,6 +81,7 @@ export interface Checklist {
   checkpoint: string;
   outcome: string;
   criteriaList: Criteria[];
+  section: string;
 }
 
 export interface Guarantor {

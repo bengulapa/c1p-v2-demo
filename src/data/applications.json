@@ -282,6 +282,7 @@
       {
         "checkpoint": "eKYC",
         "outcome": "FAIL",
+        "section": "mandatory",
         "criteriaList": [
           {
             "key": "File",
@@ -328,6 +329,7 @@
       {
         "checkpoint": "Fraud Assessment",
         "outcome": "FAIL",
+        "section": "mandatory",
         "criteriaList": [
           {
             "key": "FraudCheck",
@@ -362,6 +364,7 @@
       {
         "checkpoint": "Veda",
         "outcome": "PASS",
+        "section": "mandatory",
         "criteriaList": [
           {
             "key": "1",
@@ -410,6 +413,7 @@
       {
         "checkpoint": "ABN Registration",
         "outcome": "PASS",
+        "section": "mandatory",
         "criteriaList": [
           {
             "key": "1",
@@ -488,6 +492,7 @@
       {
         "checkpoint": "GST Registration",
         "outcome": "PASS",
+        "section": "mandatory",
         "criteriaList": [
           {
             "key": "1",
@@ -504,6 +509,80 @@
             "isOverridden": true
           }
         ]
+      },
+      {
+        "checkpoint": "Asset Qualification",
+        "outcome": "PASS",
+        "section": "goals",
+        "criteriaList": [
+          {
+            "key": "AssetBacked",
+            "text": "Asset Backed",
+            "value": "No",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "AssetType",
+            "text": "Asset Type",
+            "value": "Primary",
+            "result": "",
+            "isOverridden": false
+          },
+          {
+            "key": "AssetAligned",
+            "text": "Asset Aligned to Business Activity",
+            "value": "No",
+            "result": "FAIL",
+            "isOverridden": true
+          }
+        ]
+      },
+      {
+        "checkpoint": "Arrangement Check",
+        "outcome": "FAIL",
+        "section": "goals",
+        "criteriaList": []
+      },
+      {
+        "checkpoint": "Serviceability Evident",
+        "outcome": "PASS",
+        "section": "goals",
+        "criteriaList": []
+      },
+      {
+        "checkpoint": "LVR",
+        "outcome": "FAIL",
+        "section": "goals",
+        "criteriaList": [
+          {
+            "key": "LVR",
+            "text": "Loan to Value Ratio",
+            "value": "73.67",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "AssetBacked",
+            "text": "Asset Backed",
+            "value": "No",
+            "result": "PASS",
+            "isOverridden": false
+          },
+          {
+            "key": "AssetAligned",
+            "text": "Asset Aligned to Business Activity",
+            "value": "No",
+            "result": "FAIL",
+            "isOverridden": false
+          }
+        ]
+      },
+      {
+        "checkpoint": "DSC Ratio",
+        "outcome": "PASS",
+        "section": "goals",
+        "criteriaList": []
       }
     ]
   },
@@ -773,6 +852,7 @@
       {
         "checkpoint": "eKYC",
         "outcome": "FAIL",
+        "section": "goals",
         "criteriaList": [
           {
             "key": "KYC",
@@ -800,6 +880,7 @@
       {
         "checkpoint": "Fraud Assessment",
         "outcome": "FAIL",
+        "section": "goals",
         "criteriaList": [
           {
             "key": "FraudCheck",
@@ -834,16 +915,19 @@
       {
         "checkpoint": "Veda",
         "outcome": "PASS",
+        "section": "goals",
         "criteriaList": []
       },
       {
         "checkpoint": "ABN Registration",
         "outcome": "PASS",
+        "section": "goals",
         "criteriaList": []
       },
       {
         "checkpoint": "GST Registration",
         "outcome": "PASS",
+        "section": "goals",
         "criteriaList": []
       }
     ]
