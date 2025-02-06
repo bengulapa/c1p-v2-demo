@@ -1,5 +1,4 @@
 import { Box, Button, Grid2, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import { Criteria } from "../../../models/interfaces";
 import { useLoanStore } from "../../../state";
 import { formatCurrency } from "../../../utils/formatters";
@@ -9,38 +8,16 @@ const AssetQualification = () => {
   const checkpoint = "Asset Qualification";
 
   const loan = useLoanStore((state) => state.loan)!;
-  const setLoan = useLoanStore((state) => state.setLoan);
-  const [checklist, setChecklist] = useState(
-    loan.checklists.find((c) => c.checkpoint === checkpoint)!
-  );
+  const updateChecklist = useLoanStore((state) => state.updateChecklist);
+  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
 
   const updateCriteria = (criteria: Criteria) => {
-    setChecklist({
-      ...checklist,
-      criteriaList: checklist.criteriaList.map((c) =>
-        c.key === criteria.key ? criteria : c
-      ),
-    });
-  };
+    const updatedCriteriaList = checklist.criteriaList.map((c) =>
+      c.key === criteria.key ? criteria : c
+    );
 
-  useEffect(() => {
-    setLoan({
-      ...loan,
-      checklists: loan.checklists.map((c) =>
-        c.checkpoint === checkpoint
-          ? {
-              ...checklist,
-              // If 1 criteria failed, outcome is already failed
-              outcome: checklist.criteriaList.some(
-                (c) => c.result === "FAIL" && !c.isOverridden
-              )
-                ? "FAIL"
-                : "PASS",
-            }
-          : c
-      ),
-    });
-  }, [checklist]);
+    updateChecklist(checkpoint, updatedCriteriaList);
+  };
 
   return (
     <>

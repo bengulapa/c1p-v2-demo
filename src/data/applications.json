@@ -540,9 +540,70 @@
       },
       {
         "checkpoint": "Arrangement Check",
-        "outcome": "FAIL",
+        "outcome": "PASS",
         "section": "goals",
-        "criteriaList": []
+        "criteriaList": [
+          {
+            "key": "1",
+            "text": "Assessment Type",
+            "value": "Low Doc",
+            "result": "",
+            "section": "loan",
+            "isOverridden": false
+          },
+          {
+            "key": "2",
+            "text": "Customer Strategy",
+            "value": "Standard",
+            "result": "",
+            "section": "loan",
+            "isOverridden": false
+          },
+          {
+            "key": "3",
+            "text": "Is Private Sale?",
+            "value": "Yes",
+            "result": "",
+            "section": "loan",
+            "isOverridden": false
+          },
+          {
+            "key": "4",
+            "text": "Total financed amount",
+            "value": "20000",
+            "valueType": "currency",
+            "result": "",
+            "section": "exposure",
+            "isOverridden": false
+          },
+          {
+            "key": "5",
+            "text": "Deposit Amount",
+            "value": "2000",
+            "valueType": "currency",
+            "result": "",
+            "section": "exposure",
+            "isOverridden": false
+          },
+          {
+            "key": "6",
+            "text": "Current obligor exposure",
+            "value": "1250",
+            "valueType": "currency",
+            "result": "",
+            "section": "exposure",
+            "isOverridden": false
+          },
+          {
+            "key": "7",
+            "text": "Total obligor exposure",
+            "value": "20250",
+            "valueType": "currency",
+            "result": "FAIL",
+            "section": "exposure",
+            "isOverridden": true
+          }
+        ]
       },
       {
         "checkpoint": "Serviceability Evident",

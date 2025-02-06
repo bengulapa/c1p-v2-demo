@@ -22,6 +22,7 @@ import React from "react";
 import CardTitleHeader from "../../../components/CardTitleHeader";
 import { Checklist } from "../../../models/loan.models";
 import { useLoanStore } from "../../../state";
+import ArrangementCheck from "./ArrangementCheck";
 import AssetQualification from "./AssetQualification";
 
 const GoalsChecklist = () => {
@@ -97,6 +98,9 @@ const GoalsChecklist = () => {
           </Typography>
           {checklist?.checkpoint === "Asset Qualification" && (
             <AssetQualification />
+          )}
+          {checklist?.checkpoint === "Arrangement Check" && (
+            <ArrangementCheck />
           )}
         </DialogContent>
         <DialogActions>
