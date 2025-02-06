@@ -24,6 +24,9 @@ import { Checklist } from "../../../models/loan.models";
 import { useLoanStore } from "../../../state";
 import ArrangementCheck from "./ArrangementCheck";
 import AssetQualification from "./AssetQualification";
+import DSCRDetails from "./DSCRDetails";
+import LoanValuationReportDetails from "./LoanValuationReportDetails";
+import ServiceabilityEvidentDetails from "./ServiceabilityEvidentDetails";
 
 const GoalsChecklist = () => {
   const loan = useLoanStore((state) => state.loan);
@@ -102,6 +105,11 @@ const GoalsChecklist = () => {
           {checklist?.checkpoint === "Arrangement Check" && (
             <ArrangementCheck />
           )}
+          {checklist?.checkpoint === "Serviceability Evident" && (
+            <ServiceabilityEvidentDetails />
+          )}
+          {checklist?.checkpoint === "LVR" && <LoanValuationReportDetails />}
+          {checklist?.checkpoint === "DSCR" && <DSCRDetails />}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => toggleDialog(false)} variant="contained">

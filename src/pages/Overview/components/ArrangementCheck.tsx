@@ -21,7 +21,7 @@ const ArrangementCheck = () => {
   return (
     <>
       <Typography gutterBottom>LOAN DETAILS</Typography>
-      <Box>
+      <Box className="mb-2">
         {checklist.criteriaList
           .filter((c) => c.section === "loan")
           .map((ac) => (

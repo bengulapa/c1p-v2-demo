@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Criteria } from "../../../models/interfaces";
+import { formatCurrency } from "../../../utils/formatters";
 
 interface IProps {
   criteria: Criteria;
@@ -24,6 +25,15 @@ const CriteriaRow = ({ criteria, updateCriteria }: IProps) => {
       });
   };
 
+  const formatValue = (valueType: string | undefined, value: any) => {
+    switch (valueType) {
+      case "currency":
+        return formatCurrency(value);
+      default:
+        return value;
+    }
+  };
+
   return (
     <Grid2 container alignItems="center">
       <Grid2 size={4}>
@@ -31,7 +41,7 @@ const CriteriaRow = ({ criteria, updateCriteria }: IProps) => {
       </Grid2>
       <Grid2 size={4}>
         <Typography variant="body2" color="secondary">
-          {criteria.value}
+          {formatValue(criteria.valueType, criteria.value)}
         </Typography>
       </Grid2>
       <Grid2 size={2}>

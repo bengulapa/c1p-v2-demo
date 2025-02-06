@@ -3,8 +3,8 @@ import { Criteria } from "../../../models/interfaces";
 import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
 
-const AssetQualification = () => {
-  const checkpoint = "Asset Qualification";
+const DSCRDetails = () => {
+  const checkpoint = "DSCR";
 
   const loan = useLoanStore((state) => state.loan)!;
   const updateChecklist = useLoanStore((state) => state.updateChecklist);
@@ -19,18 +19,16 @@ const AssetQualification = () => {
   };
 
   return (
-    <>
-      <Box>
-        {checklist.criteriaList.map((ac) => (
-          <CriteriaRow
-            key={ac.key}
-            criteria={ac}
-            updateCriteria={updateCriteria}
-          />
-        ))}
-      </Box>
-    </>
+    <Box>
+      {checklist.criteriaList.map((ac) => (
+        <CriteriaRow
+          key={ac.key}
+          criteria={ac}
+          updateCriteria={updateCriteria}
+        />
+      ))}
+    </Box>
   );
 };
 
-export default AssetQualification;
+export default DSCRDetails;

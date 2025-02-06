@@ -535,6 +535,14 @@
             "value": "No",
             "result": "FAIL",
             "isOverridden": true
+          },
+          {
+            "key": "TAV",
+            "text": "Total Value",
+            "value": "20000",
+            "valueType": "currency",
+            "result": "",
+            "isOverridden": true
           }
         ]
       },
@@ -609,41 +617,82 @@
         "checkpoint": "Serviceability Evident",
         "outcome": "PASS",
         "section": "goals",
-        "criteriaList": []
-      },
-      {
-        "checkpoint": "LVR",
-        "outcome": "FAIL",
-        "section": "goals",
         "criteriaList": [
           {
-            "key": "LVR",
-            "text": "Loan to Value Ratio",
-            "value": "73.67",
-            "result": "PASS",
+            "key": "1",
+            "text": "Number of adults in household",
+            "value": "2",
+            "valueType": "",
+            "result": "",
+            "section": "",
             "isOverridden": false
           },
           {
-            "key": "AssetBacked",
-            "text": "Asset Backed",
-            "value": "No",
-            "result": "PASS",
+            "key": "2",
+            "text": "Number of dependents",
+            "value": "2",
+            "valueType": "",
+            "result": "",
+            "section": "",
             "isOverridden": false
           },
           {
-            "key": "AssetAligned",
-            "text": "Asset Aligned to Business Activity",
-            "value": "No",
-            "result": "FAIL",
+            "key": "3",
+            "text": "Expected weekly repayment",
+            "value": "689",
+            "valueType": "currency",
+            "result": "",
+            "section": "",
+            "isOverridden": false
+          },
+          {
+            "key": "3",
+            "text": "Expected weekly income from work letter",
+            "value": "56557",
+            "valueType": "currency",
+            "result": "",
+            "section": "",
+            "isOverridden": false
+          },
+          {
+            "key": "4",
+            "text": "BrokerFlow document ID",
+            "value": "A312314",
+            "valueType": "",
+            "result": "",
+            "section": "",
             "isOverridden": false
           }
         ]
       },
       {
-        "checkpoint": "DSC Ratio",
+        "checkpoint": "LVR",
         "outcome": "PASS",
         "section": "goals",
-        "criteriaList": []
+        "criteriaList": [
+          {
+            "key": "LVR",
+            "text": "Loan to Value Ratio",
+            "value": "73.67%",
+            "result": "PASS",
+            "isOverridden": false
+          }
+        ]
+      },
+      {
+        "checkpoint": "DSCR",
+        "outcome": "PASS",
+        "section": "goals",
+        "criteriaList": [
+          {
+            "key": "DSCR",
+            "text": "DSCR",
+            "value": "20.02",
+            "valueType": "decimal",
+            "result": "PASS",
+            "isOverridden": false
+          }
+        ]
       }
     ]
   },
