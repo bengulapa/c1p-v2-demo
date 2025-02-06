@@ -322,7 +322,7 @@
             "value": "Fail",
             "result": "FAIL",
             "section": "biometrics",
-            "isOverridden": true
+            "isOverridden": false
           }
         ]
       },
@@ -334,22 +334,22 @@
           {
             "key": "FraudCheck",
             "text": "Fraud Check",
-            "value": "Fail",
-            "result": "FAIL",
+            "value": "Pass",
+            "result": "PASS",
             "isOverridden": false
           },
           {
             "key": "PEP",
             "text": "Politically Exposed Person",
-            "value": "Fail",
-            "result": "FAIL",
+            "value": "Pass",
+            "result": "PASS",
             "isOverridden": false
           },
           {
             "key": "Sanctions",
             "text": "Sanctions",
-            "value": "Fail",
-            "result": "FAIL",
+            "value": "Pass",
+            "result": "PASS",
             "isOverridden": false
           },
           {
@@ -367,10 +367,43 @@
         "section": "mandatory",
         "criteriaList": [
           {
+            "key": "av1",
+            "text": "Legal Name",
+            "value": "555",
+            "result": "PASS",
+            "section": "applicant",
+            "isOverridden": false
+          },
+          {
+            "key": "av2",
+            "text": "Score",
+            "value": "650",
+            "result": "PASS",
+            "section": "applicant",
+            "isOverridden": false
+          },
+          {
+            "key": "av3",
+            "text": "CreditorWatch score",
+            "value": "",
+            "result": "",
+            "section": "applicant",
+            "isOverridden": false
+          },
+          {
+            "key": "av4",
+            "text": "CreditorWatch rating",
+            "value": "",
+            "result": "",
+            "section": "applicant",
+            "isOverridden": false
+          },
+          {
             "key": "1",
             "text": "Score",
             "value": "555",
             "result": "PASS",
+            "section": "guarantor-1",
             "isOverridden": false
           },
           {
@@ -378,6 +411,7 @@
             "text": "Number of unpaid or unsettled judgements in the last 60 months",
             "value": "0",
             "result": "PASS",
+            "section": "guarantor-1",
             "isOverridden": false
           },
           {
@@ -385,6 +419,7 @@
             "text": "Number of insolvencies on file",
             "value": "0",
             "result": "PASS",
+            "section": "guarantor-1",
             "isOverridden": false
           },
           {
@@ -392,13 +427,15 @@
             "text": "Number of consumer defaults/SCI in the last 12 months",
             "value": "0",
             "result": "PASS",
+            "section": "guarantor-1",
             "isOverridden": false
           },
           {
             "key": "6",
             "text": "Age of file",
-            "value": "5",
+            "value": "5 years",
             "result": "PASS",
+            "section": "guarantor-1",
             "isOverridden": false
           },
           {
@@ -406,6 +443,7 @@
             "text": "Total count of consumer and commercial enquiries in less than 12 months",
             "value": "2",
             "result": "PASS",
+            "section": "guarantor-1",
             "isOverridden": false
           }
         ]
@@ -459,6 +497,32 @@
             "key": "6",
             "text": "Main Business Location",
             "value": "NSW 2000",
+            "result": "",
+            "section": "abn",
+            "isOverridden": false
+          },
+          {
+            "key": "a1",
+            "text": "Is ASIC Extracted Date Present?",
+            "value": "Yes",
+            "result": "",
+            "section": "abn",
+            "isOverridden": false
+          },
+          {
+            "key": "a2",
+            "text": "ASIC Extracted Date",
+            "value": "22 Jan 2023",
+            "valueType": "date",
+            "result": "",
+            "section": "abn",
+            "isOverridden": false
+          },
+          {
+            "key": "a3",
+            "text": "ASIC Extracted Date",
+            "value": "22 Jan 2023",
+            "valueType": "date",
             "result": "",
             "section": "abn",
             "isOverridden": false
@@ -646,7 +710,7 @@
             "isOverridden": false
           },
           {
-            "key": "3",
+            "key": "4",
             "text": "Expected weekly income from work letter",
             "value": "56557",
             "valueType": "currency",
@@ -655,7 +719,7 @@
             "isOverridden": false
           },
           {
-            "key": "4",
+            "key": "5",
             "text": "BrokerFlow document ID",
             "value": "A312314",
             "valueType": "",

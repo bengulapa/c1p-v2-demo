@@ -1,35 +1,22 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Criteria } from "../../../models/interfaces";
-import CriteriaRow from "./Criteria";
-import { useState, useEffect } from "react";
 import { useLoanStore } from "../../../state";
+import CriteriaRow from "./Criteria";
 
 const FraudAssessmentDetails = () => {
   const checkpoint = "Fraud Assessment";
 
   const loan = useLoanStore((state) => state.loan)!;
-  const setLoan = useLoanStore((state) => state.setLoan);
-  const [checklist, setChecklist] = useState(
-    loan.checklists.find((c) => c.checkpoint === checkpoint)!
-  );
+  const updateChecklist = useLoanStore((state) => state.updateChecklist);
+  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
 
   const updateCriteria = (criteria: Criteria) => {
-    setChecklist({
-      ...checklist,
-      criteriaList: checklist.criteriaList.map((c) =>
-        c.key === criteria.key ? criteria : c
-      ),
-    });
-  };
+    const updatedCriteriaList = checklist.criteriaList.map((c) =>
+      c.key === criteria.key ? criteria : c
+    );
 
-  useEffect(() => {
-    setLoan({
-      ...loan,
-      checklists: loan.checklists.map((c) =>
-        c.checkpoint === checkpoint ? checklist : c
-      ),
-    });
-  }, [checklist]);
+    updateChecklist(checkpoint, updatedCriteriaList);
+  };
 
   return (
     <Box className="w-75">
