@@ -34,8 +34,8 @@ const GoalsChecklist = () => {
   const [checklist, setChecklist] = React.useState<Checklist | null>(null);
 
   const toggleDialog = (open: boolean, checklist: Checklist | null = null) => {
+    checklist && setChecklist(checklist);
     setOpenDialog(open);
-    setChecklist(checklist);
   };
 
   return (

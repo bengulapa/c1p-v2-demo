@@ -1,10 +1,20 @@
-import { Button, Grid2, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Grid2,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import { Criteria } from "../../../models/interfaces";
 import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
 
-const EKYCDetails = () => {
-  const checkpoint = "eKYC";
+const ApplicantCheckpoint = () => {
+  const checkpoint = "Applicant";
 
   const loan = useLoanStore((state) => state.loan)!;
   const updateChecklist = useLoanStore((state) => state.updateChecklist);
@@ -17,6 +27,23 @@ const EKYCDetails = () => {
 
     updateChecklist(checkpoint, updatedCriteriaList);
   };
+
+  const creditShoppedCriteria = checklist.criteriaList.find(
+    (cl) => cl.key === "CreditShopped"
+  );
+  const [creditShopped, setCreditShopped] = useState("2+");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setCreditShopped(event.target.value);
+  };
+
+  useEffect(() => {
+    updateCriteria({
+      ...creditShoppedCriteria,
+      value: creditShopped,
+      result: creditShopped !== "2+" ? "PASS" : "FAIL",
+    } as Criteria);
+  }, [creditShopped]);
 
   return (
     <>
@@ -33,10 +60,27 @@ const EKYCDetails = () => {
                   updateCriteria={updateCriteria}
                 />
               ))}
+
+            <CriteriaRow
+              key="CreditShopped"
+              criteria={creditShoppedCriteria!}
+              updateCriteria={updateCriteria}
+            >
+              <FormControl sx={{ width: 120 }} size="small">
+                <Select value={creditShopped} onChange={handleChange}>
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="0">0 in 4 weeks</MenuItem>
+                  <MenuItem value="1">1 in 4 weeks</MenuItem>
+                  <MenuItem value="2+">2 or more in 4 weeks</MenuItem>
+                </Select>
+              </FormControl>
+            </CriteriaRow>
           </div>
         </Grid2>
         <Grid2 size={6}>
-          <Stack alignItems="start" className="ml-5">
+          <Stack alignItems="start" className="pl-5">
             <Button>VIEW Equifax Report</Button>
             <Button>VIEW Driver's License</Button>
             <Button>VIEW Australian Passport</Button>
@@ -67,4 +111,4 @@ const EKYCDetails = () => {
   );
 };
 
-export default EKYCDetails;
+export default ApplicantCheckpoint;

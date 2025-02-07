@@ -23,7 +23,7 @@ import CardTitleHeader from "../../../components/CardTitleHeader";
 import { Checklist } from "../../../models/loan.models";
 import { useLoanStore } from "../../../state";
 import ABNRegistrationDetails from "./ABNRegistrationDetails";
-import EKYCDetails from "./EKYCDetails";
+import ApplicantCheckpoint from "./ApplicantCheckpoint";
 import FraudAssessmentDetails from "./FraudAssessmentDetails";
 import VedaDetails from "./VedaDetails";
 import GSTRegistrationDetails from "./GSTRegistrationDetails";
@@ -34,8 +34,8 @@ const MandatoryChecklist = () => {
   const [checklist, setChecklist] = React.useState<Checklist | null>(null);
 
   const toggleDialog = (open: boolean, checklist: Checklist | null = null) => {
+    checklist && setChecklist(checklist);
     setOpenDialog(open);
-    setChecklist(checklist);
   };
 
   return (
@@ -99,7 +99,7 @@ const MandatoryChecklist = () => {
           <Typography gutterBottom>
             Checkpoint - {checklist?.checkpoint}
           </Typography>
-          {checklist?.checkpoint === "eKYC" && <EKYCDetails />}
+          {checklist?.checkpoint === "Applicant" && <ApplicantCheckpoint />}
           {checklist?.checkpoint === "Fraud Assessment" && (
             <FraudAssessmentDetails />
           )}

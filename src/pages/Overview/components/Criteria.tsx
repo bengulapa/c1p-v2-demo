@@ -7,16 +7,17 @@ import {
   Grid2,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { ReactNode } from "react";
 import { Criteria } from "../../../models/interfaces";
 import { formatCurrency } from "../../../utils/formatters";
 
 interface IProps {
   criteria: Criteria;
   updateCriteria?: (criteria: Criteria) => void;
+  children?: ReactNode;
 }
 
-const CriteriaRow = ({ criteria, updateCriteria }: IProps) => {
+const CriteriaRow = ({ criteria, updateCriteria, children }: IProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateCriteria &&
       updateCriteria({
@@ -40,9 +41,13 @@ const CriteriaRow = ({ criteria, updateCriteria }: IProps) => {
         <Typography variant="body2">{criteria.text}:</Typography>
       </Grid2>
       <Grid2 size={4}>
-        <Typography variant="body2" color="secondary">
-          {formatValue(criteria.valueType, criteria.value)}
-        </Typography>
+        {children ? (
+          children
+        ) : (
+          <Typography variant="body2" color="secondary">
+            {formatValue(criteria.valueType, criteria.value)}
+          </Typography>
+        )}
       </Grid2>
       <Grid2 size={2}>
         <Box className="pt-1 text-l">

@@ -280,13 +280,13 @@
     "creditStatus": "Under Assessment",
     "checklists": [
       {
-        "checkpoint": "eKYC",
+        "checkpoint": "Applicant",
         "outcome": "FAIL",
         "section": "mandatory",
         "criteriaList": [
           {
             "key": "File",
-            "text": "Equifax File No:",
+            "text": "Equifax File No",
             "value": "194578932",
             "result": "",
             "section": "equifax",
@@ -301,6 +301,15 @@
             "isOverridden": false
           },
           {
+            "key": "CreditShopped",
+            "text": "Credit Shopped",
+            "value": "2+",
+            "valueType": "dropdown",
+            "result": "FAIL",
+            "section": "",
+            "isOverridden": false
+          },
+          {
             "key": "DVS",
             "text": "DVS pass",
             "value": "Fail",
@@ -310,7 +319,7 @@
           },
           {
             "key": "Bio",
-            "text": "BioID PhotoVerify File No:",
+            "text": "BioID PhotoVerify File No",
             "value": "A212134",
             "result": "",
             "section": "biometrics",
