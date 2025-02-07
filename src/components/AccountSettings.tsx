@@ -1,6 +1,6 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Logout from "@mui/icons-material/Logout";
-import Settings from "@mui/icons-material/Settings";
+import PaletteIcon from "@mui/icons-material/Palette";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -50,9 +50,9 @@ const AccountSettings = () => {
         <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <PaletteIcon fontSize="small" />
           </ListItemIcon>
-          Settings
+          Toggle Theme
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
