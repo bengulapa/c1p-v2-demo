@@ -10,22 +10,32 @@ import {
   Grid2,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { formatCurrency } from "../utils/formatters";
+import { useEffect, useState } from "react";
+import { Loan } from "../models/loan.models";
 import { Color } from "../styles/colors";
+import { formatCurrency } from "../utils/formatters";
 import CardTitleHeader from "./CardTitleHeader";
 import GaugeChart from "./GaugeChart";
 
 interface IProps {
-  loan?: any;
+  loan: Loan;
 }
 
 const PageHeader = ({ loan }: IProps) => {
-  const [score, setScore] = React.useState(loan.recommendationScore);
+  const [score, setScore] = useState(0);
 
-  const updateScore = (value: number) => {
-    setScore(score + value);
-  };
+  useEffect(() => {
+    const allCriteria = loan.checklists
+      .map((cl) => cl.criteriaList)
+      .flat()
+      .filter((clc) => !!clc.result);
+
+    const passed = allCriteria.filter(
+      (a) => a.result === "PASS" || a.isOverridden
+    ).length;
+
+    setScore((passed / allCriteria.length) * 1000);
+  }, [loan]);
 
   return (
     <Grid2 container spacing={1} className="mb-2">
