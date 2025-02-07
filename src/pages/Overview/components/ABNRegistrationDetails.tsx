@@ -1,9 +1,18 @@
 import LaunchIcon from "@mui/icons-material/Launch";
-import { Button, Grid2, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Grid2,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { Criteria } from "../../../models/interfaces";
 import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
+import { useState, useEffect } from "react";
 
 const ABNRegistrationDetails = () => {
   const checkpoint = "ABN Registration";
@@ -20,6 +29,23 @@ const ABNRegistrationDetails = () => {
     updateChecklist(checkpoint, updatedCriteriaList);
   };
 
+  const skilledTradeCriteria = checklist.criteriaList.find(
+    (cl) => cl.key === "SkilledTrade"
+  );
+  const [skilledTrade, setSkilledTrade] = useState("No");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setSkilledTrade(event.target.value);
+  };
+
+  useEffect(() => {
+    updateCriteria({
+      ...skilledTradeCriteria,
+      value: skilledTrade,
+      result: skilledTrade === "Yes" ? "PASS" : "FAIL",
+    } as Criteria);
+  }, [skilledTrade]);
+
   return (
     <>
       <Grid2 container spacing={1}>
@@ -35,6 +61,22 @@ const ABNRegistrationDetails = () => {
                   updateCriteria={updateCriteria}
                 />
               ))}
+
+            <CriteriaRow
+              key="SkilledTrade"
+              criteria={skilledTradeCriteria!}
+              updateCriteria={updateCriteria}
+            >
+              <FormControl sx={{ width: 120 }} size="small">
+                <Select value={skilledTrade} onChange={handleChange}>
+                  <MenuItem value="">
+                    <em>Unknown</em>
+                  </MenuItem>
+                  <MenuItem value="Yes">Yes</MenuItem>
+                  <MenuItem value="No">No</MenuItem>
+                </Select>
+              </FormControl>
+            </CriteriaRow>
           </div>
 
           <Typography gutterBottom>PREVIOUS</Typography>

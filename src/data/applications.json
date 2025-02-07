@@ -536,6 +536,16 @@
             "section": "abn",
             "isOverridden": false
           },
+
+          {
+            "key": "SkilledTrade",
+            "text": "Skilled Trade",
+            "value": "No",
+            "valueType": "dropdown",
+            "result": "FAIL",
+            "section": "",
+            "isOverridden": true
+          },
           {
             "key": "7",
             "text": "ABN",
@@ -578,6 +588,13 @@
             "key": "2",
             "text": "GST Registration Length",
             "value": "1 Year",
+            "result": "FAIL",
+            "isOverridden": true
+          },
+          {
+            "key": "3",
+            "text": "Is ATO Portal Satisfactory?",
+            "value": "No",
             "result": "FAIL",
             "isOverridden": true
           }
