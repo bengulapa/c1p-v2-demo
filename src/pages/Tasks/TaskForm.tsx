@@ -5,14 +5,16 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
-  InputLabel,
   MenuItem,
   Select,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import FormInputDate from "../../components/ui/FormInputDate";
+import FormInputSelect from "../../components/ui/FormInputSelect";
+import FormInputText from "../../components/ui/FormInputText";
 import { Task, TaskType } from "../../models/task.model";
 
 interface IProps {
@@ -27,9 +29,14 @@ interface Condition {
 
 const TaskForm = ({ task }: IProps) => {
   const isEditMode = task !== undefined;
-  const [taskType, setTaskType] = useState<TaskType | null>(null);
   const [condition, setCondition] = useState<Condition | null>(null);
   const [guarantor, setGuarantor] = useState<string | null>(null);
+  const { control } = useForm({
+    defaultValues: {},
+    values: { ...task },
+  });
+
+  const taskType = useWatch({ control, name: "taskType" });
 
   const creditConditions = [
     {
@@ -53,43 +60,39 @@ const TaskForm = ({ task }: IProps) => {
   ];
 
   return (
-    <>
+    <form>
       <Typography variant="subtitle1" gutterBottom>
         Task details
       </Typography>
 
       {!isEditMode && (
         <Stack direction="row" spacing={1} className="my-2">
-          <FormControl className="w-50 pr-1" variant="filled">
-            <InputLabel>Task type</InputLabel>
-            <Select
-              label="Task type"
-              onChange={(e) => setTaskType(e.target.value as TaskType)}
-            >
-              <MenuItem value={TaskType.General}>General</MenuItem>
-              <MenuItem value={TaskType.Internal}>Internal</MenuItem>
-              <MenuItem value={TaskType.CreditCondition}>
-                Credit Condition
-              </MenuItem>
-            </Select>
-          </FormControl>
+          <FormInputSelect
+            name={"taskType"}
+            control={control}
+            label={"Task type"}
+            disabled={isEditMode}
+          >
+            <MenuItem value={TaskType.General}>General</MenuItem>
+            <MenuItem value={TaskType.Internal}>Internal</MenuItem>
+            <MenuItem value={TaskType.CreditCondition}>
+              Credit Condition
+            </MenuItem>
+          </FormInputSelect>
 
           {taskType === TaskType.CreditCondition && (
-            <>
-              <FormControl className="w-50 pr-1" variant="filled">
-                <InputLabel>Conditions</InputLabel>
-                <Select
-                  label="Conditions"
-                  onChange={(e) => setCondition(e.target.value as Condition)}
-                >
-                  {creditConditions.map((c) => (
-                    <MenuItem key={c.conditionId} value={c.conditionId}>
-                      {c.display}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </>
+            <FormInputSelect
+              name={"conditions"}
+              control={control}
+              label={"Conditions"}
+              disabled={isEditMode}
+            >
+              {creditConditions.map((c) => (
+                <MenuItem key={c.conditionId} value={c.conditionId}>
+                  {c.display}
+                </MenuItem>
+              ))}
+            </FormInputSelect>
           )}
         </Stack>
       )}
@@ -120,23 +123,35 @@ const TaskForm = ({ task }: IProps) => {
       )}
 
       <Stack direction="row" spacing={1} className="my-2">
-        <FormControl className="w-50" disabled={isEditMode} variant="filled">
-          <InputLabel>Assign to</InputLabel>
-          <Select label="Assign to" value={task?.assignedTo}>
-            <MenuItem value="Klein Moretti">Klein Moretti</MenuItem>
-            <MenuItem value="Lumian Lee">Lumian Lee</MenuItem>
-            <MenuItem value="Fors Wall">Fors Wall</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          label="Due Date"
-          variant="filled"
-          className="w-50"
+        <FormInputSelect
+          name={"assignedTo"}
+          control={control}
+          label={"Assign to"}
+          disabled={isEditMode}
+        >
+          <MenuItem value="Klein Moretti">Klein Moretti</MenuItem>
+          <MenuItem value="Lumian Lee">Lumian Lee</MenuItem>
+          <MenuItem value="Fors Wall">Fors Wall</MenuItem>
+        </FormInputSelect>
+
+        <FormInputDate
+          name={"dueDate"}
+          control={control}
+          label={"Due Date"}
           disabled={isEditMode}
         />
       </Stack>
 
       <div className="mb-2">
+        {taskType && taskType !== TaskType.CreditCondition && (
+          <FormInputText
+            name={"title"}
+            control={control}
+            label={"Title"}
+            className="mb-2"
+          />
+        )}
+
         {guarantor ? (
           <Box className="border p-2">
             <div>
@@ -153,13 +168,12 @@ const TaskForm = ({ task }: IProps) => {
             </ul>
           </Box>
         ) : (
-          <TextField
-            fullWidth
-            label="Task"
+          <FormInputText
+            name="description"
+            control={control}
+            label="Message"
             multiline
             rows={4}
-            variant="filled"
-            value={task?.task}
           />
         )}
       </div>
@@ -175,7 +189,7 @@ const TaskForm = ({ task }: IProps) => {
           Attach a document
         </Button>
       </div>
-    </>
+    </form>
   );
 };
 

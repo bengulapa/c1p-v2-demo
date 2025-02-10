@@ -29,88 +29,103 @@ import React from "react";
 import CardTitleHeader from "../../components/CardTitleHeader";
 import { Task, TaskStatus, TaskType } from "../../models/task.model";
 import { Color } from "../../styles/colors";
+import { formatDisplayDate } from "../../utils/formatters";
 import TaskForm from "./TaskForm";
 
 const tasks: Task[] = [
   {
-    task: "Upload doc",
-    status: TaskStatus.InProgress,
+    title: "Upload doc",
+    description: "Upload doc adasd aeaw dasd adaa",
+    status: TaskStatus.WorkingOnIt,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date().toLocaleDateString(),
+    dateCreated: new Date(),
+    dueDate: new Date(),
     sla: "1 day to go",
     attachments: [
       {
         name: "medicare.pdf",
-        dateUploaded: new Date().toLocaleDateString(),
+        dateUploaded: new Date(),
         type: "pdf",
       },
     ],
     taskType: TaskType.Internal,
   },
   {
-    task: "Request bank statement",
+    title: "Request bank statement",
+    description: "Upload",
     status: TaskStatus.NotStarted,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date().toLocaleDateString(),
+    dateCreated: new Date(),
+    dueDate: new Date(),
     sla: "9 days overdue",
     attachments: [
       {
         name: "medicare.pdf",
-        dateUploaded: new Date().toLocaleDateString(),
+        dateUploaded: new Date(),
         type: "pdf",
       },
       {
         name: "medicare.pdf",
-        dateUploaded: new Date().toLocaleDateString(),
+        dateUploaded: new Date(),
         type: "pdf",
       },
     ],
     taskType: TaskType.Internal,
   },
   {
-    task: "Confirm applicant address",
+    title: "Confirm applicant address",
+    description: "Upload",
     status: TaskStatus.Done,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date().toLocaleDateString(),
+    dateCreated: new Date(),
+    dueDate: new Date(),
     sla: "",
     attachments: [],
     taskType: TaskType.Internal,
   },
   {
-    task: "Condition 1",
+    title: "Condition 1",
+    description: "Upload",
     status: TaskStatus.Done,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date().toLocaleDateString(),
+    dateCreated: new Date(),
+    dueDate: new Date(),
     sla: "",
     attachments: [],
     taskType: TaskType.CreditCondition,
     conditionMet: true,
   },
   {
-    task: "Condition 2",
-    status: TaskStatus.InProgress,
+    title: "Condition 2",
+    description: "Upload",
+    status: TaskStatus.WorkingOnIt,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date().toLocaleDateString(),
+    dateCreated: new Date(),
+    dueDate: new Date(),
     sla: "1 day to go",
     attachments: [],
     taskType: TaskType.CreditCondition,
     conditionMet: false,
   },
   {
-    task: "Condition 3",
-    status: TaskStatus.InProgress,
+    title: "Condition 3",
+    description: "Upload",
+    status: TaskStatus.WorkingOnIt,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date().toLocaleDateString(),
+    dateCreated: new Date(),
+    dueDate: new Date(),
     sla: "1 day to go",
     attachments: [],
     taskType: TaskType.CreditCondition,
     conditionMet: false,
   },
   {
-    task: "Condition 4",
-    status: TaskStatus.InProgress,
+    title: "Condition 4",
+    description: "Upload",
+    status: TaskStatus.WorkingOnIt,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date().toLocaleDateString(),
+    dateCreated: new Date(),
+    dueDate: new Date(),
     sla: "1 day to go",
     attachments: [],
     taskType: TaskType.CreditCondition,
@@ -126,6 +141,7 @@ const Tasks = () => {
     setOpenDialog(open);
     setTimeout(() => {
       setSelectedTask(selectedTask);
+      console.log(selectedTask);
     }, 200);
   };
 
@@ -133,7 +149,7 @@ const Tasks = () => {
     switch (status) {
       case TaskStatus.NotStarted:
         return Color.red;
-      case TaskStatus.InProgress:
+      case TaskStatus.WorkingOnIt:
         return Color.darkOrange;
       case TaskStatus.Done:
         return Color.green;
@@ -184,7 +200,7 @@ const Tasks = () => {
             <Table size="small">
               <TableHead>
                 <TableRow>
-                  <TableCell>Task</TableCell>
+                  <TableCell>Title</TableCell>
                   <TableCell></TableCell>
                   <TableCell>Status</TableCell>
                   <TableCell>Assigned</TableCell>
@@ -201,7 +217,7 @@ const Tasks = () => {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {t.task}
+                      {t.title}
                     </TableCell>
                     <TableCell>
                       <Tooltip title="Edit task">
@@ -221,7 +237,7 @@ const Tasks = () => {
                       {t.status}
                     </TableCell>
                     <TableCell>{t.assignedTo}</TableCell>
-                    <TableCell>{t.dateCreated}</TableCell>
+                    <TableCell>{formatDisplayDate(t.dateCreated)}</TableCell>
                     <TableCell
                       sx={{
                         color: getSLAColor(t.sla),

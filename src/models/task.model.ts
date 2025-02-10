@@ -1,26 +1,28 @@
 export interface Attachment {
   name: string;
   type: string;
-  dateUploaded: string;
+  dateUploaded: Date;
 }
 
 export enum TaskStatus {
-  NotStarted = "Not Started",
-  InProgress = "In Progress",
+  NotStarted = "Not started",
+  WorkingOnIt = "Working on it",
   Done = "Done",
 }
 
 export enum TaskType {
-  General,
+  General = 1,
   Internal,
   CreditCondition,
 }
 
 export interface Task {
-  task: string;
+  title: string;
+  description: string;
   status: TaskStatus;
   assignedTo: string;
-  dateCreated: string;
+  dateCreated: Date;
+  dueDate: Date;
   sla: string;
   attachments: Attachment[];
   isCondition?: boolean;
