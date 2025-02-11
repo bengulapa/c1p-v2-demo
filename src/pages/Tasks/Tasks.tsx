@@ -63,7 +63,7 @@ const mockTasks: Task[] = [
         type: "pdf",
       },
       {
-        name: "medicare.pdf",
+        name: "passport.pdf",
         dateUploaded: new Date(),
         type: "pdf",
       },
