@@ -1,3 +1,4 @@
+import { DevTool } from "@hookform/devtools";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import {
   Box,
@@ -9,22 +10,26 @@ import {
   DialogTitle,
   FormControl,
   FormControlLabel,
+  InputLabel,
   MenuItem,
   Select,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import FormInputDate from "../../components/ui/FormInputDate";
 import FormInputSelect from "../../components/ui/FormInputSelect";
-import FormInputText from "../../components/ui/FormInputText";
 import { Task, TaskStatus, TaskType } from "../../models/task.model";
+import { newGuid } from "../../utils/uuid";
 
 interface IProps {
   task: Task | null;
   open: boolean;
   toggleDialog: (open: boolean, selectedTask: Task | null) => void;
+  addTask: (newTask: Task) => void;
+  updateTask: (task: Task) => void;
 }
 
 interface Condition {
@@ -32,11 +37,38 @@ interface Condition {
   display: string;
   details: string;
 }
+const creditConditions = [
+  {
+    conditionId: 1,
+    display: "Credit Condition 1 - Confirm Details",
+  },
 
-const TaskForm = ({ task, open, toggleDialog }: IProps) => {
+  {
+    conditionId: 2,
+    display: "Credit Condition 2 - Signed Consent Form",
+  },
+  {
+    conditionId: 3,
+    display: "Credit Condition 3 - Certified Copy of Trust Deed",
+  },
+
+  {
+    conditionId: 4,
+    display: "Credit Condition 4 - Proof of Property Ownership",
+  },
+];
+
+const TaskForm = ({
+  task,
+  open,
+  toggleDialog,
+  addTask,
+  updateTask,
+}: IProps) => {
   const isEditMode = task !== null;
   const [condition, setCondition] = useState<Condition | null>(null);
   const [guarantor, setGuarantor] = useState<string | null>(null);
+  const [canAttach, setCanAttach] = useState(false);
   const { control, handleSubmit, reset, formState, register } = useForm({
     defaultValues: {
       id: "",
@@ -46,46 +78,30 @@ const TaskForm = ({ task, open, toggleDialog }: IProps) => {
       assignedTo: "",
       dateCreated: new Date(),
       dueDate: new Date(),
-      sla: "",
       attachments: [],
-      taskType: "",
+      taskType: undefined,
       conditionMet: false,
-    },
+    } as Task,
     values: { ...task },
   });
-
   const taskType = useWatch({ control, name: "taskType" });
-
-  const creditConditions = [
-    {
-      conditionId: 1,
-      display: "Credit Condition 1 - Confirm Details",
-    },
-
-    {
-      conditionId: 2,
-      display: "Credit Condition 2 - Signed Consent Form",
-    },
-    {
-      conditionId: 3,
-      display: "Credit Condition 3 - Certified Copy of Trust Deed",
-    },
-
-    {
-      conditionId: 4,
-      display: "Credit Condition 4 - Proof of Property Ownership",
-    },
-  ];
-
   const onSubmit = (data: any) => {
-    console.log(data);
+    if (data.id) {
+      updateTask(data);
+    } else {
+      addTask({
+        id: newGuid(),
+        ...data,
+      });
+    }
   };
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
-      reset({});
+      reset();
+      toggleDialog(false, null);
     }
-  }, [formState, reset]);
+  }, [formState]);
 
   return (
     <Dialog
@@ -93,42 +109,40 @@ const TaskForm = ({ task, open, toggleDialog }: IProps) => {
       fullWidth={true}
       open={open}
       onClose={() => {
-        console.log("close");
         reset();
       }}
     >
-      <DialogTitle>{isEditMode ? "Edit" : "Add"} Task</DialogTitle>
-      <DialogContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <DialogTitle>{isEditMode ? "Edit" : "Add"} Task</DialogTitle>
+        <DialogContent>
           <input {...register("id")} type="hidden" />
           {!isEditMode && (
             <Stack direction="row" spacing={1} className="my-2">
-              <FormInputSelect
-                name={"taskType"}
-                control={control}
-                label={"Task type"}
-                disabled={isEditMode}
-              >
-                <MenuItem value={TaskType.General}>General</MenuItem>
-                <MenuItem value={TaskType.Internal}>Internal</MenuItem>
-                <MenuItem value={TaskType.CreditCondition}>
-                  Credit Condition
-                </MenuItem>
-              </FormInputSelect>
+              <FormControl className="w-50 pr-1" variant="filled">
+                <InputLabel>Task type</InputLabel>
+                <Select label="Task type" {...register("taskType")}>
+                  <MenuItem value={TaskType.General}>General</MenuItem>
+                  <MenuItem value={TaskType.Internal}>Internal</MenuItem>
+                  <MenuItem value={TaskType.CreditCondition}>
+                    Credit Condition
+                  </MenuItem>
+                </Select>
+              </FormControl>
 
               {taskType === TaskType.CreditCondition && (
-                <FormInputSelect
-                  name={"conditions"}
-                  control={control}
-                  label={"Conditions"}
-                  disabled={isEditMode}
-                >
-                  {creditConditions.map((c) => (
-                    <MenuItem key={c.conditionId} value={c.conditionId}>
-                      {c.display}
-                    </MenuItem>
-                  ))}
-                </FormInputSelect>
+                <FormControl className="w-50 pr-1" variant="filled">
+                  <InputLabel>Conditions</InputLabel>
+                  <Select
+                    label="Conditions"
+                    onChange={(e) => setCondition(e.target.value as Condition)}
+                  >
+                    {creditConditions.map((c) => (
+                      <MenuItem key={c.conditionId} value={c.conditionId}>
+                        {c.display}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               )}
             </Stack>
           )}
@@ -160,11 +174,12 @@ const TaskForm = ({ task, open, toggleDialog }: IProps) => {
 
           <Stack direction="row" spacing={1} className="my-2">
             <FormInputSelect
-              name={"assignedTo"}
-              control={control}
-              label={"Assign to"}
               disabled={isEditMode}
+              name="assignedTo"
+              control={control}
+              label="Assign to"
             >
+              <MenuItem value="">Select</MenuItem>
               <MenuItem value="Klein Moretti">Klein Moretti</MenuItem>
               <MenuItem value="Lumian Lee">Lumian Lee</MenuItem>
               <MenuItem value="Fors Wall">Fors Wall</MenuItem>
@@ -180,11 +195,12 @@ const TaskForm = ({ task, open, toggleDialog }: IProps) => {
 
           <div className="mb-2">
             {taskType && taskType !== TaskType.CreditCondition && (
-              <FormInputText
-                name={"title"}
-                control={control}
-                label={"Title"}
+              <TextField
                 className="mb-2"
+                fullWidth
+                label="Title"
+                variant="filled"
+                {...register("title")}
               />
             )}
 
@@ -204,12 +220,13 @@ const TaskForm = ({ task, open, toggleDialog }: IProps) => {
                 </ul>
               </Box>
             ) : (
-              <FormInputText
-                name="description"
-                control={control}
+              <TextField
+                fullWidth
                 label="Message"
                 multiline
                 rows={4}
+                variant="filled"
+                {...register("description")}
               />
             )}
           </div>
@@ -220,25 +237,35 @@ const TaskForm = ({ task, open, toggleDialog }: IProps) => {
               label="Send email confirmation"
             />
 
-            <Button>
+            <Button onClick={() => setCanAttach(!canAttach)}>
               <AttachFileIcon />
               Attach a document
             </Button>
           </div>
-        </form>
-      </DialogContent>
-      <DialogActions>
-        <Button type="submit" variant="contained" color="secondary">
-          {task ? "Task Done" : "Add Task"}
-        </Button>
-        <Button
-          onClick={() => toggleDialog(false, null)}
-          variant="contained"
-          color="inherit"
-        >
-          Cancel
-        </Button>
-      </DialogActions>
+
+          {canAttach && (
+            <div className="border p-4 text-center">
+              Click to upload or Drag files here
+            </div>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button type="submit" variant="contained" color="secondary">
+            {isEditMode ? "Task Done" : "Add"}
+          </Button>
+          <Button
+            onClick={() => {
+              reset();
+              toggleDialog(false, null);
+            }}
+            variant="contained"
+            color="inherit"
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      </form>
+      <DevTool control={control} />
     </Dialog>
   );
 };

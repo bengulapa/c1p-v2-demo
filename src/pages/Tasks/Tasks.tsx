@@ -270,6 +270,20 @@ const Tasks = () => {
         task={selectedTask}
         open={openDialog}
         toggleDialog={toggleDialog}
+        addTask={(task) => {
+          setTasks([...tasks, task]);
+        }}
+        updateTask={(task) => {
+          setTasks(
+            tasks.map((at) =>
+              at.id === task.id
+                ? {
+                    ...task,
+                  }
+                : at
+            )
+          );
+        }}
       />
     </>
   );

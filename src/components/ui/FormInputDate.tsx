@@ -27,7 +27,6 @@ const FormInputDate = ({
             slotProps={{
               textField: {
                 variant: "filled",
-                size: "small",
               },
             }}
           />

@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@hookform/devtools": "^4.3.3",
     "react-scripts": "5.0.1"
   }
 }

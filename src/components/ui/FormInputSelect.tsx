@@ -11,7 +11,7 @@ const FormInputSelect = ({
   children,
 }: FormInputProps) => {
   return (
-    <FormControl size={"small"} fullWidth>
+    <FormControl fullWidth>
       <InputLabel>{label}</InputLabel>
       <Controller
         render={({ field: { onChange, value } }) => (
