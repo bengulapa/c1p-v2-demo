@@ -16,16 +16,16 @@ export enum TaskType {
   CreditCondition,
 }
 
-export interface Task {
-  title: string;
-  description: string;
-  status: TaskStatus;
-  assignedTo: string;
-  dateCreated: Date;
-  dueDate: Date;
-  sla: string;
-  attachments: Attachment[];
+export class Task {
+  id!: string;
+  title!: string;
+  description!: string;
+  status!: TaskStatus;
+  assignedTo!: string;
+  dateCreated!: Date;
+  dueDate!: Date;
+  attachments: Attachment[] = [];
   isCondition?: boolean;
   conditionMet?: boolean;
-  taskType: TaskType;
+  taskType?: TaskType;
 }

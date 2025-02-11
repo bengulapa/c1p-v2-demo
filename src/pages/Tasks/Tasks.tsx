@@ -1,6 +1,4 @@
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
 import TaskIcon from "@mui/icons-material/Task";
@@ -8,10 +6,7 @@ import {
   Button,
   Card,
   CardContent,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
+  Checkbox,
   FormControl,
   IconButton,
   Input,
@@ -24,23 +19,26 @@ import {
   TableHead,
   TableRow,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import CardTitleHeader from "../../components/CardTitleHeader";
 import { Task, TaskStatus, TaskType } from "../../models/task.model";
 import { Color } from "../../styles/colors";
 import { formatDisplayDate } from "../../utils/formatters";
+import { newGuid } from "../../utils/uuid";
 import TaskForm from "./TaskForm";
+import { add, differenceInBusinessDays, sub } from "date-fns";
 
-const tasks: Task[] = [
+const mockTasks: Task[] = [
   {
+    id: newGuid(),
     title: "Upload doc",
-    description: "Upload doc adasd aeaw dasd adaa",
+    description: "Upload doc desc",
     status: TaskStatus.WorkingOnIt,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date(),
-    dueDate: new Date(),
-    sla: "1 day to go",
+    dateCreated: sub(new Date(), { days: 19 }),
+    dueDate: add(new Date(), { days: 3 }),
     attachments: [
       {
         name: "medicare.pdf",
@@ -51,13 +49,13 @@ const tasks: Task[] = [
     taskType: TaskType.Internal,
   },
   {
+    id: newGuid(),
     title: "Request bank statement",
     description: "Upload",
     status: TaskStatus.NotStarted,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date(),
-    dueDate: new Date(),
-    sla: "9 days overdue",
+    dateCreated: sub(new Date(), { days: 9 }),
+    dueDate: sub(new Date(), { days: 2 }),
     attachments: [
       {
         name: "medicare.pdf",
@@ -73,60 +71,48 @@ const tasks: Task[] = [
     taskType: TaskType.Internal,
   },
   {
+    id: newGuid(),
     title: "Confirm applicant address",
     description: "Upload",
     status: TaskStatus.Done,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date(),
-    dueDate: new Date(),
-    sla: "",
+    dateCreated: sub(new Date(), { days: 2 }),
+    dueDate: add(new Date(), { days: 7 }),
     attachments: [],
     taskType: TaskType.Internal,
   },
   {
+    id: newGuid(),
     title: "Condition 1",
-    description: "Upload",
+    description: "Condition 1",
     status: TaskStatus.Done,
     assignedTo: "Klein Moretti",
-    dateCreated: new Date(),
-    dueDate: new Date(),
-    sla: "",
+    dateCreated: sub(new Date(), { days: 9 }),
+    dueDate: sub(new Date(), { days: 2 }),
     attachments: [],
     taskType: TaskType.CreditCondition,
     conditionMet: true,
   },
   {
+    id: newGuid(),
     title: "Condition 2",
-    description: "Upload",
+    description: "Condition 2",
     status: TaskStatus.WorkingOnIt,
     assignedTo: "Klein Moretti",
     dateCreated: new Date(),
-    dueDate: new Date(),
-    sla: "1 day to go",
+    dueDate: add(new Date(), { days: 8 }),
     attachments: [],
     taskType: TaskType.CreditCondition,
     conditionMet: false,
   },
   {
+    id: newGuid(),
     title: "Condition 3",
-    description: "Upload",
+    description: "Condition 3",
     status: TaskStatus.WorkingOnIt,
     assignedTo: "Klein Moretti",
     dateCreated: new Date(),
-    dueDate: new Date(),
-    sla: "1 day to go",
-    attachments: [],
-    taskType: TaskType.CreditCondition,
-    conditionMet: false,
-  },
-  {
-    title: "Condition 4",
-    description: "Upload",
-    status: TaskStatus.WorkingOnIt,
-    assignedTo: "Klein Moretti",
-    dateCreated: new Date(),
-    dueDate: new Date(),
-    sla: "1 day to go",
+    dueDate: add(new Date(), { days: 9 }),
     attachments: [],
     taskType: TaskType.CreditCondition,
     conditionMet: false,
@@ -134,15 +120,13 @@ const tasks: Task[] = [
 ];
 
 const Tasks = () => {
+  const [tasks, setTasks] = React.useState(mockTasks);
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [selectedTask, setSelectedTask] = React.useState<Task>();
+  const [selectedTask, setSelectedTask] = React.useState<Task | null>(null);
 
-  const toggleDialog = (open: boolean, selectedTask?: Task) => {
+  const toggleDialog = (open: boolean, selectedTask: Task | null) => {
+    setSelectedTask(selectedTask);
     setOpenDialog(open);
-    setTimeout(() => {
-      setSelectedTask(selectedTask);
-      console.log(selectedTask);
-    }, 200);
   };
 
   const getStatusColor = (status: string) => {
@@ -156,13 +140,17 @@ const Tasks = () => {
     }
   };
 
-  const getSLAColor = (sla: string) => {
-    if (sla.includes("overdue")) {
-      return Color.red;
-    } else if (sla.includes("to go")) {
-      return Color.darkOrange;
-    } else {
-      return "inherit";
+  const getSLA = (dueDate: Date) => {
+    const result = differenceInBusinessDays(dueDate, new Date());
+
+    if (result < 0) {
+      return (
+        <Typography sx={{ color: Color.red }}>
+          {Math.abs(result)} days overdue
+        </Typography>
+      );
+    } else if (result > 0) {
+      return <Typography>{result} days to go</Typography>;
     }
   };
 
@@ -175,7 +163,10 @@ const Tasks = () => {
               <CardTitleHeader title="Tasks" />
 
               <div className="d-flex justify-content-between align-items-center ml-5">
-                <Button variant="contained" onClick={() => toggleDialog(true)}>
+                <Button
+                  variant="contained"
+                  onClick={() => toggleDialog(true, null)}
+                >
                   New Task
                 </Button>
 
@@ -238,25 +229,31 @@ const Tasks = () => {
                     </TableCell>
                     <TableCell>{t.assignedTo}</TableCell>
                     <TableCell>{formatDisplayDate(t.dateCreated)}</TableCell>
-                    <TableCell
-                      sx={{
-                        color: getSLAColor(t.sla),
-                      }}
-                    >
-                      {t.sla}
+                    <TableCell>
+                      {t.status !== TaskStatus.Done && getSLA(t.dueDate)}
                     </TableCell>
                     <TableCell>
                       {t.attachments.map((a, i) => (
                         <AttachFileIcon key={i} />
                       ))}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {t.taskType === TaskType.CreditCondition ? (
-                        t.conditionMet ? (
-                          <CheckBoxIcon />
-                        ) : (
-                          <CheckBoxOutlineBlankIcon />
-                        )
+                        <Checkbox
+                          checked={t.conditionMet}
+                          onChange={(e) => {
+                            setTasks(
+                              tasks.map((at) =>
+                                at.id === t.id
+                                  ? {
+                                      ...t,
+                                      conditionMet: e.target.checked,
+                                    }
+                                  : at
+                              )
+                            );
+                          }}
+                        />
                       ) : (
                         ""
                       )}
@@ -269,33 +266,11 @@ const Tasks = () => {
         </CardContent>
       </Card>
 
-      <Dialog
-        maxWidth="sm"
-        fullWidth={true}
+      <TaskForm
+        task={selectedTask}
         open={openDialog}
-        onClose={() => toggleDialog(false)}
-      >
-        <DialogTitle>{selectedTask ? "Edit" : "Add"} Task</DialogTitle>
-        <DialogContent>
-          <TaskForm task={selectedTask} />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => toggleDialog(false, undefined)}
-            variant="contained"
-            color="secondary"
-          >
-            {selectedTask ? "Task Done" : "Add Task"}
-          </Button>
-          <Button
-            onClick={() => toggleDialog(false, undefined)}
-            variant="contained"
-            color="inherit"
-          >
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+        toggleDialog={toggleDialog}
+      />
     </>
   );
 };
