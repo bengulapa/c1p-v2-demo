@@ -1,4 +1,3 @@
-import { DevTool } from "@hookform/devtools";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import {
   Box,
@@ -28,8 +27,8 @@ interface IProps {
   task: Task | null;
   open: boolean;
   toggleDialog: (open: boolean, selectedTask: Task | null) => void;
-  addTask: (newTask: Task) => void;
-  updateTask: (task: Task) => void;
+  addTask?: (newTask: Task) => void;
+  updateTask?: (task: Task) => void;
 }
 
 interface Condition {
@@ -88,12 +87,13 @@ const TaskForm = ({
   const taskType = useWatch({ control, name: "taskType" });
   const onSubmit = (data: any) => {
     if (data.id) {
-      updateTask(data);
+      updateTask && updateTask(data);
     } else {
-      addTask({
-        id: newGuid(),
-        ...data,
-      });
+      addTask &&
+        addTask({
+          id: newGuid(),
+          ...data,
+        });
     }
   };
 
@@ -287,7 +287,6 @@ const TaskForm = ({
           </Button>
         </DialogActions>
       </form>
-      <DevTool control={control} />
     </Dialog>
   );
 };

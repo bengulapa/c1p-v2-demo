@@ -8,3 +8,13 @@ export enum TrustTypeEnum {
   Individual = "Individual",
   Other = "Other",
 }
+
+export enum CreditStatus {
+  UnderAssessment = "Under Assessment",
+  Escalated = "Escalated For Further Assessment",
+  MissingInfo = "Missing Information",
+  Pending = "Pending Compliance Call",
+  Approved = "Approved",
+  Declined = "Declined",
+  Withdrawn = "Withdrawn",
+}

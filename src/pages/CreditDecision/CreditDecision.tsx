@@ -1,78 +1,175 @@
 import {
-  Box,
   Button,
   Card,
   CardContent,
   Chip,
-  Divider,
   FormControl,
   Grid2,
   InputLabel,
   MenuItem,
+  Paper,
   Select,
+  SelectChangeEvent,
   Stack,
   Typography,
 } from "@mui/material";
-import AcceptanceCriteria from "../../components/AcceptanceCriteria";
-import PageTitle from "../../components/PageTitle";
+import { useState } from "react";
 import DetailCardHeader from "../../components/DetailCardHeader";
-
-const statusList = [
-  "Under Assessment",
-  "Escalated For Further Assessment",
-  "Missing Information",
-  "Pending Compliance Call",
-  "Approved",
-  "Declined",
-  "Withdrawn",
-];
+import PageTitle from "../../components/PageTitle";
+import { declineReasons, withdrawalReasons } from "../../data/reasons";
+import { brokers, creditAnalysts } from "../../data/users";
+import { CreditStatus } from "../../models/enums";
+import TaskForm from "../Tasks/TaskForm";
 
 const CreditDecision = () => {
+  const [status, setStatus] = useState(CreditStatus.UnderAssessment);
+  const [showTaskModal, setShowTaskModal] = useState(false);
+  const [creditAnalyst, setCreditAnalyst] = useState(0);
+
+  const handleStatusChange = (event: SelectChangeEvent<string>) => {
+    const selectedStatus = event.target.value as CreditStatus;
+    setStatus(selectedStatus);
+
+    if (selectedStatus === CreditStatus.UnderAssessment) {
+      setCreditAnalyst(11);
+    }
+  };
+
   return (
-    <>
+    <Paper className="p-3">
       <PageTitle title="Credit Decision" />
 
       <Grid2 container spacing={2}>
         <Grid2 size={6}>
-          <Card className="mb-3">
+          <Card variant="outlined">
             <CardContent>
               <div className="d-flex justify-content-between">
-                <Typography variant="overline" className="list-label">
-                  Deal Status
+                <Typography variant="h6" gutterBottom>
+                  Credit Status
                 </Typography>
-                <Chip label="Under Assessment" color="primary" />
+                <Chip label={status} color="primary" />
               </div>
 
-              <Divider className="my-2" />
+              <Stack direction="column" spacing={2} className="mb-3">
+                <Select
+                  value={status}
+                  onChange={handleStatusChange}
+                  displayEmpty
+                  fullWidth
+                >
+                  <MenuItem value="" disabled>
+                    Select Status
+                  </MenuItem>
+                  {Object.values(CreditStatus).map((status) => (
+                    <MenuItem key={status} value={status}>
+                      {status}
+                    </MenuItem>
+                  ))}
+                </Select>
 
-              <div>
-                <Typography variant="overline" className="list-label">
-                  Credit Analyst:
-                </Typography>
-                <span className="list-value">Unassigned</span>
-              </div>
-              <div>
-                <Typography variant="overline" className="list-label">
-                  Credit Support Officer:
-                </Typography>
-                <span className="list-value">Unassigned</span>
-              </div>
-
-              <Box>
-                {statusList.map((status) => (
-                  <Chip
-                    key={status}
-                    label={status}
-                    color="secondary"
+                {[CreditStatus.Approved, CreditStatus.MissingInfo].includes(
+                  status
+                ) && (
+                  <Button
+                    fullWidth
                     variant="outlined"
-                    className="mr-2 mb-2"
-                  />
-                ))}
-              </Box>
+                    color="secondary"
+                    onClick={() => setShowTaskModal(true)}
+                  >
+                    Add a Task
+                  </Button>
+                )}
+
+                {status === CreditStatus.Declined && (
+                  <>
+                    <FormControl fullWidth>
+                      <InputLabel>Decline reason</InputLabel>
+                      <Select label="Decline reason">
+                        <MenuItem value="" disabled>
+                          Select a reason
+                        </MenuItem>
+                        {declineReasons.map((option) => (
+                          <MenuItem key={option.id} value={option.id}>
+                            {option.value}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                    <div className="text-center">
+                      <Button variant="outlined" color="error" className="mr-2">
+                        Decline
+                      </Button>
+                      <Button variant="outlined" color="error">
+                        Decline and Email
+                      </Button>
+                    </div>
+                  </>
+                )}
+
+                {status === CreditStatus.Withdrawn && (
+                  <>
+                    <FormControl fullWidth>
+                      <InputLabel>Withdrawal reason</InputLabel>
+                      <Select label="Decline reason">
+                        <MenuItem value="" disabled>
+                          Select a reason
+                        </MenuItem>
+                        {withdrawalReasons.map((option) => (
+                          <MenuItem key={option.id} value={option.id}>
+                            {option.value}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                    <div className="text-center">
+                      <Button variant="outlined" color="error">
+                        Withdraw
+                      </Button>
+                    </div>
+                  </>
+                )}
+
+                <FormControl fullWidth>
+                  <InputLabel>Credit Analyst</InputLabel>
+                  <Select label="Credit Analyst" value={creditAnalyst}>
+                    <MenuItem value={0} disabled>
+                      Unassigned
+                    </MenuItem>
+                    {creditAnalysts.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <FormControl fullWidth>
+                  <InputLabel>Credit Support Officer</InputLabel>
+                  <Select label="Credit Support Officer">
+                    <MenuItem value={0} disabled>
+                      Unassigned
+                    </MenuItem>
+                    {brokers.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <TaskForm
+                  task={null}
+                  open={showTaskModal}
+                  toggleDialog={setShowTaskModal}
+                />
+              </Stack>
             </CardContent>
           </Card>
-
-          <Card className="mb-3">
+        </Grid2>
+        <Grid2 size={6}>
+          <Card variant="outlined">
             <CardContent>
               <DetailCardHeader
                 title="ANZSIC Codes"
@@ -82,7 +179,7 @@ const CreditDecision = () => {
               <Stack className="mt-2" spacing={2}>
                 <FormControl fullWidth>
                   <InputLabel>Industry code</InputLabel>
-                  <Select value={10} label="ANZSIC industry code">
+                  <Select value={10} label="Industry code">
                     <MenuItem value={10}>
                       A - Agriculture, Forestry and Fishing
                     </MenuItem>
@@ -93,12 +190,7 @@ const CreditDecision = () => {
                 </FormControl>
                 <FormControl fullWidth>
                   <InputLabel>Industry sub code</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={10}
-                    label="ANZSIC industry code"
-                  >
+                  <Select value={10} label="Industry code">
                     <MenuItem value={10}>02 - Aquaculture</MenuItem>
                     <MenuItem value={20}>
                       B - Bagriculture, Forestry and Fishing
@@ -107,21 +199,16 @@ const CreditDecision = () => {
                 </FormControl>
               </Stack>
 
-              <Button className="mt-2" variant="contained">
-                Save
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid2>
-        <Grid2 size={6}>
-          <Card className="mb-3">
-            <CardContent>
-              <AcceptanceCriteria />
+              <div className="text-right">
+                <Button className="mt-4" variant="contained">
+                  Save
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </Grid2>
       </Grid2>
-    </>
+    </Paper>
   );
 };
 

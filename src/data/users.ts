@@ -1,4 +1,4 @@
-export const assignedTo = [
+export const brokers = [
   {
     id: 1,
     name: "Klein Moretti",
@@ -12,5 +12,26 @@ export const assignedTo = [
   {
     id: 3,
     name: "Fors Wall",
+  },
+];
+
+export const creditAnalysts = [
+  {
+    id: 1,
+    name: "Will Auceptin",
+  },
+
+  {
+    id: 2,
+    name: "Red Medici",
+  },
+
+  {
+    id: 3,
+    name: "Grisha Adam",
+  },
+  {
+    id: 11,
+    name: "Ben Gulapa",
   },
 ];
