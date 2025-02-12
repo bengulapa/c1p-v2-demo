@@ -12,7 +12,7 @@ interface IProps {
 const DetailCardHeader = ({
   title,
   canEdit = true,
-  showEdit = true,
+  showEdit = false,
   onEdit,
 }: IProps) => {
   return (
