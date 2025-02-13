@@ -8,35 +8,91 @@ import {
   Typography,
 } from "@mui/material";
 import CardTitleHeader from "../../../components/CardTitleHeader";
-import { Color } from "../../../styles/colors";
+import { CreditStatus } from "../../../models/enums";
 import { useLoanStore } from "../../../state";
+import { Color } from "../../../styles/colors";
 
 const StatusCard = () => {
-  const loan = useLoanStore((state) => state.loan);
-  const status = ["Submitted", "Assessing", "Pending", "Decisioned", "Settled"];
+  const { status } = useLoanStore();
+  const statusList = [
+    {
+      index: 1,
+      name: "Submitted",
+      progress: 5,
+    },
+    {
+      index: 2,
+      name: "Assessing",
+      progress: 20,
+    },
+    {
+      index: 3,
+      name: "Pending",
+      progress: 33,
+    },
+
+    {
+      index: 4,
+      name: "Decisioned",
+      progress: 47,
+    },
+
+    {
+      index: 5,
+      name: "Settlement",
+      progress: 80,
+    },
+  ];
+
+  const getMainStatus = (status: CreditStatus) => {
+    if (status === CreditStatus.UnderAssessment) {
+      return statusList.find((s) => s.name === "Assessing");
+    } else if (
+      [
+        CreditStatus.Escalated,
+        CreditStatus.MissingInfo,
+        CreditStatus.Pending,
+      ].includes(status)
+    ) {
+      return statusList.find((s) => s.name === "Pending");
+    } else if (
+      [
+        CreditStatus.Approved,
+        CreditStatus.Declined,
+        CreditStatus.Withdrawn,
+      ].includes(status)
+    ) {
+      return statusList.find((s) => s.name === "Decisioned");
+      // Settlement status
+    } else if (false) {
+      return statusList.find((s) => s.name === "Settlement");
+    } else {
+      return statusList.find((s) => s.name === "Submitted");
+    }
+  };
 
   return (
     <Card variant="outlined" className="mb-2">
       <CardHeader
         action={<HistoryIcon color="primary" />}
-        subheader={
-          <CardTitleHeader title={"The Progress: " + loan?.creditStatus} />
-        }
+        subheader={<CardTitleHeader title={"The Progress: " + status} />}
         sx={{ pb: 0 }}
       />
       <CardContent>
         <div className="d-flex w-100 mb-3">
-          {status.map((s, i) => (
+          {statusList.map((s) => (
             <Box
-              key={i}
+              key={s.index}
               sx={{
-                background: i > 1 ? "gray" : "green",
-                color: i > 1 ? "gray" : "green",
+                background:
+                  getMainStatus(status)?.index! < s.index ? "gray" : "green",
+                color:
+                  getMainStatus(status)?.index! < s.index ? "gray" : "green",
               }}
               className="status-box d-flex align-items-center justify-content-center"
             >
               <Typography variant="caption" sx={{ color: "white" }}>
-                {s}
+                {s.name}
               </Typography>
             </Box>
           ))}
@@ -45,13 +101,19 @@ const StatusCard = () => {
         <Stack direction="row" alignItems="center" justifyContent="start">
           <Box
             className="status-done-progress"
-            sx={{ width: "20%", background: Color.darkOrange }}
+            sx={{
+              width: `${getMainStatus(status)?.progress}%`,
+              background: Color.darkOrange,
+            }}
           >
             &nbsp;
           </Box>
           <Box
             className="d-flex align-items-center justify-content-center"
-            sx={{ width: "20%", textAlign: "center" }}
+            sx={{
+              width: `${getMainStatus(status)?.progress}%`,
+              textAlign: "center",
+            }}
           >
             <Box
               className="sub-status-done-progress"
@@ -61,7 +123,7 @@ const StatusCard = () => {
             </Box>
 
             <Typography className="mx-2" variant="caption">
-              {loan?.creditStatus}
+              {status}
             </Typography>
 
             <Box

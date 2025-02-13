@@ -19,20 +19,36 @@ import PageTitle from "../../components/PageTitle";
 import { declineReasons, withdrawalReasons } from "../../data/reasons";
 import { brokers, creditAnalysts } from "../../data/users";
 import { CreditStatus } from "../../models/enums";
+import { useLoanStore } from "../../state";
 import TaskForm from "../Tasks/TaskForm";
 
 const CreditDecision = () => {
-  const [status, setStatus] = useState(CreditStatus.UnderAssessment);
+  const { status, setStatus } = useLoanStore();
   const [showTaskModal, setShowTaskModal] = useState(false);
-  const [creditAnalyst, setCreditAnalyst] = useState(0);
 
   const handleStatusChange = (event: SelectChangeEvent<string>) => {
     const selectedStatus = event.target.value as CreditStatus;
     setStatus(selectedStatus);
 
     if (selectedStatus === CreditStatus.UnderAssessment) {
-      setCreditAnalyst(11);
+      setFormData((prevData) => ({
+        ...prevData,
+        // creditAnalyst: 11,
+      }));
     }
+  };
+
+  const [formData, setFormData] = useState({
+    creditAnalyst: 0,
+    creditSupportOfficer: 0,
+  });
+
+  const handleChange = (e: SelectChangeEvent<number>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -133,7 +149,17 @@ const CreditDecision = () => {
 
                 <FormControl fullWidth>
                   <InputLabel>Credit Analyst</InputLabel>
-                  <Select label="Credit Analyst" value={creditAnalyst}>
+                  <Select
+                    label="Credit Analyst"
+                    value={formData.creditAnalyst}
+                    onChange={handleChange}
+                    disabled={
+                      ![
+                        CreditStatus.UnderAssessment,
+                        CreditStatus.Escalated,
+                      ].includes(status)
+                    }
+                  >
                     <MenuItem value={0} disabled>
                       Unassigned
                     </MenuItem>
@@ -147,7 +173,12 @@ const CreditDecision = () => {
 
                 <FormControl fullWidth>
                   <InputLabel>Credit Support Officer</InputLabel>
-                  <Select label="Credit Support Officer">
+                  <Select
+                    label="Credit Support Officer"
+                    disabled={status !== CreditStatus.Escalated}
+                    value={formData.creditSupportOfficer}
+                    onChange={handleChange}
+                  >
                     <MenuItem value={0} disabled>
                       Unassigned
                     </MenuItem>
