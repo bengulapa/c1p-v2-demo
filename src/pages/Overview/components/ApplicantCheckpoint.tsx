@@ -1,3 +1,4 @@
+import FileOpenIcon from "@mui/icons-material/FileOpen";
 import {
   Button,
   FormControl,
@@ -80,11 +81,35 @@ const ApplicantCheckpoint = () => {
           </div>
         </Grid2>
         <Grid2 size={6}>
-          <Stack alignItems="start" className="pl-5">
-            <Button>VIEW Equifax Report</Button>
-            <Button>VIEW Driver's License</Button>
-            <Button>VIEW Australian Passport</Button>
-            <Button>VIEW Medicare Card</Button>
+          <Stack alignItems="start" className="pl-5 ml-5">
+            <Button
+              href={`${process.env.PUBLIC_URL}/assets/docs/EquifaxReport.pdf`}
+              target="_blank"
+            >
+              VIEW Equifax Report{" "}
+              <FileOpenIcon fontSize="small" className="ml-2" />
+            </Button>
+            <Button
+              href={`${process.env.PUBLIC_URL}/assets/docs/dlfront.jpg`}
+              target="_blank"
+            >
+              VIEW Driver's License{" "}
+              <FileOpenIcon fontSize="small" className="ml-2" />
+            </Button>
+            <Button
+              href={`${process.env.PUBLIC_URL}/assets/docs/passport.jpg`}
+              target="_blank"
+            >
+              VIEW Australian Passport{" "}
+              <FileOpenIcon fontSize="small" className="ml-2" />
+            </Button>
+            <Button
+              href={`${process.env.PUBLIC_URL}/assets/docs/medicare.jpg`}
+              target="_blank"
+            >
+              VIEW Medicare Card{" "}
+              <FileOpenIcon fontSize="small" className="ml-2" />
+            </Button>
           </Stack>
         </Grid2>
       </Grid2>
@@ -104,7 +129,12 @@ const ApplicantCheckpoint = () => {
           </div>
         </Grid2>
         <Grid2 size={6}>
-          <Button className="ml-5">VIEW BioID Report</Button>
+          <div className="pl-5 ml-5">
+            <Button>
+              VIEW BioID Report{" "}
+              <FileOpenIcon fontSize="small" className="ml-2" />
+            </Button>
+          </div>
         </Grid2>
       </Grid2>
     </>

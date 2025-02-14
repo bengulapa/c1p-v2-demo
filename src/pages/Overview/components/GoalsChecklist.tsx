@@ -112,7 +112,11 @@ const GoalsChecklist = () => {
           {checklist?.checkpoint === "DSCR" && <DSCRDetails />}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => toggleDialog(false)} variant="contained">
+          <Button
+            onClick={() => toggleDialog(false)}
+            variant="outlined"
+            color="inherit"
+          >
             Close
           </Button>
         </DialogActions>

@@ -1,3 +1,4 @@
+import FileOpenIcon from "@mui/icons-material/FileOpen";
 import { Box, Button, Grid2, Typography } from "@mui/material";
 import { Criteria } from "../../../models/interfaces";
 import { useLoanStore } from "../../../state";
@@ -86,7 +87,14 @@ const LoanValuationReportDetails = () => {
           </div>
         </Grid2>
         <Grid2 size={7}>
-          <Button className="ml-5">VIEW Valuation Report</Button>
+          <Button
+            className="ml-5"
+            href={`${process.env.PUBLIC_URL}/assets/images/redbook-valuation-cert-sample.png`}
+            target="_blank"
+          >
+            VIEW Valuation Report{" "}
+            <FileOpenIcon fontSize="small" className="ml-2" />
+          </Button>
         </Grid2>
       </Grid2>
     </>

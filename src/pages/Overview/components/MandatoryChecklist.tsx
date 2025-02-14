@@ -89,7 +89,7 @@ const MandatoryChecklist = () => {
       </Card>
 
       <Dialog
-        maxWidth="md"
+        maxWidth="lg"
         fullWidth={true}
         open={openDialog}
         onClose={() => toggleDialog(false)}
@@ -112,7 +112,11 @@ const MandatoryChecklist = () => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => toggleDialog(false)} variant="contained">
+          <Button
+            onClick={() => toggleDialog(false)}
+            variant="outlined"
+            color="inherit"
+          >
             Close
           </Button>
         </DialogActions>
