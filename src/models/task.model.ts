@@ -25,7 +25,6 @@ export class Task {
   dateCreated!: Date;
   dueDate!: Date;
   attachments: Attachment[] = [];
-  isCondition?: boolean;
   conditionMet?: boolean;
   taskType?: TaskType;
 }

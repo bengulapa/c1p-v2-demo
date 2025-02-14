@@ -4,6 +4,7 @@ import * as React from "react";
 import { Outlet, useParams } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import applications from "../data/applications.json";
+import { mockTasks } from "../data/tasks";
 import { useLoanStore } from "../state";
 import { Color } from "../styles/colors";
 import { DrawerHeader } from "./DrawerHeader";
@@ -13,8 +14,7 @@ import SideBar from "./SideBar";
 const Main = () => {
   const { loanId } = useParams();
   const theme = useTheme();
-  const setLoan = useLoanStore((state) => state.setLoan);
-  const loan = useLoanStore((state) => state.loan);
+  const { loan, setLoan, tasks, setTasks } = useLoanStore();
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -30,6 +30,7 @@ const Main = () => {
 
     if (loan) {
       setLoan(loan);
+      setTasks(mockTasks);
     }
   }, [loanId]);
 
@@ -48,7 +49,7 @@ const Main = () => {
           <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
             <DrawerHeader />
 
-            <PageHeader loan={loan} />
+            <PageHeader loan={loan} tasks={tasks} />
 
             <Outlet />
           </Box>

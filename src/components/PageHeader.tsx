@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Loan } from "../models/loan.models";
+import { Task, TaskType } from "../models/task.model";
 import { Color } from "../styles/colors";
 import { formatCurrency } from "../utils/formatters";
 import CardTitleHeader from "./CardTitleHeader";
@@ -19,10 +20,20 @@ import GaugeChart from "./GaugeChart";
 
 interface IProps {
   loan: Loan;
+  tasks: Task[];
 }
 
-const PageHeader = ({ loan }: IProps) => {
+enum Recommendation {
+  Approve = "Approve",
+  ConditionallyApprove = "Conditionally Approve",
+  Decline = "Decline",
+  Review = "Review",
+}
+
+const PageHeader = ({ loan, tasks }: IProps) => {
   const [score, setScore] = useState(0);
+  const [scoreColor, setScoreColor] = useState(Color.textGray);
+  const [recommendation, setRecommendation] = useState<Recommendation>();
 
   useEffect(() => {
     const allCriteria = loan.checklists
@@ -34,8 +45,28 @@ const PageHeader = ({ loan }: IProps) => {
       (a) => a.result === "PASS" || a.isOverridden
     ).length;
 
-    setScore((passed / allCriteria.length) * 1000);
-  }, [loan]);
+    const score = (passed / allCriteria.length) * 1000;
+    setScore(score);
+
+    const allConditionMet = tasks
+      .filter((t) => t.taskType === TaskType.CreditCondition)
+      .every((t) => t.conditionMet);
+
+    if (score > 666) {
+      setRecommendation(
+        allConditionMet
+          ? Recommendation.Approve
+          : Recommendation.ConditionallyApprove
+      );
+      setScoreColor(Color.green);
+    } else if (score > 333 && score <= 666) {
+      setRecommendation(Recommendation.Review);
+      setScoreColor(Color.darkOrange);
+    } else {
+      setRecommendation(Recommendation.Decline);
+      setScoreColor(Color.red);
+    }
+  }, [loan, tasks]);
 
   return (
     <Grid2 container spacing={1} className="mb-2">
@@ -126,10 +157,19 @@ const PageHeader = ({ loan }: IProps) => {
             className="d-flex justify-content-between"
             sx={{ pt: 1 }}
           >
-            <Typography variant="h6" color="success">
-              Approve
+            <Typography
+              variant="h6"
+              sx={{
+                color: scoreColor,
+                fontSize:
+                  recommendation === Recommendation.ConditionallyApprove
+                    ? "0.75rem"
+                    : "1.25rem",
+              }}
+            >
+              {recommendation}
             </Typography>
-            <Box sx={{ width: 160, height: 120 }}>
+            <Box sx={{ width: "auto", height: 120 }}>
               <GaugeChart score={score} showLabels={true} width={160} />
             </Box>
           </CardContent>

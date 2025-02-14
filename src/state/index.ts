@@ -3,10 +3,13 @@ import { devtools, persist } from "zustand/middleware";
 import { CreditStatus } from "../models/enums";
 import { Criteria } from "../models/interfaces";
 import { Loan } from "../models/loan.models";
+import { Task } from "../models/task.model";
 
 interface State {
   loan: Loan | null;
   setLoan: (newLoan: Loan) => void;
+  tasks: Task[];
+  setTasks: (tasks: Task[]) => void;
   status: CreditStatus;
   setStatus: (status: CreditStatus) => void;
   updateChecklist: (
@@ -21,6 +24,8 @@ export const useLoanStore = create<State>()(
       (set) => ({
         loan: null,
         status: CreditStatus.UnderAssessment,
+        tasks: [],
+        setTasks: (tasks: Task[]) => set({ tasks }),
         setStatus: (status: CreditStatus) => set({ status }),
         setLoan: (newLoan: Loan) => set({ loan: newLoan }),
         updateChecklist: (

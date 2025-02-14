@@ -49,7 +49,7 @@ const GaugeChart = ({
       customSegmentLabels={showLabels ? customSegmentLabels : []}
       ringWidth={10}
       needleHeightRatio={0.6}
-      needleColor={Color.darkOrange}
+      needleColor={Color.primary}
     />
   );
 };

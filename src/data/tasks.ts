@@ -1,0 +1,92 @@
+import { sub, add } from "date-fns";
+import { Task, TaskStatus, TaskType } from "../models/task.model";
+import { newGuid } from "../utils/uuid";
+
+export const mockTasks: Task[] = [
+  {
+    id: newGuid(),
+    title: "Upload doc",
+    description: "Upload doc desc",
+    status: TaskStatus.WorkingOnIt,
+    assignedTo: "Klein Moretti",
+    dateCreated: sub(new Date(), { days: 19 }),
+    dueDate: add(new Date(), { days: 3 }),
+    attachments: [
+      {
+        name: "medicare.pdf",
+        dateUploaded: new Date(),
+        type: "pdf",
+      },
+    ],
+    taskType: TaskType.Internal,
+  },
+  {
+    id: newGuid(),
+    title: "Request bank statement",
+    description: "Upload",
+    status: TaskStatus.NotStarted,
+    assignedTo: "Klein Moretti",
+    dateCreated: sub(new Date(), { days: 9 }),
+    dueDate: sub(new Date(), { days: 2 }),
+    attachments: [
+      {
+        name: "medicare.pdf",
+        dateUploaded: new Date(),
+        type: "pdf",
+      },
+      {
+        name: "passport.pdf",
+        dateUploaded: new Date(),
+        type: "pdf",
+      },
+    ],
+    taskType: TaskType.Internal,
+  },
+  {
+    id: newGuid(),
+    title: "Confirm applicant address",
+    description: "Upload",
+    status: TaskStatus.Done,
+    assignedTo: "Klein Moretti",
+    dateCreated: sub(new Date(), { days: 2 }),
+    dueDate: add(new Date(), { days: 7 }),
+    attachments: [],
+    taskType: TaskType.Internal,
+  },
+  {
+    id: newGuid(),
+    title: "Condition 1",
+    description: "Condition 1",
+    status: TaskStatus.Done,
+    assignedTo: "Klein Moretti",
+    dateCreated: sub(new Date(), { days: 9 }),
+    dueDate: sub(new Date(), { days: 2 }),
+    attachments: [],
+    taskType: TaskType.CreditCondition,
+    conditionMet: true,
+  },
+  {
+    id: newGuid(),
+    title: "Condition 2",
+    description: "Condition 2",
+    status: TaskStatus.WorkingOnIt,
+    assignedTo: "Klein Moretti",
+    dateCreated: new Date(),
+    dueDate: add(new Date(), { days: 8 }),
+    attachments: [],
+    taskType: TaskType.CreditCondition,
+    conditionMet: false,
+  },
+  {
+    id: newGuid(),
+    title: "Condition 3",
+    description: "Condition 3",
+    status: TaskStatus.WorkingOnIt,
+    assignedTo: "Klein Moretti",
+    dateCreated: new Date(),
+    dueDate: add(new Date(), { days: 9 }),
+    attachments: [],
+    taskType: TaskType.CreditCondition,
+    conditionMet: false,
+  },
+];
