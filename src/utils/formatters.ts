@@ -29,6 +29,10 @@ export function timeAgo(value: string): string {
 }
 
 export function formatDisplayDate(value: string | Date): string {
+  if (!value) {
+    return "";
+  }
+
   const appDate = typeof value === "string" ? new Date(value) : value;
   return appDate.toLocaleString("en-AU", {
     year: "numeric",

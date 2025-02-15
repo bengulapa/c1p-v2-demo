@@ -26,7 +26,7 @@ const FormInputDate = ({
             disabled={disabled}
             slotProps={{
               textField: {
-                variant: "filled",
+                variant: "outlined",
               },
             }}
           />

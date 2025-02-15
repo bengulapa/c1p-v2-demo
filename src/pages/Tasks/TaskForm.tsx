@@ -34,8 +34,9 @@ interface IProps {
 interface Condition {
   conditionId: number;
   display: string;
-  details: string;
+  details?: string;
 }
+
 const creditConditions = [
   {
     conditionId: 1,
@@ -87,12 +88,21 @@ const TaskForm = ({
   const taskType = useWatch({ control, name: "taskType" });
   const onSubmit = (data: any) => {
     if (data.id) {
-      updateTask && updateTask(data);
+      updateTask &&
+        updateTask({
+          ...data,
+          status: TaskStatus.Done,
+        });
     } else {
       addTask &&
         addTask({
-          id: newGuid(),
           ...data,
+          id: newGuid(),
+          status: TaskStatus.NotStarted,
+          title:
+            taskType === TaskType.CreditCondition
+              ? condition?.display
+              : data.title,
         });
     }
   };
@@ -103,6 +113,20 @@ const TaskForm = ({
       reset();
     }
   }, [formState]);
+
+  useEffect(() => {
+    if (taskType === TaskType.CreditCondition) {
+      setCondition({
+        conditionId: 1,
+        display: "Credit Condition 1 - Confirm Details",
+      });
+
+      setGuarantor("Guarantor One");
+    } else {
+      setCondition(null);
+      setGuarantor(null);
+    }
+  }, [taskType, task]);
 
   return (
     <Dialog
@@ -120,7 +144,7 @@ const TaskForm = ({
             <input {...register("id")} type="hidden" />
             {!isEditMode && (
               <Stack direction="row" spacing={1} className="my-2">
-                <FormControl className="w-50 pr-1" variant="filled">
+                <FormControl className="w-50 pr-1" variant="outlined">
                   <InputLabel>Task type</InputLabel>
                   <Select label="Task type" {...register("taskType")}>
                     <MenuItem value={TaskType.General}>General</MenuItem>
@@ -132,7 +156,7 @@ const TaskForm = ({
                 </FormControl>
 
                 {taskType === TaskType.CreditCondition && (
-                  <FormControl className="w-50 pr-1" variant="filled">
+                  <FormControl className="w-50 pr-1" variant="outlined">
                     <InputLabel>Conditions</InputLabel>
                     <Select
                       label="Conditions"
@@ -151,7 +175,7 @@ const TaskForm = ({
               </Stack>
             )}
 
-            {condition && (
+            {condition && taskType === TaskType.CreditCondition && (
               <Box className="border p-2">
                 <Typography>Credit Condition 1 - Confirm Details</Typography>
                 Require additional guarantee details from{" "}
@@ -162,6 +186,7 @@ const TaskForm = ({
                 >
                   <Select
                     label="Select"
+                    value={guarantor}
                     onChange={(e) => setGuarantor(e.target.value as string)}
                   >
                     <MenuItem value="Guarantor One">Guarantor One</MenuItem>
@@ -207,13 +232,13 @@ const TaskForm = ({
                   className="mb-2"
                   fullWidth
                   label="Title"
-                  variant="filled"
+                  variant="outlined"
                   {...register("title")}
                 />
               )}
 
-              {guarantor ? (
-                <Box className="border p-2">
+              {guarantor && taskType === TaskType.CreditCondition ? (
+                <div contentEditable className="border p-2">
                   <div>
                     Require additional guarantee details from{" "}
                     <strong>{guarantor}</strong> subject to AML & Credit Score.
@@ -226,14 +251,14 @@ const TaskForm = ({
                     </li>
                     <li>Signed Privacy Consent</li>
                   </ul>
-                </Box>
+                </div>
               ) : (
                 <TextField
                   fullWidth
                   label="Message"
                   multiline
                   rows={4}
-                  variant="filled"
+                  variant="outlined"
                   {...register("description")}
                 />
               )}
@@ -252,12 +277,18 @@ const TaskForm = ({
             </div>
 
             {(canAttach || task?.attachments?.length! > 0) && (
-              <div className="border p-4 text-center">
+              <Box
+                className="p-4 text-center"
+                sx={{
+                  borderStyle: "dashed",
+                  borderWidth: 2,
+                }}
+              >
                 Click to upload or Drag files here
                 <ul className="w-50 mx-auto text-left">
                   {task?.attachments.map((t) => <li>{t.name}</li>)}
                 </ul>
-              </div>
+              </Box>
             )}
           </fieldset>
         </DialogContent>

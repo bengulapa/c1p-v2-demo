@@ -16,11 +16,12 @@ const FormInputSelect = ({
       <Controller
         render={({ field: { onChange, value } }) => (
           <Select
+            label={label}
             onChange={onChange}
             value={value}
             className={className}
             disabled={disabled}
-            variant="filled"
+            variant="outlined"
           >
             {children}
           </Select>

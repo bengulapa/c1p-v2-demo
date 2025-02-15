@@ -144,9 +144,7 @@ const Tasks = () => {
                       {t.status !== TaskStatus.Done && getSLA(t.dueDate)}
                     </TableCell>
                     <TableCell>
-                      {t.attachments.map((a, i) => (
-                        <AttachFileIcon key={i} />
-                      ))}
+                      {t.attachments?.map((a, i) => <AttachFileIcon key={i} />)}
                     </TableCell>
                     <TableCell align="center">
                       {t.taskType === TaskType.CreditCondition ? (
