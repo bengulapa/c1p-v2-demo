@@ -130,7 +130,10 @@ const ApplicantCheckpoint = () => {
         </Grid2>
         <Grid2 size={6}>
           <div className="pl-5 ml-5">
-            <Button>
+            <Button
+              href={`${process.env.PUBLIC_URL}/assets/docs/GreenIDReport.jpg`}
+              target="_blank"
+            >
               VIEW BioID Report{" "}
               <FileOpenIcon fontSize="small" className="ml-2" />
             </Button>
