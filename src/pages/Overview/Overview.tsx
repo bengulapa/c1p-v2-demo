@@ -1,9 +1,17 @@
 import { Button, Grid2, Stack } from "@mui/material";
+import { CreditStatus, Recommendation } from "../../models/enums";
+import { useLoanStore } from "../../state";
 import GoalsChecklist from "./components/GoalsChecklist";
 import MandatoryChecklist from "./components/MandatoryChecklist";
 import StatusCard from "./components/StatusCard";
 
 const Overview = () => {
+  const { recommendation, setStatus } = useLoanStore();
+
+  const handleClick = () => {
+    setStatus(CreditStatus.ReadyForSettlement);
+  };
+
   return (
     <>
       <StatusCard />
@@ -18,8 +26,12 @@ const Overview = () => {
       </Grid2>
 
       <Stack direction="row" justifyContent="end" spacing={1}>
-        <Button variant="contained" disabled>
-          Approve
+        <Button
+          variant="contained"
+          disabled={recommendation !== Recommendation.Approve}
+          onClick={handleClick}
+        >
+          Ready for Settlement
         </Button>
         <Button variant="contained" color="error">
           Decline

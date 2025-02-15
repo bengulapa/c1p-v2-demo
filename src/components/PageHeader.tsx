@@ -11,8 +11,10 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Recommendation } from "../models/enums";
 import { Loan } from "../models/loan.models";
 import { Task, TaskType } from "../models/task.model";
+import { useLoanStore } from "../state";
 import { Color } from "../styles/colors";
 import { formatCurrency } from "../utils/formatters";
 import CardTitleHeader from "./CardTitleHeader";
@@ -23,17 +25,10 @@ interface IProps {
   tasks: Task[];
 }
 
-enum Recommendation {
-  Approve = "Approve",
-  ConditionallyApprove = "Conditionally Approve",
-  Decline = "Decline",
-  Review = "Review",
-}
-
 const PageHeader = ({ loan, tasks }: IProps) => {
   const [score, setScore] = useState(0);
   const [scoreColor, setScoreColor] = useState(Color.textGray);
-  const [recommendation, setRecommendation] = useState<Recommendation>();
+  const { recommendation, setRecommendation } = useLoanStore();
 
   useEffect(() => {
     const allCriteria = loan.checklists

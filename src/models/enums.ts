@@ -10,6 +10,7 @@ export enum TrustTypeEnum {
 }
 
 export enum CreditStatus {
+  Submitted = "Submitted",
   UnderAssessment = "Under Assessment",
   Escalated = "Escalated For Further Assessment",
   MissingInfo = "Missing Information",
@@ -17,4 +18,12 @@ export enum CreditStatus {
   Approved = "Approved",
   Declined = "Declined",
   Withdrawn = "Withdrawn",
+  ReadyForSettlement = "Ready for Settlement",
+}
+
+export enum Recommendation {
+  Approve = "Approve",
+  ConditionallyApprove = "Conditionally Approve",
+  Decline = "Decline",
+  Review = "Review",
 }

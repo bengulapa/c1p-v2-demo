@@ -14,6 +14,7 @@ import { Color } from "../../../styles/colors";
 
 const StatusCard = () => {
   const { status } = useLoanStore();
+
   const statusList = [
     {
       index: 1,
@@ -40,12 +41,14 @@ const StatusCard = () => {
     {
       index: 5,
       name: "Settlement",
-      progress: 80,
+      progress: 100,
     },
   ];
 
   const getMainStatus = (status: CreditStatus) => {
-    if (status === CreditStatus.UnderAssessment) {
+    if (status === CreditStatus.Submitted) {
+      return statusList.find((s) => s.name === "Submitted");
+    } else if (status === CreditStatus.UnderAssessment) {
       return statusList.find((s) => s.name === "Assessing");
     } else if (
       [
@@ -63,11 +66,8 @@ const StatusCard = () => {
       ].includes(status)
     ) {
       return statusList.find((s) => s.name === "Decisioned");
-      // Settlement status
-    } else if (false) {
+    } else if (status === CreditStatus.ReadyForSettlement) {
       return statusList.find((s) => s.name === "Settlement");
-    } else {
-      return statusList.find((s) => s.name === "Submitted");
     }
   };
 
@@ -115,23 +115,27 @@ const StatusCard = () => {
               textAlign: "center",
             }}
           >
-            <Box
-              className="sub-status-done-progress"
-              sx={{ flex: "1 1 auto", background: Color.darkOrange }}
-            >
-              &nbsp;
-            </Box>
+            {status !== CreditStatus.Submitted && (
+              <Box
+                className="sub-status-done-progress"
+                sx={{ flex: "1 1 auto", background: Color.darkOrange }}
+              >
+                &nbsp;
+              </Box>
+            )}
 
             <Typography className="mx-2" variant="caption">
               {status}
             </Typography>
 
-            <Box
-              className="sub-status-future-progress"
-              sx={{ flex: "1 1 auto" }}
-            >
-              &nbsp;
-            </Box>
+            {status !== CreditStatus.ReadyForSettlement && (
+              <Box
+                className="sub-status-future-progress"
+                sx={{ flex: "1 1 auto" }}
+              >
+                &nbsp;
+              </Box>
+            )}
           </Box>
 
           <Box

@@ -76,11 +76,19 @@ const CreditDecision = () => {
                   <MenuItem value="" disabled>
                     Select Status
                   </MenuItem>
-                  {Object.values(CreditStatus).map((status) => (
-                    <MenuItem key={status} value={status}>
-                      {status}
-                    </MenuItem>
-                  ))}
+                  {Object.values(CreditStatus)
+                    .filter(
+                      (s) =>
+                        ![
+                          CreditStatus.Submitted,
+                          CreditStatus.ReadyForSettlement,
+                        ].includes(s)
+                    )
+                    .map((status) => (
+                      <MenuItem key={status} value={status}>
+                        {status}
+                      </MenuItem>
+                    ))}
                 </Select>
 
                 {[CreditStatus.Approved, CreditStatus.MissingInfo].includes(
