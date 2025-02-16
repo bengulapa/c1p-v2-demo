@@ -54,8 +54,10 @@ const ServiceabilityEvidentDetails = () => {
                   });
                 }}
               >
-                {options.map((o) => (
-                  <MenuItem value={o}>{o}</MenuItem>
+                {options.map((o, i) => (
+                  <MenuItem key={i} value={o}>
+                    {o}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>

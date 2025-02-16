@@ -95,6 +95,8 @@ const TaskForm = ({
           status: TaskStatus.Done,
         });
     } else {
+      const selectedCondition = creditConditions.find((c) => c.conditionId);
+
       addTask &&
         addTask({
           ...data,
@@ -102,7 +104,7 @@ const TaskForm = ({
           status: TaskStatus.NotStarted,
           title:
             taskType === TaskType.CreditCondition
-              ? condition?.display
+              ? selectedCondition?.display
               : data.title,
         });
     }

@@ -2,12 +2,22 @@ import FileOpenIcon from "@mui/icons-material/FileOpen";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
+import { Criteria } from "../../../models/interfaces";
 
 const VedaDetails = () => {
   const checkpoint = "Veda";
 
   const loan = useLoanStore((state) => state.loan)!;
+  const updateChecklist = useLoanStore((state) => state.updateChecklist);
   const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
+
+  const updateCriteria = (criteria: Criteria) => {
+    const updatedCriteriaList = checklist.criteriaList.map((c) =>
+      c.key === criteria.key ? criteria : c
+    );
+
+    updateChecklist(checkpoint, updatedCriteriaList);
+  };
 
   const cwScoreCriteria = checklist.criteriaList.find(
     (cl) => cl.key === "cwScore"
@@ -15,6 +25,13 @@ const VedaDetails = () => {
   const cwRatingCriteria = checklist.criteriaList.find(
     (cl) => cl.key === "cwRating"
   );
+
+  const handleChange = (criteria: Criteria, value: string) => {
+    updateCriteria({
+      ...criteria,
+      value,
+    });
+  };
 
   return (
     <>
@@ -38,11 +55,25 @@ const VedaDetails = () => {
             ))}
 
           <CriteriaRow criteria={cwScoreCriteria!}>
-            <TextField variant="outlined" size="small"></TextField>
+            <TextField
+              variant="outlined"
+              size="small"
+              value={cwScoreCriteria?.value}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(cwScoreCriteria!, e.target.value)
+              }
+            ></TextField>
           </CriteriaRow>
 
           <CriteriaRow criteria={cwRatingCriteria!}>
-            <TextField variant="outlined" size="small"></TextField>
+            <TextField
+              variant="outlined"
+              size="small"
+              value={cwRatingCriteria?.value}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(cwRatingCriteria!, e.target.value)
+              }
+            ></TextField>
           </CriteriaRow>
         </div>
 
