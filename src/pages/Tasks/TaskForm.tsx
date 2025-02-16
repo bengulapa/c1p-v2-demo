@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import FormInputDate from "../../components/ui/FormInputDate";
 import FormInputSelect from "../../components/ui/FormInputSelect";
+import Uploader from "../../components/ui/Uploader";
 import { Task, TaskStatus, TaskType } from "../../models/task.model";
 import { newGuid } from "../../utils/uuid";
 
@@ -277,18 +278,7 @@ const TaskForm = ({
             </div>
 
             {(canAttach || task?.attachments?.length! > 0) && (
-              <Box
-                className="p-4 text-center"
-                sx={{
-                  borderStyle: "dashed",
-                  borderWidth: 2,
-                }}
-              >
-                Click to upload or Drag files here
-                <ul className="w-50 mx-auto text-left">
-                  {task?.attachments.map((t) => <li>{t.name}</li>)}
-                </ul>
-              </Box>
+              <Uploader docType="TaskDoc" documents={task?.attachments} />
             )}
           </fieldset>
         </DialogContent>
