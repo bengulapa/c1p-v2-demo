@@ -385,26 +385,26 @@
           },
           {
             "key": "av2",
-            "text": "Score",
+            "text": "Veda Score",
             "value": "650",
             "result": "PASS",
             "section": "applicant",
             "isOverridden": false
           },
           {
-            "key": "av3",
+            "key": "cwScore",
             "text": "CreditorWatch score",
             "value": "",
             "result": "",
-            "section": "applicant",
+            "section": "",
             "isOverridden": false
           },
           {
-            "key": "av4",
+            "key": "cwRating",
             "text": "CreditorWatch rating",
             "value": "",
             "result": "",
-            "section": "applicant",
+            "section": "",
             "isOverridden": false
           },
           {
@@ -666,18 +666,27 @@
             "isOverridden": false
           },
           {
-            "key": "4",
-            "text": "Total financed amount",
-            "value": "20000",
+            "key": "5",
+            "text": "Deposit amount",
+            "value": "2000",
             "valueType": "currency",
             "result": "",
             "section": "exposure",
             "isOverridden": false
           },
           {
-            "key": "5",
-            "text": "Deposit Amount",
-            "value": "2000",
+            "key": "depositRequired",
+            "text": "Deposit to reduce to low doc",
+            "value": "Yes",
+            "valueType": "dropdown",
+            "result": "PASS",
+            "section": "exposure",
+            "isOverridden": false
+          },
+          {
+            "key": "4",
+            "text": "Total financed amount",
+            "value": "20000",
             "valueType": "currency",
             "result": "",
             "section": "exposure",
@@ -750,6 +759,15 @@
             "value": "A312314",
             "valueType": "",
             "result": "",
+            "section": "",
+            "isOverridden": false
+          },
+          {
+            "key": "existingCustomerPerf",
+            "text": "Existing customer performance",
+            "value": "No history",
+            "valueType": "dropdown",
+            "result": "PASS",
             "section": "",
             "isOverridden": false
           }
