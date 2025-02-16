@@ -23,7 +23,7 @@ import { useLoanStore } from "../../state";
 import TaskForm from "../Tasks/TaskForm";
 
 const CreditDecision = () => {
-  const { status, setStatus } = useLoanStore();
+  const { status, setStatus, addTask } = useLoanStore();
   const [showTaskModal, setShowTaskModal] = useState(false);
 
   const handleStatusChange = (event: SelectChangeEvent<string>) => {
@@ -33,7 +33,7 @@ const CreditDecision = () => {
     if (selectedStatus === CreditStatus.UnderAssessment) {
       setFormData((prevData) => ({
         ...prevData,
-        // creditAnalyst: 11,
+        creditAnalyst: 11,
       }));
     }
   };
@@ -45,6 +45,7 @@ const CreditDecision = () => {
 
   const handleChange = (e: SelectChangeEvent<number>) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -159,6 +160,7 @@ const CreditDecision = () => {
                   <InputLabel>Credit Analyst</InputLabel>
                   <Select
                     label="Credit Analyst"
+                    name="creditAnalyst"
                     value={formData.creditAnalyst}
                     onChange={handleChange}
                     disabled={
@@ -183,8 +185,9 @@ const CreditDecision = () => {
                   <InputLabel>Credit Support Officer</InputLabel>
                   <Select
                     label="Credit Support Officer"
-                    disabled={status !== CreditStatus.Escalated}
+                    name="creditSupportOfficer"
                     value={formData.creditSupportOfficer}
+                    disabled={status !== CreditStatus.Escalated}
                     onChange={handleChange}
                   >
                     <MenuItem value={0} disabled>
@@ -202,6 +205,7 @@ const CreditDecision = () => {
                   task={null}
                   open={showTaskModal}
                   toggleDialog={setShowTaskModal}
+                  addTask={addTask}
                 />
               </Stack>
             </CardContent>
@@ -222,18 +226,14 @@ const CreditDecision = () => {
                     <MenuItem value={10}>
                       A - Agriculture, Forestry and Fishing
                     </MenuItem>
-                    <MenuItem value={20}>
-                      B - Bagriculture, Forestry and Fishing
-                    </MenuItem>
+                    <MenuItem value={20}>B - Mining</MenuItem>
                   </Select>
                 </FormControl>
                 <FormControl fullWidth>
                   <InputLabel>Industry sub code</InputLabel>
-                  <Select value={10} label="Industry code">
-                    <MenuItem value={10}>02 - Aquaculture</MenuItem>
-                    <MenuItem value={20}>
-                      B - Bagriculture, Forestry and Fishing
-                    </MenuItem>
+                  <Select value={2} label="Industry code">
+                    <MenuItem value={1}>01 - Agriculture</MenuItem>
+                    <MenuItem value={2}>02 - Aquaculture</MenuItem>
                   </Select>
                 </FormControl>
               </Stack>

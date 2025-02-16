@@ -10,6 +10,7 @@ interface State {
   setLoan: (newLoan: Loan) => void;
   tasks: Task[];
   setTasks: (tasks: Task[]) => void;
+  addTask: (task: Task) => void;
   recommendation: Recommendation;
   setRecommendation: (recommendation: Recommendation) => void;
   status: CreditStatus;
@@ -31,6 +32,8 @@ export const useLoanStore = create<State>()(
         setRecommendation: (recommendation: Recommendation) =>
           set({ recommendation }),
         setTasks: (tasks: Task[]) => set({ tasks }),
+        addTask: (task: Task) =>
+          set((state) => ({ tasks: [...state.tasks, task] })),
         setStatus: (status: CreditStatus) => set({ status }),
         setLoan: (newLoan: Loan) => set({ loan: newLoan }),
         updateChecklist: (
