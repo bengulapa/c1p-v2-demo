@@ -31,7 +31,7 @@ import { formatDisplayDate } from "../../utils/formatters";
 import TaskForm from "./TaskForm";
 
 const Tasks = () => {
-  const { tasks, setTasks } = useLoanStore();
+  const { tasks, setTasks, addTask } = useLoanStore();
   const [openDialog, setOpenDialog] = React.useState(false);
   const [selectedTask, setSelectedTask] = React.useState<Task | null>(null);
 
@@ -179,9 +179,7 @@ const Tasks = () => {
         task={selectedTask}
         open={openDialog}
         toggleDialog={toggleDialog}
-        addTask={(task) => {
-          setTasks([...tasks, task]);
-        }}
+        addTask={addTask}
         updateTask={(task) => {
           setTasks(
             tasks.map((at) =>

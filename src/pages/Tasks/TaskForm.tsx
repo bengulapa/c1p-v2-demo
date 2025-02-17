@@ -102,6 +102,7 @@ const TaskForm = ({
           ...data,
           id: newGuid(),
           status: TaskStatus.NotStarted,
+          dateCreated: new Date(),
           title:
             taskType === TaskType.CreditCondition
               ? selectedCondition?.display

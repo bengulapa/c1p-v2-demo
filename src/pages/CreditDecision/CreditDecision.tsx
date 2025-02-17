@@ -21,10 +21,12 @@ import { brokers, creditAnalysts } from "../../data/users";
 import { CreditStatus } from "../../models/enums";
 import { useLoanStore } from "../../state";
 import TaskForm from "../Tasks/TaskForm";
+import { industryCodes, industrySubCodes } from "../../data/industry-codes";
 
 const CreditDecision = () => {
   const { status, setStatus, addTask } = useLoanStore();
   const [showTaskModal, setShowTaskModal] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const handleStatusChange = (event: SelectChangeEvent<string>) => {
     const selectedStatus = event.target.value as CreditStatus;
@@ -41,11 +43,12 @@ const CreditDecision = () => {
   const [formData, setFormData] = useState({
     creditAnalyst: 0,
     creditSupportOfficer: 0,
+    industryCode: "A",
+    industrySubCode: "01",
   });
 
-  const handleChange = (e: SelectChangeEvent<number>) => {
+  const handleChange = (e: SelectChangeEvent<number | string>) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -216,33 +219,78 @@ const CreditDecision = () => {
             <CardContent>
               <DetailCardHeader
                 title="ANZSIC Codes"
-                canEdit={false}
-              ></DetailCardHeader>
+                showEdit={true}
+                onEdit={() => setIsEditMode(true)}
+              />
+              {isEditMode ? (
+                <Stack className="mt-2" spacing={2}>
+                  <FormControl fullWidth>
+                    <InputLabel>Industry code</InputLabel>
+                    <Select
+                      name="industryCode"
+                      label="Industry code"
+                      value={formData.industryCode}
+                      onChange={handleChange}
+                    >
+                      {industryCodes.map((c, i) => (
+                        <MenuItem key={i} value={c.code}>
+                          {c.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <FormControl fullWidth>
+                    <InputLabel>Industry sub code</InputLabel>
+                    <Select
+                      name="industrySubCode"
+                      label="Industry sub code"
+                      value={formData.industrySubCode}
+                      onChange={handleChange}
+                    >
+                      {industrySubCodes.map((c, i) => (
+                        <MenuItem key={i} value={c.code}>
+                          {c.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
 
-              <Stack className="mt-2" spacing={2}>
-                <FormControl fullWidth>
-                  <InputLabel>Industry code</InputLabel>
-                  <Select value={10} label="Industry code">
-                    <MenuItem value={10}>
-                      A - Agriculture, Forestry and Fishing
-                    </MenuItem>
-                    <MenuItem value={20}>B - Mining</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl fullWidth>
-                  <InputLabel>Industry sub code</InputLabel>
-                  <Select value={2} label="Industry code">
-                    <MenuItem value={1}>01 - Agriculture</MenuItem>
-                    <MenuItem value={2}>02 - Aquaculture</MenuItem>
-                  </Select>
-                </FormControl>
-              </Stack>
-
-              <div className="text-right">
-                <Button className="mt-4" variant="contained">
-                  Save
-                </Button>
-              </div>
+                  <div className="text-center mt-4">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{ mr: 2 }}
+                      onClick={() => setIsEditMode(false)}
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => setIsEditMode(false)}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </Stack>
+              ) : (
+                <>
+                  <div>
+                    <Typography variant="caption" className="list-label">
+                      ANZSIC Industry code:
+                    </Typography>
+                    <span className="list-value">{formData.industryCode}</span>
+                  </div>
+                  <div>
+                    <Typography variant="caption" className="list-label">
+                      ANZSIC Industry sub code:
+                    </Typography>
+                    <span className="list-value">
+                      {formData.industrySubCode}
+                    </span>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
         </Grid2>
