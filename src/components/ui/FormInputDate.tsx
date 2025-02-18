@@ -24,6 +24,7 @@ const FormInputDate = ({
             className={className}
             label={label}
             disabled={disabled}
+            format="dd/MM/yyyy"
             slotProps={{
               textField: {
                 variant: "outlined",

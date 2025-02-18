@@ -6,7 +6,7 @@ import { formatCurrency } from "../../../utils/formatters";
 import CriteriaRow from "./Criteria";
 
 const LoanValuationReportDetails = () => {
-  const checkpoint = "LVR";
+  const checkpoint = "Loan to Value Ratio";
 
   const loan = useLoanStore((state) => state.loan)!;
   const updateChecklist = useLoanStore((state) => state.updateChecklist);

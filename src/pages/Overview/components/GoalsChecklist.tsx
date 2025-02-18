@@ -108,8 +108,12 @@ const GoalsChecklist = () => {
           {checklist?.checkpoint === "Serviceability Evident" && (
             <ServiceabilityEvidentDetails />
           )}
-          {checklist?.checkpoint === "LVR" && <LoanValuationReportDetails />}
-          {checklist?.checkpoint === "DSCR" && <DSCRDetails />}
+          {checklist?.checkpoint === "Loan to Value Ratio" && (
+            <LoanValuationReportDetails />
+          )}
+          {checklist?.checkpoint === "Debt Service Coverage Ratio" && (
+            <DSCRDetails />
+          )}
         </DialogContent>
         <DialogActions>
           <Button

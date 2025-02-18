@@ -5,7 +5,7 @@ import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
 
 const DSCRDetails = () => {
-  const checkpoint = "DSCR";
+  const checkpoint = "Debt Service Coverage Ratio";
 
   const loan = useLoanStore((state) => state.loan)!;
   const updateChecklist = useLoanStore((state) => state.updateChecklist);
