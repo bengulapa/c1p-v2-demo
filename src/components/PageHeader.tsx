@@ -8,6 +8,7 @@ import {
   CardContent,
   CardHeader,
   Grid2,
+  Stack,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -123,7 +124,7 @@ const PageHeader = ({ loan, tasks }: IProps) => {
         <Card variant="outlined" className="header-box">
           <CardHeader
             action={<EmergencyIcon color="primary" />}
-            subheader={<CardTitleHeader title="The Strategy" />}
+            subheader={<CardTitleHeader title="The Applicant" />}
             sx={{ pb: 0 }}
           />
           <CardContent
@@ -132,11 +133,11 @@ const PageHeader = ({ loan, tasks }: IProps) => {
           >
             <div className="w-100">
               <Typography variant="h6" color="primary">
-                Low Risk
+                {loan.entityName}
               </Typography>
-              <Typography variant="body2">
-                {loan.assessmentType} A+ Partner
-              </Typography>
+              <Typography variant="body2">{loan.entityType}</Typography>
+              <Typography variant="body2">Grant Tor</Typography>
+              <Typography variant="body2">Sal de Pan - Co Support</Typography>
             </div>
           </CardContent>
         </Card>
@@ -152,18 +153,28 @@ const PageHeader = ({ loan, tasks }: IProps) => {
             className="d-flex justify-content-between"
             sx={{ pt: 1 }}
           >
-            <Typography
-              variant="h6"
-              sx={{
-                color: scoreColor,
-                fontSize:
-                  recommendation === Recommendation.ConditionallyApprove
-                    ? "0.75rem"
-                    : "1.25rem",
-              }}
-            >
-              {recommendation}
-            </Typography>
+            <div>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: scoreColor,
+                  fontSize:
+                    recommendation === Recommendation.ConditionallyApprove
+                      ? "0.75rem"
+                      : "1.25rem",
+                  mb: 1,
+                }}
+              >
+                {recommendation}
+              </Typography>
+              <Stack>
+                <Typography variant="body1" color="primary">
+                  Low Risk
+                </Typography>
+                <Typography variant="caption">{loan.assessmentType}</Typography>
+                <Typography variant="caption">A+ / Partner</Typography>
+              </Stack>
+            </div>
             <Box sx={{ width: "auto", height: 120 }}>
               <GaugeChart score={score} showLabels={true} width={160} />
             </Box>

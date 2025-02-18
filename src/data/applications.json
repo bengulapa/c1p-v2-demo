@@ -363,7 +363,7 @@
           },
           {
             "key": "Velocity",
-            "text": "Fraud Check",
+            "text": "Velocity",
             "value": "Fail",
             "result": "FAIL",
             "isOverridden": false
@@ -1108,14 +1108,14 @@
             "isOverridden": false
           },
           {
-            "key": "FraudCheck",
+            "key": "PEP",
             "text": "Politically Exposed Person",
             "value": "Fail",
             "result": "FAIL",
             "isOverridden": false
           },
           {
-            "key": "FraudCheck",
+            "key": "Fail",
             "text": "Sanctions",
             "value": "Fail",
             "result": "FAIL",
@@ -1123,7 +1123,7 @@
           },
           {
             "key": "Velocity",
-            "text": "Fraud Check",
+            "text": "Velocity",
             "value": "Fail",
             "result": "FAIL",
             "isOverridden": false
