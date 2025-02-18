@@ -3,7 +3,9 @@ import { Paper, Tab } from "@mui/material";
 import React from "react";
 import PageTitle from "../../components/PageTitle";
 import AssetAndLiabilitiesTab from "./components/AssetAndLiabilitiesTab";
-import CustomerTab from "./components/CustomerTab";
+import ApplicantTab from "./components/ApplicantTab";
+import GuarantorsTab from "./components/GuarantorsTab";
+import BeneficialOwnersTab from "./components/BeneficialOwnersTab";
 
 const CustomerDetails = () => {
   const [value, setValue] = React.useState("1");
@@ -22,14 +24,22 @@ const CustomerDetails = () => {
           textColor="primary"
           indicatorColor="secondary"
         >
-          <Tab label="Customer" value="1" />
+          <Tab label="Applicant" value="1" />
           <Tab label="Assets & Liabilities" value="2" />
+          <Tab label="Guarantors" value="3" />
+          <Tab label="Beneficial Owners" value="4" />
         </TabList>
         <TabPanel className="px-0" value="1">
-          <CustomerTab />
+          <ApplicantTab />
         </TabPanel>
         <TabPanel className="px-0" value="2">
           <AssetAndLiabilitiesTab />
+        </TabPanel>
+        <TabPanel className="px-0" value="3">
+          <GuarantorsTab />
+        </TabPanel>
+        <TabPanel className="px-0" value="4">
+          <BeneficialOwnersTab />
         </TabPanel>
       </TabContext>
     </Paper>
