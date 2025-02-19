@@ -1,9 +1,10 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { CreditStatus, Recommendation } from "../models/enums";
-import { Criteria } from "../models/interfaces";
+import { AuditLog, Criteria, UserData } from "../models/interfaces";
 import { Loan } from "../models/loan.models";
 import { Task } from "../models/task.model";
+import { newGuid } from "../utils/uuid";
 
 interface State {
   loan: Loan | null;
@@ -15,10 +16,13 @@ interface State {
   setRecommendation: (recommendation: Recommendation) => void;
   status: CreditStatus;
   setStatus: (status: CreditStatus) => void;
+  auditLogs: AuditLog[];
+  log: (message: string) => void;
   updateChecklist: (
     checkpoint: string,
     updatedCriteriaList: Criteria[]
   ) => void;
+  currentUser: UserData;
 }
 
 export const useLoanStore = create<State>()(
@@ -26,6 +30,13 @@ export const useLoanStore = create<State>()(
     persist(
       (set) => ({
         loan: null,
+        currentUser: {
+          id: newGuid(),
+          name: "Ben Gulapa",
+          email: "ben@anglefinance.com.au",
+          role: "CreditAnalyst",
+        },
+        auditLogs: [new AuditLog(`Bro Ker submitted the deal.`)],
         status: CreditStatus.Submitted,
         tasks: [],
         recommendation: Recommendation.Review,
@@ -33,9 +44,28 @@ export const useLoanStore = create<State>()(
           set({ recommendation }),
         setTasks: (tasks: Task[]) => set({ tasks }),
         addTask: (task: Task) =>
-          set((state) => ({ tasks: [...state.tasks, task] })),
-        setStatus: (status: CreditStatus) => set({ status }),
+          set((state) => ({
+            tasks: [...state.tasks, task],
+            auditLogs: [
+              new AuditLog(`${state.currentUser.name} added a new task.`),
+              ...state.auditLogs,
+            ],
+          })),
+        setStatus: (status: CreditStatus) =>
+          set((state) => ({
+            status,
+            auditLogs: [
+              new AuditLog(
+                `${state.currentUser.name} updated the status to ${status}.`
+              ),
+              ...state.auditLogs,
+            ],
+          })),
         setLoan: (newLoan: Loan) => set({ loan: newLoan }),
+        log: (message: string) =>
+          set((state) => ({
+            auditLogs: [new AuditLog(message), ...state.auditLogs],
+          })),
         updateChecklist: (
           checkpoint: string,
           updatedCriteriaList: Criteria[]

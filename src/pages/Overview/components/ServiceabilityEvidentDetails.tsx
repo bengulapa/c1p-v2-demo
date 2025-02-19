@@ -5,10 +5,9 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { Criteria } from "../../../models/interfaces";
-import { useLoanStore } from "../../../state";
-import CriteriaRow from "./Criteria";
 import { useState } from "react";
+import { useChecklist } from "../../../hooks/useChecklist";
+import CriteriaRow from "./Criteria";
 
 const options = [
   "No history",
@@ -18,19 +17,7 @@ const options = [
 ];
 
 const ServiceabilityEvidentDetails = () => {
-  const checkpoint = "Serviceability Evident";
-
-  const loan = useLoanStore((state) => state.loan)!;
-  const updateChecklist = useLoanStore((state) => state.updateChecklist);
-  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
-
-  const updateCriteria = (criteria: Criteria) => {
-    const updatedCriteriaList = checklist.criteriaList.map((c) =>
-      c.key === criteria.key ? criteria : c
-    );
-
-    updateChecklist(checkpoint, updatedCriteriaList);
-  };
+  const { checklist, updateCriteria } = useChecklist("Serviceability Evident");
 
   const [existingCustomerPerf, setExistingCustomerPerf] =
     useState("No history");
@@ -40,7 +27,7 @@ const ServiceabilityEvidentDetails = () => {
       {checklist.criteriaList.map((ac) => (
         <CriteriaRow key={ac.key} criteria={ac} updateCriteria={updateCriteria}>
           {ac.key === "existingCustomerPerf" && (
-            <FormControl sx={{ width: 120 }} size="small">
+            <FormControl size="small" sx={{ minWidth: 200 }}>
               <Select
                 value={existingCustomerPerf}
                 onChange={(event: SelectChangeEvent) => {
@@ -53,6 +40,7 @@ const ServiceabilityEvidentDetails = () => {
                       value === "Previous or current arrears" ? "FAIL" : "PASS",
                   });
                 }}
+                autoWidth
               >
                 {options.map((o, i) => (
                   <MenuItem key={i} value={o}>

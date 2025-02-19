@@ -1,23 +1,13 @@
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
+import { useChecklist } from "../../../hooks/useChecklist";
 import { Criteria } from "../../../models/interfaces";
-import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
 
 const DSCRDetails = () => {
-  const checkpoint = "Debt Service Coverage Ratio";
-
-  const loan = useLoanStore((state) => state.loan)!;
-  const updateChecklist = useLoanStore((state) => state.updateChecklist);
-  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
-
-  const updateCriteria = (criteria: Criteria) => {
-    const updatedCriteriaList = checklist.criteriaList.map((c) =>
-      c.key === criteria.key ? criteria : c
-    );
-
-    updateChecklist(checkpoint, updatedCriteriaList);
-  };
+  const { checklist, updateCriteria } = useChecklist(
+    "Debt Service Coverage Ratio"
+  );
 
   const [dscr, setDSCR] = useState(1.1);
 
@@ -54,6 +44,3 @@ const DSCRDetails = () => {
 };
 
 export default DSCRDetails;
-function useEffect(arg0: () => void, arg1: number[]) {
-  throw new Error("Function not implemented.");
-}

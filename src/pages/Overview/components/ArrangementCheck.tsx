@@ -7,24 +7,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Criteria } from "../../../models/interfaces";
-import { useLoanStore } from "../../../state";
+import { useChecklist } from "../../../hooks/useChecklist";
 import CriteriaRow from "./Criteria";
 
 const ArrangementCheck = () => {
-  const checkpoint = "Arrangement Check";
-
-  const loan = useLoanStore((state) => state.loan)!;
-  const updateChecklist = useLoanStore((state) => state.updateChecklist);
-  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
-
-  const updateCriteria = (criteria: Criteria) => {
-    const updatedCriteriaList = checklist.criteriaList.map((c) =>
-      c.key === criteria.key ? criteria : c
-    );
-
-    updateChecklist(checkpoint, updatedCriteriaList);
-  };
+  const { checklist, updateCriteria } = useChecklist("Arrangement Check");
 
   const [depositRequired, setDepositRequired] = useState("Yes");
 

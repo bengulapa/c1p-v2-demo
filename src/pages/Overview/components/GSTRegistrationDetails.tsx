@@ -1,22 +1,9 @@
 import { Box } from "@mui/material";
-import { Criteria } from "../../../models/interfaces";
-import { useLoanStore } from "../../../state";
+import { useChecklist } from "../../../hooks/useChecklist";
 import CriteriaRow from "./Criteria";
 
 const GSTRegistrationDetails = () => {
-  const checkpoint = "GST Registration";
-
-  const loan = useLoanStore((state) => state.loan)!;
-  const updateChecklist = useLoanStore((state) => state.updateChecklist);
-  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
-
-  const updateCriteria = (criteria: Criteria) => {
-    const updatedCriteriaList = checklist.criteriaList.map((c) =>
-      c.key === criteria.key ? criteria : c
-    );
-
-    updateChecklist(checkpoint, updatedCriteriaList);
-  };
+  const { checklist, updateCriteria } = useChecklist("GST Registration");
 
   return (
     <Box className="w-75">

@@ -1,23 +1,11 @@
 import FileOpenIcon from "@mui/icons-material/FileOpen";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useLoanStore } from "../../../state";
-import CriteriaRow from "./Criteria";
+import { useChecklist } from "../../../hooks/useChecklist";
 import { Criteria } from "../../../models/interfaces";
+import CriteriaRow from "./Criteria";
 
 const VedaDetails = () => {
-  const checkpoint = "Veda";
-
-  const loan = useLoanStore((state) => state.loan)!;
-  const updateChecklist = useLoanStore((state) => state.updateChecklist);
-  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
-
-  const updateCriteria = (criteria: Criteria) => {
-    const updatedCriteriaList = checklist.criteriaList.map((c) =>
-      c.key === criteria.key ? criteria : c
-    );
-
-    updateChecklist(checkpoint, updatedCriteriaList);
-  };
+  const { checklist, updateCriteria } = useChecklist("Veda");
 
   const cwScoreCriteria = checklist.criteriaList.find(
     (cl) => cl.key === "cwScore"

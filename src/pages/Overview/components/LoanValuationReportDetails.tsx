@@ -1,24 +1,13 @@
 import FileOpenIcon from "@mui/icons-material/FileOpen";
 import { Box, Button, Grid2, Typography } from "@mui/material";
-import { Criteria } from "../../../models/interfaces";
+import { useChecklist } from "../../../hooks/useChecklist";
 import { useLoanStore } from "../../../state";
 import { formatCurrency } from "../../../utils/formatters";
 import CriteriaRow from "./Criteria";
 
 const LoanValuationReportDetails = () => {
-  const checkpoint = "Loan to Value Ratio";
-
   const loan = useLoanStore((state) => state.loan)!;
-  const updateChecklist = useLoanStore((state) => state.updateChecklist);
-  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
-
-  const updateCriteria = (criteria: Criteria) => {
-    const updatedCriteriaList = checklist.criteriaList.map((c) =>
-      c.key === criteria.key ? criteria : c
-    );
-
-    updateChecklist(checkpoint, updatedCriteriaList);
-  };
+  const { checklist, updateCriteria } = useChecklist("Loan to Value Ratio");
 
   return (
     <>

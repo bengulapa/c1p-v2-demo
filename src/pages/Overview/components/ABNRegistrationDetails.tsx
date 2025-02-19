@@ -8,43 +8,21 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useChecklist } from "../../../hooks/useChecklist";
 import { Criteria } from "../../../models/interfaces";
 import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
-import { useState, useEffect } from "react";
 
 const ABNRegistrationDetails = () => {
-  const checkpoint = "ABN Registration";
-
   const loan = useLoanStore((state) => state.loan)!;
-  const updateChecklist = useLoanStore((state) => state.updateChecklist);
-  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
-
-  const updateCriteria = (criteria: Criteria) => {
-    const updatedCriteriaList = checklist.criteriaList.map((c) =>
-      c.key === criteria.key ? criteria : c
-    );
-
-    updateChecklist(checkpoint, updatedCriteriaList);
-  };
+  const { checklist, updateCriteria } = useChecklist("ABN Registration");
 
   const skilledTradeCriteria = checklist.criteriaList.find(
     (cl) => cl.key === "SkilledTrade"
   );
   const [skilledTrade, setSkilledTrade] = useState("No");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setSkilledTrade(event.target.value);
-  };
-
-  useEffect(() => {
-    updateCriteria({
-      ...skilledTradeCriteria,
-      value: skilledTrade,
-      result: skilledTrade === "Yes" ? "PASS" : "FAIL",
-    } as Criteria);
-  }, [skilledTrade]);
 
   return (
     <>
@@ -68,7 +46,18 @@ const ABNRegistrationDetails = () => {
               updateCriteria={updateCriteria}
             >
               <FormControl sx={{ width: 120 }} size="small">
-                <Select value={skilledTrade} onChange={handleChange}>
+                <Select
+                  value={skilledTrade}
+                  onChange={(event: SelectChangeEvent) => {
+                    const value = event.target.value;
+                    setSkilledTrade(value);
+                    updateCriteria({
+                      ...skilledTradeCriteria,
+                      value: value,
+                      result: value === "Yes" ? "PASS" : "FAIL",
+                    } as Criteria);
+                  }}
+                >
                   <MenuItem value="">
                     <em>Unknown</em>
                   </MenuItem>

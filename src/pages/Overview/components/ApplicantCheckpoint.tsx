@@ -9,48 +9,23 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useChecklist } from "../../../hooks/useChecklist";
 import { Criteria } from "../../../models/interfaces";
-import { useLoanStore } from "../../../state";
 import CriteriaRow from "./Criteria";
 
 const ApplicantCheckpoint = () => {
-  const checkpoint = "Applicant";
-
-  const loan = useLoanStore((state) => state.loan)!;
-  const updateChecklist = useLoanStore((state) => state.updateChecklist);
-  const checklist = loan.checklists.find((c) => c.checkpoint === checkpoint)!;
-
-  const updateCriteria = (criteria: Criteria) => {
-    const updatedCriteriaList = checklist.criteriaList.map((c) =>
-      c.key === criteria.key ? criteria : c
-    );
-
-    updateChecklist(checkpoint, updatedCriteriaList);
-  };
-
+  const { checklist, updateCriteria } = useChecklist("Applicant");
   const creditShoppedCriteria = checklist.criteriaList.find(
     (cl) => cl.key === "CreditShopped"
   );
   const [creditShopped, setCreditShopped] = useState("2+");
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setCreditShopped(event.target.value);
-  };
-
-  useEffect(() => {
-    updateCriteria({
-      ...creditShoppedCriteria,
-      value: creditShopped,
-      result: creditShopped !== "2+" ? "PASS" : "FAIL",
-    } as Criteria);
-  }, [creditShopped]);
-
   return (
     <>
       <Typography gutterBottom>EQUIFAX</Typography>
       <Grid2 container spacing={1} className="mb-3">
-        <Grid2 size={6}>
+        <Grid2 size={8}>
           <div className="ml-3">
             {checklist.criteriaList
               .filter((c) => c.section === "equifax")
@@ -67,8 +42,20 @@ const ApplicantCheckpoint = () => {
               criteria={creditShoppedCriteria!}
               updateCriteria={updateCriteria}
             >
-              <FormControl sx={{ width: 120 }} size="small">
-                <Select value={creditShopped} onChange={handleChange}>
+              <FormControl size="small" sx={{ minWidth: 200 }}>
+                <Select
+                  value={creditShopped}
+                  onChange={(event: SelectChangeEvent) => {
+                    const value = event.target.value;
+                    setCreditShopped(value);
+                    updateCriteria({
+                      ...creditShoppedCriteria,
+                      value: value,
+                      result: value !== "2+" ? "PASS" : "FAIL",
+                    } as Criteria);
+                  }}
+                  autoWidth
+                >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
@@ -80,7 +67,7 @@ const ApplicantCheckpoint = () => {
             </CriteriaRow>
           </div>
         </Grid2>
-        <Grid2 size={6}>
+        <Grid2 size={4}>
           <Stack alignItems="start" className="pl-5 ml-5">
             <Button
               href={`${process.env.PUBLIC_URL}/assets/docs/EquifaxReport.pdf`}
@@ -114,7 +101,7 @@ const ApplicantCheckpoint = () => {
         </Grid2>
       </Grid2>
       <Grid2 container spacing={1}>
-        <Grid2 size={6}>
+        <Grid2 size={8}>
           <Typography gutterBottom>BIOMETRICS</Typography>
           <div className="ml-3">
             {checklist.criteriaList
@@ -128,7 +115,7 @@ const ApplicantCheckpoint = () => {
               ))}
           </div>
         </Grid2>
-        <Grid2 size={6}>
+        <Grid2 size={4}>
           <div className="pl-5 ml-5">
             <Button
               href={`${process.env.PUBLIC_URL}/assets/docs/GreenIDReport.jpg`}
