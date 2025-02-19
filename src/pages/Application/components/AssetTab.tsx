@@ -11,6 +11,11 @@ import React, { useState } from "react";
 import DetailCardHeader from "../../../components/DetailCardHeader";
 
 const AssetTab = () => {
+  const [isEditMode, setIsEditMode] = useState<{
+    key?: string;
+    edit: boolean;
+  }>();
+
   const [formData, setFormData] = useState({
     type: "Motor vehicle up to 4.5t",
     yearOfManufacture: 2023,
@@ -19,6 +24,8 @@ const AssetTab = () => {
     description: "Hatchback",
     supplierName: "Edison Motors",
     supplierABN: "9895684787",
+    valuationAmount: 23320.0,
+    valuationSource: "Automated RedBook",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +36,6 @@ const AssetTab = () => {
     }));
   };
 
-  const [isEditMode, setIsEditMode] = useState(false);
-
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={6}>
@@ -39,9 +44,9 @@ const AssetTab = () => {
             <DetailCardHeader
               title="Asset Details"
               showEdit={true}
-              onEdit={() => setIsEditMode(true)}
+              onEdit={() => setIsEditMode({ key: "asset", edit: true })}
             />
-            {isEditMode ? (
+            {isEditMode?.key === "asset" && isEditMode.edit ? (
               <form>
                 <TextField
                   select
@@ -116,14 +121,14 @@ const AssetTab = () => {
                     variant="contained"
                     color="primary"
                     sx={{ mr: 2 }}
-                    onClick={() => setIsEditMode(false)}
+                    onClick={() => setIsEditMode({ edit: false })}
                   >
                     Save
                   </Button>
                   <Button
                     variant="outlined"
                     color="secondary"
-                    onClick={() => setIsEditMode(false)}
+                    onClick={() => setIsEditMode({ edit: false })}
                   >
                     Cancel
                   </Button>
@@ -185,14 +190,63 @@ const AssetTab = () => {
           <CardContent>
             <DetailCardHeader
               title="Valuations"
-              canEdit={false}
-            ></DetailCardHeader>
-
-            <img
-              className="w-100"
-              src={`${process.env.PUBLIC_URL}/assets/images/redbook-valuation-cert-sample.png`}
-              alt="red book valuation"
+              showEdit={true}
+              onEdit={() => setIsEditMode({ key: "valuation", edit: true })}
             />
+            {isEditMode?.key === "valuation" && isEditMode.edit ? (
+              <>
+                <TextField
+                  label="Amount"
+                  name="valuationAmount"
+                  value={formData.valuationAmount}
+                  onChange={handleChange}
+                  fullWidth
+                  type="number"
+                  margin="normal"
+                />
+                <TextField
+                  label="Source"
+                  name="valuationSource"
+                  value={formData.valuationSource}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                />
+
+                <div className="text-center mt-4">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ mr: 2 }}
+                    onClick={() => setIsEditMode({ edit: false })}
+                  >
+                    Save
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() => setIsEditMode({ edit: false })}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <Typography variant="caption" className="list-label">
+                    Amount:
+                  </Typography>
+                  <span className="list-value">{formData.valuationAmount}</span>
+                </div>
+                <div>
+                  <Typography variant="caption" className="list-label">
+                    Source:
+                  </Typography>
+                  <span className="list-value">{formData.valuationSource}</span>
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </Grid2>
