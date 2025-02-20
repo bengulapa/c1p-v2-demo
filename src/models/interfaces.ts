@@ -37,3 +37,11 @@ export interface UserData {
   email: string;
   role: string;
 }
+
+export interface DetailFormProps {
+  index: number;
+  remove: (index: number) => void;
+  isEditing: boolean;
+  toggleEditMode: (index: number | null) => void;
+  isNew?: boolean;
+}
