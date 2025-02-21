@@ -7,8 +7,10 @@ export const Color = {
   lightGray: "#efefef",
   textGray: "#8C8C8D",
   green: "#008000",
+  lightGreen: "#CBE8BA",
   darkOrange: "#FF8C00",
   red: "#e3454d",
-  amber: "#f4ce5c",
+  amber: "#FFE3AE",
+  darkAmber: "#FFA834",
   white: "#fff",
 };

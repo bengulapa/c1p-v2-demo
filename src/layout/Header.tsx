@@ -2,6 +2,7 @@ import AlternateEmailSharpIcon from "@mui/icons-material/AlternateEmailSharp";
 import CallSharpIcon from "@mui/icons-material/CallSharp";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 import {
   Box,
   Drawer,
@@ -16,6 +17,7 @@ import React from "react";
 import AccountSettings from "../components/AccountSettings";
 import AuditLogs from "../components/AuditLogs";
 import ProcessList from "../components/ProcessList";
+import ReportCardDialog from "../components/ReportCardDialog";
 
 const drawerWidth = 220;
 
@@ -51,6 +53,7 @@ const AppBar = styled(MuiAppBar, {
 const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const [openAuditLogs, setOpenAuditLogs] = React.useState(false);
+  const [openReportCard, setOpenCard] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpenDrawer(newOpen);
@@ -83,6 +86,11 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
           </Typography>
 
           <div className="d-flex align-items-center">
+            <Tooltip title="View Report Card">
+              <IconButton color="secondary" onClick={() => setOpenCard(true)}>
+                <SummarizeIcon />
+              </IconButton>
+            </Tooltip>
             <Tooltip title="Audit Logs">
               <IconButton
                 color="secondary"
@@ -112,6 +120,10 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
           </div>
         </div>
       </Toolbar>
+      <ReportCardDialog
+        open={openReportCard}
+        handleClose={() => setOpenCard(false)}
+      />
       <Drawer open={openDrawer} onClose={toggleDrawer(false)} anchor="right">
         <Box
           sx={{ width: 320, mt: 5, pt: 5, px: 1, height: "100%" }}

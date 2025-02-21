@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { CreditStatus, Recommendation } from "../models/enums";
-import { AuditLog, Criteria, UserData } from "../models/interfaces";
+import { AuditLog, Criteria, Report, UserData } from "../models/interfaces";
 import { Loan } from "../models/loan.models";
 import { Task } from "../models/task.model";
 import { newGuid } from "../utils/uuid";
@@ -23,6 +23,8 @@ interface State {
     updatedCriteriaList: Criteria[]
   ) => void;
   currentUser: UserData;
+  report?: Report;
+  setReport: (report: Report) => void;
 }
 
 export const useLoanStore = create<State>()(
@@ -36,6 +38,8 @@ export const useLoanStore = create<State>()(
           email: "ben@anglefinance.com.au",
           role: "CreditAnalyst",
         },
+        report: undefined,
+        setReport: (report: Report) => set({ report }),
         auditLogs: [new AuditLog(`Bro Ker submitted the deal.`)],
         status: CreditStatus.Submitted,
         tasks: [],

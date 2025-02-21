@@ -45,3 +45,45 @@ export interface DetailFormProps {
   toggleEditMode: (index: number | null) => void;
   isNew?: boolean;
 }
+
+export interface RiskFactor {
+  name: string;
+  values: number[];
+}
+
+export interface ReportData {
+  text: string;
+  value: any;
+  result: string;
+  verified: string;
+  resultInfo?: string;
+  valueType?: string;
+  isChild?: boolean;
+}
+
+export interface Report {
+  title: string;
+  applicant: {
+    title: string;
+    result: string;
+    data: ReportData[];
+  };
+  asset: {
+    title: string;
+    result: string;
+    data: ReportData[];
+  };
+  arrangement: {
+    title: string;
+    result: string;
+    data: ReportData[];
+  };
+  strategy: {
+    title: string;
+    result: string;
+    riskFactors: RiskFactor[];
+    data: ReportData[];
+  };
+  recommendation: string;
+  recommendationDetails: string;
+}
