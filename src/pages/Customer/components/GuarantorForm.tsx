@@ -1,20 +1,16 @@
-import React, { useState } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { Delete as DeleteIcon, Edit as EditIcon } from "@mui/icons-material";
 import {
   Box,
-  TextField,
-  MenuItem,
-  IconButton,
-  Typography,
   Button,
-  Stack,
   Divider,
+  IconButton,
+  MenuItem,
+  Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
-import {
-  Delete as DeleteIcon,
-  Edit as EditIcon,
-  Cancel as CancelIcon,
-} from "@mui/icons-material";
+import { useState } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 import { DetailFormProps } from "../../../models/interfaces";
 import IdentityValidationDialog from "./IdentityValidationDialog";
 
@@ -23,7 +19,7 @@ const GuarantorForm = ({
   remove,
   isEditing,
   toggleEditMode,
-  isNew,
+  canDeleteAll,
 }: DetailFormProps) => {
   const { control, getValues } = useFormContext();
   const guarantor = getValues(`guarantors.${index}`);
@@ -51,7 +47,7 @@ const GuarantorForm = ({
               color="error"
               onClick={() => remove(index)}
               size="small"
-              disabled={index === 0}
+              disabled={index === 0 && !canDeleteAll}
             >
               <DeleteIcon fontSize="small" />
             </IconButton>
@@ -121,7 +117,7 @@ const GuarantorForm = ({
           />
         </div>
 
-        {index === 0 && (
+        {index === 0 && guarantor.alternateContact && (
           <>
             <Typography variant="subtitle2">Alternate Contact</Typography>
             <div>
@@ -264,7 +260,7 @@ const GuarantorForm = ({
           />
         )}
       />
-      {index === 0 && (
+      {index === 0 && guarantor.alternateContact && (
         <>
           <Typography className="mt-1" variant="subtitle1">
             Alternate Contact

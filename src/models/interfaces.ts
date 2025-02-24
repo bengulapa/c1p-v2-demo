@@ -44,6 +44,7 @@ export interface DetailFormProps {
   isEditing: boolean;
   toggleEditMode: (index: number | null) => void;
   isNew?: boolean;
+  canDeleteAll?: boolean;
 }
 
 export interface ReportSection {
