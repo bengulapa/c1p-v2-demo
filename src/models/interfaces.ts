@@ -46,9 +46,10 @@ export interface DetailFormProps {
   isNew?: boolean;
 }
 
-export interface RiskFactor {
-  name: string;
-  values: number[];
+export interface ReportSection {
+  title: string;
+  result: string;
+  data: ReportData[];
 }
 
 export interface ReportData {
@@ -63,27 +64,10 @@ export interface ReportData {
 
 export interface Report {
   title: string;
-  applicant: {
-    title: string;
-    result: string;
-    data: ReportData[];
-  };
-  asset: {
-    title: string;
-    result: string;
-    data: ReportData[];
-  };
-  arrangement: {
-    title: string;
-    result: string;
-    data: ReportData[];
-  };
-  strategy: {
-    title: string;
-    result: string;
-    riskFactors: RiskFactor[];
-    data: ReportData[];
-  };
+  applicant: ReportSection;
+  asset: ReportSection;
+  arrangement: ReportSection;
+  strategy: ReportSection;
   recommendation: string;
   recommendationDetails: string;
 }

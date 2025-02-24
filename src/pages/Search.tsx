@@ -2,7 +2,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Alert, Box, IconButton, InputBase, Paper } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import applications from "../data/applications.json";
+import { applications } from "../data/applications";
 
 const Search = () => {
   const [value, setValue] = React.useState("");

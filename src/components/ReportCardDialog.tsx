@@ -3,28 +3,20 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box,
   Button,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
   Grid2,
   Paper,
   Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useLoanStore } from "../state";
 import { Color } from "../styles/colors";
-import ResultIcon from "./ui/ResultIcon";
 import RangeDisplay from "./ui/RangeDisplay";
+import ResultIcon from "./ui/ResultIcon";
 
 interface ReportCardDialogProps {
   open: boolean;
@@ -35,7 +27,7 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
   open,
   handleClose,
 }) => {
-  const report = useLoanStore((state) => state.report!);
+  const report = useLoanStore((state) => state.loan!.report);
   const { applicant, asset, arrangement, strategy } = report;
   const [expandedList, setExpandedList] = useState<string[]>([]);
 
@@ -53,8 +45,9 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
       <DialogTitle>Report Card - {report.title}</DialogTitle>
       <DialogContent>
-        {sections.map((section) => (
+        {sections.map((section, i) => (
           <Accordion
+            key={i}
             className="mb-2"
             sx={{
               backgroundColor:
@@ -155,7 +148,7 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
           className="mb-2"
           sx={{
             backgroundColor:
-              strategy.result === "PASS" ? Color.lightGreen : Color.amber,
+              strategy.result === "LOW RISK" ? Color.lightGreen : Color.amber,
           }}
           onChange={(_, expanded) => handleExpand(expanded, strategy.title)}
         >
@@ -251,24 +244,38 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
 
         {/* The Recommendation Section */}
         <Paper sx={{ p: 2, backgroundColor: Color.lightGray }}>
-          <Typography variant="subtitle1">The Recommendation:</Typography>
-          <Typography
-            sx={{
-              color:
-                report.recommendation === "PASS"
-                  ? Color.lightGreen
-                  : Color.darkAmber,
-            }}
-          >
-            {report.recommendation} {report.recommendationDetails}
-          </Typography>
+          <Stack direction={"row"} justifyContent={"space-between"}>
+            <div>
+              <Typography variant="subtitle1">The Recommendation:</Typography>
+              <Typography
+                sx={{
+                  color:
+                    report.recommendation === "APPROVE"
+                      ? Color.green
+                      : Color.darkAmber,
+                }}
+              >
+                <strong>{report.recommendation}</strong>{" "}
+                {report.recommendationDetails}
+              </Typography>
+            </div>
+            <Stack direction={"row"} spacing={1} alignItems={"center"}>
+              <Button onClick={handleClose} color="warning" variant="contained">
+                Review
+              </Button>
+              {report.recommendation === "APPROVE" && (
+                <Button
+                  onClick={handleClose}
+                  color="success"
+                  variant="contained"
+                >
+                  Approve
+                </Button>
+              )}
+            </Stack>
+          </Stack>
         </Paper>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          Close
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 };

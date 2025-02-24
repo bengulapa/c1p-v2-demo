@@ -1,4 +1,5 @@
-import { Criteria } from "./interfaces";
+import { Criteria, Report } from "./interfaces";
+import { Task } from "./task.model";
 
 export interface Loan {
   creditArrangementId: string;
@@ -75,6 +76,8 @@ export interface Loan {
   assessmentType: string;
   creditStatus: string;
   checklists: Checklist[];
+  report: Report;
+  tasks: Task[];
 }
 
 export interface Checklist {

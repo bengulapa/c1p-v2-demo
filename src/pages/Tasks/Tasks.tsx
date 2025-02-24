@@ -3,6 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
 import TaskIcon from "@mui/icons-material/Task";
 import {
+  Alert,
   Button,
   Card,
   CardContent,
@@ -98,80 +99,88 @@ const Tasks = () => {
             <TaskIcon color="primary" />
           </div>
 
-          <TableContainer component={Paper}>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Title</TableCell>
-                  <TableCell></TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Assigned</TableCell>
-                  <TableCell>Date created</TableCell>
-                  <TableCell>SLA</TableCell>
-                  <TableCell>Attachments</TableCell>
-                  <TableCell>Condition Met</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {tasks.map((t, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {t.title}
-                    </TableCell>
-                    <TableCell>
-                      <Tooltip title="Edit task">
-                        <IconButton
-                          color="secondary"
-                          onClick={() => toggleDialog(true, t)}
-                        >
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        backgroundColor: getStatusColor(t.status),
-                      }}
-                    >
-                      {t.status}
-                    </TableCell>
-                    <TableCell>{t.assignedTo}</TableCell>
-                    <TableCell>{formatDisplayDate(t.dateCreated)}</TableCell>
-                    <TableCell>
-                      {t.status !== TaskStatus.Done && getSLA(t.dueDate)}
-                    </TableCell>
-                    <TableCell>
-                      {t.attachments?.map((a, i) => <AttachFileIcon key={i} />)}
-                    </TableCell>
-                    <TableCell align="center">
-                      {t.taskType === TaskType.CreditCondition ? (
-                        <Checkbox
-                          checked={t.conditionMet}
-                          onChange={(e) => {
-                            setTasks(
-                              tasks.map((at) =>
-                                at.id === t.id
-                                  ? {
-                                      ...t,
-                                      conditionMet: e.target.checked,
-                                    }
-                                  : at
-                              )
-                            );
-                          }}
-                        />
-                      ) : (
-                        ""
-                      )}
-                    </TableCell>
+          {tasks.length === 0 ? (
+            <Alert color="info" variant="standard">
+              No task found.
+            </Alert>
+          ) : (
+            <TableContainer component={Paper}>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Title</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Assigned</TableCell>
+                    <TableCell>Date created</TableCell>
+                    <TableCell>SLA</TableCell>
+                    <TableCell>Attachments</TableCell>
+                    <TableCell>Condition Met</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {tasks.map((t, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {t.title}
+                      </TableCell>
+                      <TableCell>
+                        <Tooltip title="Edit task">
+                          <IconButton
+                            color="secondary"
+                            onClick={() => toggleDialog(true, t)}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          backgroundColor: getStatusColor(t.status),
+                        }}
+                      >
+                        {t.status}
+                      </TableCell>
+                      <TableCell>{t.assignedTo}</TableCell>
+                      <TableCell>{formatDisplayDate(t.dateCreated)}</TableCell>
+                      <TableCell>
+                        {t.status !== TaskStatus.Done && getSLA(t.dueDate)}
+                      </TableCell>
+                      <TableCell>
+                        {t.attachments?.map((a, i) => (
+                          <AttachFileIcon key={i} />
+                        ))}
+                      </TableCell>
+                      <TableCell align="center">
+                        {t.taskType === TaskType.CreditCondition ? (
+                          <Checkbox
+                            checked={t.conditionMet}
+                            onChange={(e) => {
+                              setTasks(
+                                tasks.map((at) =>
+                                  at.id === t.id
+                                    ? {
+                                        ...t,
+                                        conditionMet: e.target.checked,
+                                      }
+                                    : at
+                                )
+                              );
+                            }}
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
         </CardContent>
       </Card>
 

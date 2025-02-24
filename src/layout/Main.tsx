@@ -3,9 +3,7 @@ import { useTheme } from "@mui/material/styles";
 import * as React from "react";
 import { Outlet, useParams } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
-import applications from "../data/applications.json";
-import { midReportData } from "../data/report-data";
-import { mockTasks } from "../data/tasks";
+import { applications } from "../data/applications";
 import { useLoanStore } from "../state";
 import { Color } from "../styles/colors";
 import { DrawerHeader } from "./DrawerHeader";
@@ -15,13 +13,7 @@ import SideBar from "./SideBar";
 const Main = () => {
   const { loanId } = useParams();
   const theme = useTheme();
-  const {
-    loan,
-    setLoan,
-    tasks,
-    setTasks,
-    setReport: setReportData,
-  } = useLoanStore();
+  const { loan, setLoan, tasks, setTasks } = useLoanStore();
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -36,9 +28,8 @@ const Main = () => {
     const loan = applications.find((a) => a.creditArrangementId === loanId);
 
     if (loan) {
-      setReportData(midReportData);
-      setTasks(mockTasks);
       setLoan(loan);
+      setTasks(loan.tasks);
     }
   }, [loanId]);
 

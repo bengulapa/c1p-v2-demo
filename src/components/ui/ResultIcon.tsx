@@ -13,7 +13,7 @@ interface IProps {
 const ResultIcon = ({ result, resultInfo = "", isOverridden }: IProps) => {
   return (
     <>
-      {(result === "PASS" || isOverridden) && (
+      {(result === "PASS" || result === "LOW RISK" || isOverridden) && (
         <CheckCircleOutlinedIcon color="success" fontSize="small" />
       )}
 

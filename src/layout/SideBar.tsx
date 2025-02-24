@@ -23,6 +23,7 @@ import MuiDrawer from "@mui/material/Drawer";
 import { Link, useLocation } from "react-router-dom";
 import { Color } from "../styles/colors";
 import { DrawerHeader } from "./DrawerHeader";
+import { useLoanStore } from "../state";
 
 interface IProps {
   open: boolean;
@@ -81,6 +82,7 @@ const Drawer = styled(MuiDrawer, {
 
 const SideBar = ({ open, handleDrawerClose, theme }: IProps) => {
   const { pathname } = useLocation();
+  const { tasks } = useLoanStore();
   const menuItems = [
     {
       text: "Overview",
@@ -94,7 +96,12 @@ const SideBar = ({ open, handleDrawerClose, theme }: IProps) => {
     },
     { text: "Customer Details", icon: <RememberMeIcon />, path: "customer" },
     { text: "Credit Decision", icon: <ChecklistIcon />, path: "decision" },
-    { text: "Tasks", icon: <TaskIcon />, path: "tasks", badgeContent: 4 },
+    {
+      text: "Tasks",
+      icon: <TaskIcon />,
+      path: "tasks",
+      badgeContent: tasks.length,
+    },
   ];
 
   return (
