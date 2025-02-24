@@ -338,6 +338,14 @@ export const applications: Loan[] = [
             section: "biometrics",
             isOverridden: false,
           },
+          {
+            key: "AssetBacked",
+            text: "Property Backed",
+            value: "Yes",
+            result: "PASS",
+            section: "property",
+            isOverridden: false,
+          },
         ],
       },
       {
@@ -610,15 +618,15 @@ export const applications: Loan[] = [
         section: "goals",
         criteriaList: [
           {
-            key: "AssetBacked",
-            text: "Asset Backed",
-            value: "No",
+            key: "AssetType",
+            text: "Asset type",
+            value: "Motor Vehicle (up to 4.5t)",
             result: "PASS",
             isOverridden: false,
           },
           {
-            key: "AssetType",
-            text: "Asset Type",
+            key: "AssetClass",
+            text: "Asset class",
             value: "Primary",
             result: "",
             isOverridden: false,
@@ -964,12 +972,6 @@ export const applications: Loan[] = [
             result: "PASS",
             verified: "Internal",
           },
-          {
-            text: "Introducer program",
-            value: "Partner",
-            result: "PASS",
-            verified: "Internal",
-          },
         ],
       },
       recommendation: "APPROVE",
@@ -1293,7 +1295,7 @@ export const applications: Loan[] = [
             value: "Fail",
             result: "FAIL",
             section: "equifax",
-            isOverridden: true,
+            isOverridden: false,
           },
           {
             key: "Bio",
@@ -1309,6 +1311,14 @@ export const applications: Loan[] = [
             value: "Fail",
             result: "FAIL",
             section: "biometrics",
+            isOverridden: false,
+          },
+          {
+            key: "AssetBacked",
+            text: "Property Backed",
+            value: "No",
+            result: "FAIL",
+            section: "property",
             isOverridden: false,
           },
         ],
@@ -1437,7 +1447,7 @@ export const applications: Loan[] = [
       },
       {
         checkpoint: "ABN Registration",
-        outcome: "PASS",
+        outcome: "FAIL",
         section: "mandatory",
         criteriaList: [
           {
@@ -1462,7 +1472,7 @@ export const applications: Loan[] = [
             value: "1 year",
             result: "FAIL",
             section: "abn",
-            isOverridden: true,
+            isOverridden: false,
           },
           {
             key: "4",
@@ -1521,7 +1531,7 @@ export const applications: Loan[] = [
             valueType: "dropdown",
             result: "FAIL",
             section: "",
-            isOverridden: true,
+            isOverridden: false,
           },
           {
             key: "7",
@@ -1537,7 +1547,7 @@ export const applications: Loan[] = [
             value: "Cancelled from 01 Jul 2003",
             result: "",
             section: "previous",
-            isOverridden: true,
+            isOverridden: false,
           },
           {
             key: "9",
@@ -1551,7 +1561,7 @@ export const applications: Loan[] = [
       },
       {
         checkpoint: "GST Registration",
-        outcome: "PASS",
+        outcome: "FAIL",
         section: "mandatory",
         criteriaList: [
           {
@@ -1566,32 +1576,32 @@ export const applications: Loan[] = [
             text: "GST Registration Length",
             value: "1 Year",
             result: "FAIL",
-            isOverridden: true,
+            isOverridden: false,
           },
           {
             key: "3",
             text: "Is ATO Portal Satisfactory?",
             value: "No",
             result: "FAIL",
-            isOverridden: true,
+            isOverridden: false,
           },
         ],
       },
       {
         checkpoint: "Asset Qualification",
-        outcome: "PASS",
+        outcome: "FAIL",
         section: "goals",
         criteriaList: [
           {
-            key: "AssetBacked",
-            text: "Asset Backed",
-            value: "No",
+            key: "AssetType",
+            text: "Asset type",
+            value: "Motor Vehicle (up to 4.5t)",
             result: "PASS",
             isOverridden: false,
           },
           {
-            key: "AssetType",
-            text: "Asset Type",
+            key: "AssetClass",
+            text: "Asset class",
             value: "Primary",
             result: "",
             isOverridden: false,
@@ -1601,7 +1611,7 @@ export const applications: Loan[] = [
             text: "Asset Aligned to Business Activity",
             value: "No",
             result: "FAIL",
-            isOverridden: true,
+            isOverridden: false,
           },
           {
             key: "TAV",
@@ -1609,13 +1619,13 @@ export const applications: Loan[] = [
             value: "20000",
             valueType: "currency",
             result: "",
-            isOverridden: true,
+            isOverridden: false,
           },
         ],
       },
       {
         checkpoint: "Arrangement Check",
-        outcome: "PASS",
+        outcome: "FAIL",
         section: "goals",
         criteriaList: [
           {
@@ -1685,7 +1695,7 @@ export const applications: Loan[] = [
             valueType: "currency",
             result: "FAIL",
             section: "exposure",
-            isOverridden: true,
+            isOverridden: false,
           },
         ],
       },
@@ -1935,12 +1945,6 @@ export const applications: Loan[] = [
           {
             text: "Customer strategy",
             value: "Standard",
-            result: "PASS",
-            verified: "Internal",
-          },
-          {
-            text: "Introducer program",
-            value: "Partner",
             result: "PASS",
             verified: "Internal",
           },

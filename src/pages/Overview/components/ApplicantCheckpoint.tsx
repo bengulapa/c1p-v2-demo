@@ -24,7 +24,7 @@ const ApplicantCheckpoint = () => {
   return (
     <>
       <Typography gutterBottom>EQUIFAX</Typography>
-      <Grid2 container spacing={1} className="mb-3">
+      <Grid2 container spacing={1} className="mb-2">
         <Grid2 size={8}>
           <div className="ml-3">
             {checklist.criteriaList
@@ -100,7 +100,7 @@ const ApplicantCheckpoint = () => {
           </Stack>
         </Grid2>
       </Grid2>
-      <Grid2 container spacing={1}>
+      <Grid2 container spacing={1} className="mb-3">
         <Grid2 size={8}>
           <Typography gutterBottom>BIOMETRICS</Typography>
           <div className="ml-3">
@@ -126,6 +126,23 @@ const ApplicantCheckpoint = () => {
             </Button>
           </div>
         </Grid2>
+      </Grid2>
+      <Grid2 container spacing={1}>
+        <Grid2 size={8}>
+          <Typography>PROPERTY</Typography>
+          <div className="ml-3">
+            {checklist.criteriaList
+              .filter((c) => c.section === "property")
+              .map((c) => (
+                <CriteriaRow
+                  key={c.key}
+                  criteria={c}
+                  updateCriteria={updateCriteria}
+                />
+              ))}
+          </div>
+        </Grid2>
+        <Grid2 size={4}></Grid2>
       </Grid2>
     </>
   );
