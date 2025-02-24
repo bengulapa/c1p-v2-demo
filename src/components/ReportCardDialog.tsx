@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { CreditStatus } from "../models/enums";
 import { useLoanStore } from "../state";
 import { Color } from "../styles/colors";
 import RangeDisplay from "./ui/RangeDisplay";
@@ -28,6 +29,7 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
   handleClose,
 }) => {
   const report = useLoanStore((state) => state.loan!.report);
+  const { status, setStatus } = useLoanStore();
   const { applicant, asset, arrangement, strategy } = report;
   const [expandedList, setExpandedList] = useState<string[]>([]);
 
@@ -263,15 +265,19 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
               <Button onClick={handleClose} color="warning" variant="contained">
                 Review
               </Button>
-              {report.recommendation === "APPROVE" && (
-                <Button
-                  onClick={handleClose}
-                  color="success"
-                  variant="contained"
-                >
-                  Approve
-                </Button>
-              )}
+              {report.recommendation === "APPROVE" &&
+                status !== CreditStatus.Approved && (
+                  <Button
+                    onClick={() => {
+                      setStatus(CreditStatus.Approved);
+                      handleClose();
+                    }}
+                    color="success"
+                    variant="contained"
+                  >
+                    Approve
+                  </Button>
+                )}
             </Stack>
           </Stack>
         </Paper>

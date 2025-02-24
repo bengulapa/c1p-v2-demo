@@ -1200,8 +1200,8 @@ export const applications: Loan[] = [
     dateSubmitted: "2024-10-01T06:03:26.963",
     docFee: 0,
     abn: "42600819010",
-    entityName: "BEN's BAKERY",
-    legalName: "BEN's BAKERY",
+    entityName: "Middle Earth Store",
+    legalName: "Middle Earth Store Inc.",
     isAssetBacked: true,
     contributionAmount: 5000,
     hasDefaults: false,
@@ -1781,14 +1781,14 @@ export const applications: Loan[] = [
       },
     ],
     report: {
-      title: "CA01 - BEN'S BAKERY",
+      title: "CA02 - Middle Earth Store",
       applicant: {
         title: "The Applicant",
         result: "PASS",
         data: [
           {
             text: "Legal name",
-            value: "MAHOGANY DEVELOPMENTS PTY LTD",
+            value: "Middle Earth Store PTY LTD",
             result: "",
             verified: "ABR",
           },
@@ -1805,7 +1805,7 @@ export const applications: Loan[] = [
             verified: "Equifax",
           },
           {
-            text: "Guarantor 1 Credit Score",
+            text: "Frodo Baggins's Credit Score",
             value: "510",
             result: "PASS",
             verified: "Equifax",

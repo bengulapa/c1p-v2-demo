@@ -73,15 +73,39 @@ const PageHeader = ({ loan, tasks }: IProps) => {
           sx={{ background: Color.secondary, color: Color.white }}
         >
           <CardHeader
+            action={<EmergencyIcon color="primary" />}
+            subheader={<CardTitleHeader title="The Applicant" color="white" />}
+            sx={{ pb: 0 }}
+          />
+          <CardContent
+            className="d-flex justify-content-between"
+            sx={{ pt: 1 }}
+          >
+            <Box className="w-100">
+              <Typography variant="h6" color="primary">
+                {loan.entityName}
+              </Typography>
+              <Box sx={{ color: Color.lightGray }}>
+                <Typography variant="body2">{loan.entityType}</Typography>
+                <Typography variant="body2">Ben Gula</Typography>
+                <Typography variant="body2">Sal de Pan - Co Support</Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid2>
+      <Grid2 size={3}>
+        <Card variant="outlined" className="header-box">
+          <CardHeader
             action={<PaidIcon color="primary" />}
-            subheader={<CardTitleHeader title="The Deal" color="white" />}
+            subheader={<CardTitleHeader title="The Arrangement" />}
             sx={{ pb: 0 }}
           />
           <CardContent sx={{ pt: 1 }}>
             <Typography variant="h6">
               {formatCurrency(loan.financeAmount)}
             </Typography>
-            <Box sx={{ color: Color.lightGray }}>
+            <Box>
               <Typography variant="caption" component="p">
                 {formatCurrency(loan.repaymentAmount)} {loan.repaymentFrequency}
               </Typography>
@@ -105,10 +129,7 @@ const PageHeader = ({ loan, tasks }: IProps) => {
             subheader={<CardTitleHeader title="The Asset" />}
             sx={{ pb: 0 }}
           />
-          <CardContent
-            className="d-flex justify-content-between"
-            sx={{ pt: 1 }}
-          >
+          <CardContent sx={{ pt: 1 }}>
             <div className="w-100">
               <Typography variant="h6" color="primary">
                 Motor vehicle
@@ -123,30 +144,8 @@ const PageHeader = ({ loan, tasks }: IProps) => {
       <Grid2 size={3}>
         <Card variant="outlined" className="header-box">
           <CardHeader
-            action={<EmergencyIcon color="primary" />}
-            subheader={<CardTitleHeader title="The Applicant" />}
-            sx={{ pb: 0 }}
-          />
-          <CardContent
-            className="d-flex justify-content-between"
-            sx={{ pt: 1 }}
-          >
-            <div className="w-100">
-              <Typography variant="h6" color="primary">
-                {loan.entityName}
-              </Typography>
-              <Typography variant="body2">{loan.entityType}</Typography>
-              <Typography variant="body2">Grant Tor</Typography>
-              <Typography variant="body2">Sal de Pan - Co Support</Typography>
-            </div>
-          </CardContent>
-        </Card>
-      </Grid2>
-      <Grid2 size={3}>
-        <Card variant="outlined" className="header-box">
-          <CardHeader
             action={<RecommendIcon color="primary" />}
-            subheader={<CardTitleHeader title="The Recommendation" />}
+            subheader={<CardTitleHeader title="The Strategy" />}
             sx={{ pb: 0 }}
           />
           <CardContent
