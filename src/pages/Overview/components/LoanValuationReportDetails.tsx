@@ -24,7 +24,7 @@ const LoanValuationReportDetails = () => {
 
       <Typography>ASSET</Typography>
       <Grid2 container spacing={1} className="mb-3">
-        <Grid2 size={5}>
+        <Grid2 size={3.7}>
           <div className="d-flex justify-content-between">
             <Typography variant="caption">Make:</Typography>
             <Typography variant="body2" color="secondary">
@@ -44,12 +44,11 @@ const LoanValuationReportDetails = () => {
             </Typography>
           </div>
         </Grid2>
-        <Grid2 size={7}></Grid2>
       </Grid2>
 
       <Typography>VALUATION</Typography>
       <Grid2 container spacing={1}>
-        <Grid2 size={5}>
+        <Grid2 size={3.7}>
           <div className="d-flex justify-content-between">
             <Typography variant="caption">Valuator:</Typography>
             <Typography variant="body2" color="secondary">
@@ -75,7 +74,7 @@ const LoanValuationReportDetails = () => {
             </Typography>
           </div>
         </Grid2>
-        <Grid2 size={7}>
+        <Grid2 size={8.3}>
           <Button
             className="ml-5"
             href={`${process.env.PUBLIC_URL}/assets/images/redbook-valuation-cert-sample.png`}

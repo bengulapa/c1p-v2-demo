@@ -6,6 +6,7 @@ import {
   Checkbox,
   FormControlLabel,
   Grid2,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -49,10 +50,10 @@ const CriteriaRow = ({ criteria, updateCriteria, children }: IProps) => {
 
   return (
     <Grid2 container alignItems="center">
-      <Grid2 size={4}>
+      <Grid2 size={3}>
         <Typography variant="body2">{criteria.text}:</Typography>
       </Grid2>
-      <Grid2 size={4}>
+      <Grid2 size={3.5}>
         {children ? (
           children
         ) : (
@@ -61,7 +62,7 @@ const CriteriaRow = ({ criteria, updateCriteria, children }: IProps) => {
           </Typography>
         )}
       </Grid2>
-      <Grid2 size={1}>
+      <Grid2 size={0.5}>
         <Box className="pt-1 text-l">
           {criteria.result === "PASS" || criteria.isOverridden ? (
             <CheckCircleIcon color="success" fontSize="small" />
@@ -72,10 +73,10 @@ const CriteriaRow = ({ criteria, updateCriteria, children }: IProps) => {
           )}
         </Box>
       </Grid2>
-      <Grid2 size={3}>
+      <Grid2 size={5}>
         <Box className="text-left">
           {criteria.result === "FAIL" && (
-            <>
+            <Stack direction={"row"}>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -87,7 +88,7 @@ const CriteriaRow = ({ criteria, updateCriteria, children }: IProps) => {
                 label="Override?"
               />
               {criteria.isOverridden && (
-                <>
+                <div className="d-flex">
                   <TextField
                     size="small"
                     value={reason}
@@ -95,20 +96,20 @@ const CriteriaRow = ({ criteria, updateCriteria, children }: IProps) => {
                       setReason(e.target.value)
                     }
                     multiline
-                    rows={2}
+                    className="mr-1 mb-1"
+                    placeholder="Reason"
                   />
-                  <div className="text-right my-2">
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      onClick={handleOverrideReason}
-                    >
-                      Save
-                    </Button>
-                  </div>
-                </>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    className="mb-1"
+                    onClick={handleOverrideReason}
+                  >
+                    Save
+                  </Button>
+                </div>
               )}
-            </>
+            </Stack>
           )}
         </Box>
       </Grid2>

@@ -25,7 +25,7 @@ const ApplicantCheckpoint = () => {
     <>
       <Typography gutterBottom>EQUIFAX</Typography>
       <Grid2 container spacing={1} className="mb-2">
-        <Grid2 size={8}>
+        <Grid2 size={9}>
           <div className="ml-3">
             {checklist.criteriaList
               .filter((c) => c.section === "equifax")
@@ -67,8 +67,8 @@ const ApplicantCheckpoint = () => {
             </CriteriaRow>
           </div>
         </Grid2>
-        <Grid2 size={4}>
-          <Stack alignItems="start" className="pl-5 ml-5">
+        <Grid2 size={3}>
+          <Stack alignItems="start" className="pl-3">
             <Button
               href={`${process.env.PUBLIC_URL}/assets/docs/EquifaxReport.pdf`}
               target="_blank"
@@ -101,7 +101,7 @@ const ApplicantCheckpoint = () => {
         </Grid2>
       </Grid2>
       <Grid2 container spacing={1} className="mb-3">
-        <Grid2 size={8}>
+        <Grid2 size={9}>
           <Typography gutterBottom>BIOMETRICS</Typography>
           <div className="ml-3">
             {checklist.criteriaList
@@ -115,8 +115,8 @@ const ApplicantCheckpoint = () => {
               ))}
           </div>
         </Grid2>
-        <Grid2 size={4}>
-          <div className="pl-5 ml-5">
+        <Grid2 size={3}>
+          <div className="pl-3">
             <Button
               href={`${process.env.PUBLIC_URL}/assets/docs/GreenIDReport.jpg`}
               target="_blank"
@@ -128,7 +128,7 @@ const ApplicantCheckpoint = () => {
         </Grid2>
       </Grid2>
       <Grid2 container spacing={1}>
-        <Grid2 size={8}>
+        <Grid2 size={9}>
           <Typography>PROPERTY</Typography>
           <div className="ml-3">
             {checklist.criteriaList
@@ -142,7 +142,7 @@ const ApplicantCheckpoint = () => {
               ))}
           </div>
         </Grid2>
-        <Grid2 size={4}></Grid2>
+        <Grid2 size={3}></Grid2>
       </Grid2>
     </>
   );
