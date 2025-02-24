@@ -1930,9 +1930,9 @@ export const applications: Loan[] = [
           },
           {
             text: "Arrangement risk",
-            value: 9,
+            value: 3,
             valueType: "range",
-            result: "FAIL",
+            result: "REVIEW",
             verified: "",
             isChild: true,
           },
