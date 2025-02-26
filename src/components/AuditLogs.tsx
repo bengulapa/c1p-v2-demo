@@ -21,8 +21,12 @@ const AuditLogs = () => {
               <ListItemText
                 primary={
                   <>
-                    <strong className="mr-2">{a.source}</strong>
-                    <small>{formatDateTimeDisplay(a.date)}</small>
+                    <Typography variant="caption" className="mr-2">
+                      <strong>{a.source}</strong>
+                    </Typography>
+                    <Typography variant="caption">
+                      {formatDateTimeDisplay(a.date)}
+                    </Typography>
                   </>
                 }
                 secondary={

@@ -245,10 +245,12 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
         </Accordion>
 
         {/* The Recommendation Section */}
-        <Paper sx={{ p: 2, backgroundColor: Color.lightGray }}>
+        <Paper sx={{ p: 2 }}>
           <Stack direction={"row"} justifyContent={"space-between"}>
             <div>
-              <Typography variant="subtitle1">The Recommendation:</Typography>
+              <Typography variant="subtitle1">
+                <strong>The Recommendation</strong>
+              </Typography>
               <Typography
                 sx={{
                   color:
@@ -257,7 +259,7 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
                       : Color.darkAmber,
                 }}
               >
-                <strong>{report.recommendation}</strong>{" "}
+                <strong>{report.recommendation}:</strong>{" "}
                 {report.recommendationDetails}
               </Typography>
             </div>

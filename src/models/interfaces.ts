@@ -23,10 +23,10 @@ export class AuditLog {
   date: string;
   message: string;
 
-  constructor(message: string) {
+  constructor(message: string, source?: string) {
     this.message = message;
     this.id = newGuid();
-    this.source = "C1P v2 API";
+    this.source = source || "C1P v2 API";
     this.date = new Date().toJSON();
   }
 }

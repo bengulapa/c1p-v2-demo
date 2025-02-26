@@ -909,7 +909,7 @@ export const applications: Loan[] = [
             text: "Property backed",
             value: "Yes",
             result: "PASS",
-            verified: "",
+            verified: "Equifax",
           },
           {
             text: "Asset age (SOT)",
@@ -922,6 +922,12 @@ export const applications: Loan[] = [
             value: "6 years",
             result: "PASS",
             verified: "",
+          },
+          {
+            text: "Loan to Value Ratio (LVR)",
+            value: "80%",
+            result: "PASS",
+            verified: "RedBook",
           },
         ],
       },
@@ -1899,6 +1905,12 @@ export const applications: Loan[] = [
             result: "PASS",
             verified: "",
           },
+          {
+            text: "Loan to Value Ratio (LVR)",
+            value: "125%",
+            result: "FAIL",
+            verified: "",
+          },
         ],
       },
       strategy: {
@@ -1952,7 +1964,7 @@ export const applications: Loan[] = [
       },
       recommendation: "REVIEW",
       recommendationDetails:
-        "not property backed, deposit amount less than 20%, medium risk, with credit conditions",
+        "not property backed, deposit amount less than 20%, medium risk, LVR exceeds the threshold as the applicant is not property backed, with credit conditions",
     },
     tasks: [
       {

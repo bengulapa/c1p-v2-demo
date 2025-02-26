@@ -36,7 +36,9 @@ export const useLoanStore = create<State>()(
           email: "ben@anglefinance.com.au",
           role: "CreditAnalyst",
         },
-        auditLogs: [new AuditLog(`Bro Ker submitted the deal.`)],
+        auditLogs: [
+          new AuditLog(`Bro Ker submitted the deal.`, "Broker Portal"),
+        ],
         status: CreditStatus.Submitted,
         tasks: [],
         recommendation: Recommendation.Review,

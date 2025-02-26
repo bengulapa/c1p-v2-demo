@@ -2,12 +2,14 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Box,
-  Button,
   Checkbox,
+  FormControl,
   FormControlLabel,
   Grid2,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import React, { ReactNode, useState } from "react";
@@ -30,12 +32,12 @@ const CriteriaRow = ({ criteria, updateCriteria, children }: IProps) => {
       });
   };
 
-  const handleOverrideReason = () => {
+  const handleOverrideReason = (overrideReason: string) => {
     updateCriteria &&
       updateCriteria({
         ...criteria,
         isOverridden: true,
-        overrideReason: reason,
+        overrideReason,
       });
   };
 
@@ -88,26 +90,24 @@ const CriteriaRow = ({ criteria, updateCriteria, children }: IProps) => {
                 label="Override?"
               />
               {criteria.isOverridden && (
-                <div className="d-flex">
-                  <TextField
-                    size="small"
+                <FormControl size="small" sx={{ minWidth: 120 }}>
+                  <Select
                     value={reason}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setReason(e.target.value)
-                    }
-                    multiline
-                    className="mr-1 mb-1"
-                    placeholder="Reason"
-                  />
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    className="mb-1"
-                    onClick={handleOverrideReason}
+                    onChange={(event: SelectChangeEvent) => {
+                      const value = event.target.value;
+                      setReason(value);
+                      handleOverrideReason(value);
+                    }}
+                    autoWidth
                   >
-                    Save
-                  </Button>
-                </div>
+                    <MenuItem value="">
+                      <em>Select</em>
+                    </MenuItem>
+                    <MenuItem value="1">Reason 1</MenuItem>
+                    <MenuItem value="2">Reason 2</MenuItem>
+                    <MenuItem value="3">Reason 3</MenuItem>
+                  </Select>
+                </FormControl>
               )}
             </Stack>
           )}
