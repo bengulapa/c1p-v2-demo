@@ -31,10 +31,12 @@ const GuarantorsTab = () => {
       coSupport: [
         {
           abn: "22605215227",
+          acn: "605215227",
           entityName: "GULA PATISSERIE",
           legalName: "GULA PATISSERIE",
           incorporationDate: "2023-06-05",
           entityType: "Private Company",
+          businessAddress: "11 BAKER ST, MELBOURNE VIC 2074",
         },
       ],
     },
@@ -101,10 +103,12 @@ const GuarantorsTab = () => {
     const newIndex = coSupportFields.length;
     coSupportAppend({
       abn: "",
+      acn: "",
       entityName: "",
       legalName: "",
       incorporationDate: "",
       entityType: "",
+      businessAddress: "",
     });
     setEditCoSupportIndex(newIndex);
   };
@@ -144,7 +148,7 @@ const GuarantorsTab = () => {
           <Grid2 size={6}>
             <Card variant="outlined" className="mb-3">
               <CardContent>
-                <DetailCardHeader title="Co-Support Companies"></DetailCardHeader>
+                <DetailCardHeader title="Company Guarantors"></DetailCardHeader>
 
                 {coSupportFields.map((item, index) => (
                   <CoSupportForm
@@ -163,7 +167,7 @@ const GuarantorsTab = () => {
                     onClick={handleAddCoSupport}
                     size="small"
                   >
-                    Add Co-Support
+                    Add Company Guarantor
                   </Button>
                 </Stack>
               </CardContent>

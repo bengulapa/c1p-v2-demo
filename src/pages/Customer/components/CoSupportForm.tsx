@@ -60,6 +60,12 @@ const CoSupportForm = ({
         </div>
         <div>
           <Typography variant="caption" className="list-label">
+            ACN:
+          </Typography>
+          <span className="list-value">{coSupport.acn}</span>
+        </div>
+        <div>
+          <Typography variant="caption" className="list-label">
             Entity name:
           </Typography>
           <span className="list-value">{coSupport.entityName}</span>
@@ -82,6 +88,12 @@ const CoSupportForm = ({
           </Typography>
           <span className="list-value">{coSupport.entityType}</span>
         </div>
+        <div>
+          <Typography variant="caption" className="list-label">
+            Business address:
+          </Typography>
+          <span className="list-value">{coSupport.businessAddress}</span>
+        </div>
 
         <Divider className="my-3" />
       </Box>
@@ -95,6 +107,13 @@ const CoSupportForm = ({
         control={control}
         render={({ field }) => (
           <TextField {...field} label="ABN" fullWidth margin="normal" />
+        )}
+      />
+      <Controller
+        name={`coSupport.${index}.acn`}
+        control={control}
+        render={({ field }) => (
+          <TextField {...field} label="ACN" fullWidth margin="normal" />
         )}
       />
       <Controller
@@ -138,6 +157,18 @@ const CoSupportForm = ({
             <MenuItem value="Private Company">Private Company</MenuItem>
             {/* Add more options as needed */}
           </TextField>
+        )}
+      />
+      <Controller
+        name={`coSupport.${index}.businessAddress`}
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            label="Business address"
+            fullWidth
+            margin="normal"
+          />
         )}
       />
       <Stack spacing={1} direction={"row"} justifyContent={"end"}>
