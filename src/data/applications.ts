@@ -817,123 +817,142 @@ export const applications: Loan[] = [
     ],
     report: {
       title: "CA01 - BEN'S BAKERY",
-      applicant: {
-        title: "The Applicant",
+      qualifiers: {
+        title: "Qualifiers",
         result: "PASS",
-        data: [
-          {
-            text: "Legal name",
-            value: "BEN'S BAKERY PTY LTD",
+        applicant: {
+          title: "Applicant",
+          result: "PASS",
+
+          header: {
+            title: "Applicant",
+            value: "Value",
+            result: "Pass",
+          },
+          data: [
+            {
+              text: "Legal name",
+              value: "BEN'S BAKERY PTY LTD",
+              result: "",
+              verified: "ABR",
+            },
+            {
+              text: "Industry",
+              value: "Hospitality",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Organisation Credit Score",
+              value: "520",
+              result: "PASS",
+              verified: "Equifax",
+            },
+            {
+              text: "Guarantor 1 Credit Score",
+              value: "510",
+              result: "PASS",
+              verified: "Equifax",
+            },
+            {
+              text: "Key Contributing Factor",
+              value: "No negative factors",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "ABN Age",
+              value: "5 years",
+              result: "PASS",
+              verified: "ABR",
+            },
+          ],
+        },
+        asset: {
+          title: "Asset",
+          result: "PASS",
+          header: {
+            title: "Asset",
+            value: "",
             result: "",
-            verified: "ABR",
           },
-          {
-            text: "Industry",
-            value: "Hospitality",
-            result: "PASS",
-            verified: "",
+          data: [
+            {
+              text: "Asset type",
+              value: "Motor Vehicle (up to 4.5t)",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Asset class",
+              value: "Primary",
+              result: "PASS",
+              verified: "",
+            },
+          ],
+        },
+        arrangement: {
+          title: "Arrangement",
+          result: "PASS",
+          header: {
+            title: "Arrangement",
+            value: "",
+            result: "",
           },
-          {
-            text: "Organisation Credit Score",
-            value: "520",
-            result: "PASS",
-            verified: "Equifax",
-          },
-          {
-            text: "Ben Gula's Credit Score",
-            value: "510",
-            result: "PASS",
-            verified: "Equifax",
-          },
-          {
-            text: "Key Contributing Factor",
-            value: "No negative factors",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "ABN Age",
-            value: "5 years",
-            result: "PASS",
-            verified: "ABR",
-          },
-          {
-            text: "AML/KYC",
-            value: "Pass",
-            result: "PASS",
-            verified: "GreenID",
-          },
-        ],
+          data: [
+            {
+              text: "Loan amount",
+              value: "$12,000.00 ($115,000.00 credit remaining)",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Deposit amount",
+              value: "$52,000.00 (20%)",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Balloon payment",
+              value: "$5,000.00 (14%)",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Property backed",
+              value: "Yes",
+              result: "PASS",
+              verified: "Equifax",
+            },
+            {
+              text: "Asset age (SOT)",
+              value: "1 year",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Asset age (EOT)",
+              value: "6 years",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Loan to Value Ratio (LVR)",
+              value: "80%",
+              result: "PASS",
+              verified: "RedBook",
+            },
+          ],
+        },
       },
-      asset: {
-        title: "The Asset",
-        result: "PASS",
-        data: [
-          {
-            text: "Asset type",
-            value: "Motor Vehicle (up to 4.5t)",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Asset class",
-            value: "Primary",
-            result: "PASS",
-            verified: "",
-          },
-        ],
-      },
-      arrangement: {
-        title: "The Arrangement",
-        result: "PASS",
-        data: [
-          {
-            text: "Loan amount",
-            value: "$12,000.00 ($115,000.00 credit remaining)",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Deposit amount",
-            value: "$52,000.00 (20%)",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Balloon payment",
-            value: "$5,000.00 (14%)",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Property backed",
-            value: "Yes",
-            result: "PASS",
-            verified: "Equifax",
-          },
-          {
-            text: "Asset age (SOT)",
-            value: "1 year",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Asset age (EOT)",
-            value: "6 years",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Loan to Value Ratio (LVR)",
-            value: "80%",
-            result: "PASS",
-            verified: "RedBook",
-          },
-        ],
-      },
-      strategy: {
-        title: "The Strategy",
+      riskRating: {
+        title: "Risk Rating",
         result: "LOW RISK",
+        header: {
+          title: "Strategy",
+          value: "LOW HIGH",
+          result: "Pass",
+        },
         data: [
           {
             text: "Overall risk profile",
@@ -980,8 +999,51 @@ export const applications: Loan[] = [
           },
         ],
       },
-      recommendation: "APPROVE",
-      recommendationDetails: "with no credit conditions",
+      compliance: {
+        title: "Compliance",
+        result: "LOW RISK",
+        header: {
+          title: "Applicant",
+          value: "Value",
+          result: "Pass",
+        },
+        data: [
+          {
+            text: "AML/KYC",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+          {
+            text: "Fraud Check",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+          {
+            text: "Politically Exposed Persons",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+          {
+            text: "Sanctions",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+          {
+            text: "Velocity",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+        ],
+      },
+      recommendation: {
+        result: "APPROVE",
+        details: "with no credit conditions",
+      },
     },
     tasks: [],
   },
@@ -1798,124 +1860,144 @@ export const applications: Loan[] = [
     ],
     report: {
       title: "CA02 - Middle Earth Store",
-      applicant: {
-        title: "The Applicant",
-        result: "PASS",
-        data: [
-          {
-            text: "Legal name",
-            value: "Middle Earth Store PTY LTD",
+      qualifiers: {
+        title: "Qualifiers",
+        result: "FAIL",
+        applicant: {
+          title: "Applicant",
+          result: "PASS",
+          header: {
+            title: "Applicant",
+            value: "Value",
+            result: "Pass",
+          },
+          data: [
+            {
+              text: "Legal name",
+              value: "Middle Earth Store PTY LTD",
+              result: "",
+              verified: "ABR",
+            },
+            {
+              text: "Industry",
+              value: "Agriculture",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Organisation Credit Score",
+              value: "520",
+              result: "PASS",
+              verified: "Equifax",
+            },
+            {
+              text: "Guarantor 1 Credit Score",
+              value: "490",
+              result: "FAIL",
+              resultInfo: "Credit score < 500",
+              verified: "Equifax",
+            },
+            {
+              text: "Key Contributing Factor",
+              value: "No negative factors",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "ABN Age",
+              value: "5 years",
+              result: "PASS",
+              verified: "ABR",
+            },
+          ],
+        },
+        asset: {
+          title: "Asset",
+          result: "PASS",
+          header: {
+            title: "Asset",
+            value: "",
             result: "",
-            verified: "ABR",
           },
-          {
-            text: "Industry",
-            value: "Agriculture",
-            result: "PASS",
-            verified: "",
+          data: [
+            {
+              text: "Asset type",
+              value: "Motor Vehicle (up to 4.5t)",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Asset class",
+              value: "Primary",
+              result: "PASS",
+              verified: "",
+            },
+          ],
+        },
+        arrangement: {
+          title: "Arrangement",
+          result: "REVIEW",
+          header: {
+            title: "Arrangement",
+            value: "",
+            result: "",
           },
-          {
-            text: "Organisation Credit Score",
-            value: "520",
-            result: "PASS",
-            verified: "Equifax",
-          },
-          {
-            text: "Frodo Baggins's Credit Score",
-            value: "510",
-            result: "PASS",
-            verified: "Equifax",
-          },
-          {
-            text: "Key Contributing Factor",
-            value: "No negative factors",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "ABN Age",
-            value: "5 years",
-            result: "PASS",
-            verified: "ABR",
-          },
-          {
-            text: "AML/KYC",
-            value: "Pass",
-            result: "PASS",
-            verified: "GreenID",
-          },
-        ],
+          data: [
+            {
+              text: "Loan amount",
+              value: "$35,000.00 ($115,000.00 credit remaining)",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Deposit amount",
+              value: "$5,250.00 (15%)",
+              result: "FAIL",
+              resultInfo: "Deposit < 20%",
+              verified: "",
+            },
+            {
+              text: "Balloon payment",
+              value: "$5,000.00 (14%)",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Property backed",
+              value: "No",
+              result: "FAIL",
+              resultInfo: "Not property backed",
+              verified: "",
+            },
+            {
+              text: "Asset age (SOT)",
+              value: "1 year",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Asset age (EOT)",
+              value: "6 years",
+              result: "PASS",
+              verified: "",
+            },
+            {
+              text: "Loan to Value Ratio (LVR)",
+              value: "125%",
+              result: "FAIL",
+              verified: "Redbook",
+            },
+          ],
+        },
       },
-      asset: {
-        title: "The Asset",
-        result: "PASS",
-        data: [
-          {
-            text: "Asset type",
-            value: "Motor Vehicle (up to 4.5t)",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Asset class",
-            value: "Primary",
-            result: "PASS",
-            verified: "",
-          },
-        ],
-      },
-      arrangement: {
-        title: "The Arrangement",
-        result: "REVIEW",
-        data: [
-          {
-            text: "Loan amount",
-            value: "$35,000.00 ($115,000.00 credit remaining)",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Deposit amount",
-            value: "$5,250.00 (15%)",
-            result: "FAIL",
-            resultInfo: "Deposit < 20%",
-            verified: "",
-          },
-          {
-            text: "Balloon payment",
-            value: "$5,000.00 (14%)",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Property backed",
-            value: "No",
-            result: "FAIL",
-            verified: "",
-          },
-          {
-            text: "Asset age (SOT)",
-            value: "1 year",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Asset age (EOT)",
-            value: "6 years",
-            result: "PASS",
-            verified: "",
-          },
-          {
-            text: "Loan to Value Ratio (LVR)",
-            value: "125%",
-            result: "FAIL",
-            verified: "",
-          },
-        ],
-      },
-      strategy: {
-        title: "The Strategy",
+      riskRating: {
+        title: "Risk Rating",
         result: "MED RISK",
+        header: {
+          title: "Strategy",
+          value: "LOW HIGH",
+          result: "Pass",
+        },
         data: [
           {
             text: "Overall risk profile",
@@ -1926,7 +2008,7 @@ export const applications: Loan[] = [
           },
           {
             text: "Financed asset risk",
-            value: 1,
+            value: 3,
             valueType: "range",
             result: "PASS",
             verified: "",
@@ -1934,7 +2016,7 @@ export const applications: Loan[] = [
           },
           {
             text: "Applicant risk",
-            value: 5,
+            value: 4,
             valueType: "range",
             result: "REVIEW",
             verified: "",
@@ -1942,7 +2024,7 @@ export const applications: Loan[] = [
           },
           {
             text: "Arrangement risk",
-            value: 3,
+            value: 5,
             valueType: "range",
             result: "REVIEW",
             verified: "",
@@ -1950,21 +2032,64 @@ export const applications: Loan[] = [
           },
           {
             text: "Assessment type",
-            value: "LOW DOC",
+            value: "HIGH DOC",
             result: "PASS",
-            verified: "",
+            verified: "LOS",
           },
           {
             text: "Customer strategy",
-            value: "Standard",
+            value: "D",
             result: "PASS",
             verified: "Internal",
           },
         ],
       },
-      recommendation: "REVIEW",
-      recommendationDetails:
-        "not property backed, deposit amount less than 20%, medium risk, LVR exceeds the threshold as the applicant is not property backed, with credit conditions",
+      compliance: {
+        title: "Compliance",
+        result: "LOW RISK",
+        header: {
+          title: "Applicant",
+          value: "Value",
+          result: "Pass",
+        },
+        data: [
+          {
+            text: "AML/KYC",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+          {
+            text: "Fraud Check",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+          {
+            text: "Politically Exposed Persons",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+          {
+            text: "Sanctions",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+          {
+            text: "Velocity",
+            value: "Pass",
+            result: "PASS",
+            verified: "CAM",
+          },
+        ],
+      },
+      recommendation: {
+        result: "REVIEW",
+        details:
+          "not property backed, deposit amount less than 20%, medium risk, LVR exceeds the threshold as the applicant is not property backed, with credit conditions",
+      },
     },
     tasks: [
       {

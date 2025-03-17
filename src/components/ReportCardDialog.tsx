@@ -30,196 +30,186 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
 }) => {
   const report = useLoanStore((state) => state.loan!.report);
   const { status, setStatus } = useLoanStore();
-  const { applicant, asset, arrangement, strategy } = report;
-  const [expandedList, setExpandedList] = useState<string[]>([]);
-
-  const handleExpand = (expanded: boolean, title: string) => {
-    if (expanded) {
-      setExpandedList([...expandedList, title]);
-    } else {
-      setExpandedList(expandedList.filter((t) => t !== title));
-    }
-  };
-
-  const sections = [applicant, asset, arrangement];
+  const { qualifiers, riskRating, compliance, recommendation } = report;
+  const { applicant, asset, arrangement } = qualifiers;
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
+    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
       <DialogTitle>Report Card - {report.title}</DialogTitle>
       <DialogContent>
-        {sections.map((section, i) => (
-          <Accordion
-            key={i}
-            className="mb-2"
-            sx={{
-              backgroundColor:
-                section.result === "PASS" ? Color.lightGreen : Color.amber,
-            }}
-            onChange={(_, expanded) => handleExpand(expanded, section.title)}
-          >
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Grid2 container className="w-100">
-                {expandedList.includes(section.title) ? (
-                  <>
-                    <Grid2 size={8}>
-                      <Typography>
-                        <strong>{section.title}</strong>
-                      </Typography>
-                    </Grid2>
-                    <Grid2 size={2}>
-                      <Typography>Result</Typography>
-                    </Grid2>
-                    <Grid2 size={2}>
-                      <Typography>Verified</Typography>
-                    </Grid2>
-                  </>
-                ) : (
-                  <>
-                    <Grid2 size={4}>
-                      <strong>{section.title}</strong>
-                    </Grid2>
-                    <Grid2 size={4}>
-                      <Stack
-                        direction={"row"}
-                        alignItems={"center"}
-                        spacing={2}
-                      >
-                        <Typography>{section.result}</Typography>
-                        <ResultIcon result={section.result} />
-                      </Stack>
-                    </Grid2>
-                    <Grid2 size={2}>
-                      <Stack
-                        direction={"row"}
-                        alignItems={"center"}
-                        spacing={2}
-                      >
-                        {["PASS", "REVIEW"].includes(section.result) && (
-                          <>
-                            <Typography>Verified</Typography>
-                            {section.result === "PASS" && (
-                              <ResultIcon result={section.result} />
-                            )}
-                          </>
-                        )}
-                      </Stack>
-                    </Grid2>
-                    <Grid2 size={2} className="text-right">
-                      Details
-                    </Grid2>
-                  </>
-                )}
+        <Accordion
+          className="mb-2"
+          sx={{
+            backgroundColor:
+              qualifiers.result === "PASS" ? Color.lightGreen : Color.amber,
+          }}
+          defaultExpanded
+        >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <strong className="text-uppercase">{qualifiers.title}</strong>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid2 container>
+              <Grid2 size={4}>
+                <Typography variant="subtitle1">
+                  {applicant.header.title}
+                </Typography>
               </Grid2>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Grid2 container>
-                {section.data.map((data, i) => (
-                  <React.Fragment key={i}>
-                    <Grid2 size={4}>
-                      <Typography>{data.text}:</Typography>
-                    </Grid2>
-                    <Grid2 size={4}>
-                      <Typography>{data.value}</Typography>
-                    </Grid2>
-                    <Grid2 size={2}>
-                      <Typography>
-                        <ResultIcon
-                          result={data.result}
-                          resultInfo={data.resultInfo}
-                        />
-                      </Typography>
-                    </Grid2>
-                    <Grid2 size={2}>
-                      <Stack
-                        direction={"row"}
-                        alignItems={"center"}
-                        spacing={1}
-                      >
-                        {!!data.verified && <ResultIcon result="PASS" />}
-                        <Typography>{data.verified}</Typography>
-                      </Stack>
-                    </Grid2>
-                  </React.Fragment>
-                ))}
+              <Grid2 size={6}>
+                <Typography variant="subtitle1">
+                  {applicant.header.value}
+                </Typography>
               </Grid2>
-            </AccordionDetails>
-          </Accordion>
-        ))}
+              <Grid2 size={2}>
+                <Typography variant="subtitle1">
+                  {applicant.header.result}
+                </Typography>
+              </Grid2>
+              {applicant.data.map((data, i) => (
+                <React.Fragment key={i}>
+                  <Grid2 size={4}>
+                    <Typography variant="caption">{data.text}</Typography>
+                  </Grid2>
+                  <Grid2 size={6}>
+                    <Typography>{data.value}</Typography>
+                  </Grid2>
+                  <Grid2 size={2}>
+                    <Typography>
+                      <ResultIcon
+                        result={data.result}
+                        verified={data.verified}
+                        resultInfo={data.resultInfo}
+                      />
+                    </Typography>
+                  </Grid2>
+                </React.Fragment>
+              ))}
+
+              <div className="w-100 mt-2">
+                <Grid2 size={4}>
+                  <Typography variant="subtitle1">
+                    {asset.header.title}
+                  </Typography>
+                </Grid2>
+                <Grid2 size={6}>
+                  <Typography variant="subtitle1">
+                    {asset.header.value}
+                  </Typography>
+                </Grid2>
+                <Grid2 size={2}>
+                  <Typography variant="subtitle1">
+                    {asset.header.result}
+                  </Typography>
+                </Grid2>
+              </div>
+              {asset.data.map((data, i) => (
+                <React.Fragment key={i}>
+                  <Grid2 size={4}>
+                    <Typography variant="caption">{data.text}</Typography>
+                  </Grid2>
+                  <Grid2 size={6}>
+                    <Typography>{data.value}</Typography>
+                  </Grid2>
+                  <Grid2 size={2}>
+                    <Typography>
+                      <ResultIcon
+                        result={data.result}
+                        verified={data.verified}
+                        resultInfo={data.resultInfo}
+                      />
+                    </Typography>
+                  </Grid2>
+                </React.Fragment>
+              ))}
+
+              <div className="w-100 mt-2">
+                <Grid2 size={4}>
+                  <Typography variant="subtitle1">
+                    {arrangement.header.title}
+                  </Typography>
+                </Grid2>
+                <Grid2 size={6}>
+                  <Typography variant="subtitle1">
+                    {arrangement.header.value}
+                  </Typography>
+                </Grid2>
+                <Grid2 size={2}>
+                  <Typography variant="subtitle1">
+                    {arrangement.header.result}
+                  </Typography>
+                </Grid2>
+              </div>
+              {arrangement.data.map((data, i) => (
+                <React.Fragment key={i}>
+                  <Grid2 size={4}>
+                    <Typography variant="caption">{data.text}</Typography>
+                  </Grid2>
+                  <Grid2 size={6}>
+                    <Typography>{data.value}</Typography>
+                  </Grid2>
+                  <Grid2 size={2}>
+                    <Typography>
+                      <ResultIcon
+                        result={data.result}
+                        verified={data.verified}
+                        resultInfo={data.resultInfo}
+                      />
+                    </Typography>
+                  </Grid2>
+                </React.Fragment>
+              ))}
+            </Grid2>
+          </AccordionDetails>
+        </Accordion>
 
         <Accordion
           className="mb-2"
           sx={{
             backgroundColor:
-              strategy.result === "LOW RISK" ? Color.lightGreen : Color.amber,
+              riskRating.result === "LOW RISK" ? Color.lightGreen : Color.amber,
           }}
-          onChange={(_, expanded) => handleExpand(expanded, strategy.title)}
+          defaultExpanded
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Grid2 container className="w-100">
-              {expandedList.includes(strategy.title) ? (
-                <>
-                  <Grid2 size={4}>
-                    <Typography>
-                      <strong>{strategy.title}</strong>
-                    </Typography>
-                  </Grid2>
-                  <Grid2 size={4}>
-                    <Stack
-                      direction={"row"}
-                      justifyContent={"space-between"}
-                      className="pr-5"
-                    >
-                      <Typography>LOW</Typography>
-                      <Typography>HIGH</Typography>
-                    </Stack>
-                  </Grid2>
-                  <Grid2 size={2}>
-                    <Typography>Result</Typography>
-                  </Grid2>
-                  <Grid2 size={2}>
-                    <Typography>Verified</Typography>
-                  </Grid2>
-                </>
-              ) : (
-                <>
-                  <Grid2 size={4}>
-                    <strong>{strategy.title}</strong>
-                  </Grid2>
-                  <Grid2 size={4}>
-                    <Stack direction={"row"} alignItems={"center"} spacing={2}>
-                      <Typography>{strategy.result}</Typography>
-                      <ResultIcon result={strategy.result} />
-                    </Stack>
-                  </Grid2>
-                  <Grid2 size={2}>
-                    <Stack direction={"row"} alignItems={"center"} spacing={2}>
-                      {["PASS", "REVIEW"].includes(strategy.result) && (
-                        <>
-                          <Typography>Verified</Typography>{" "}
-                          {strategy.result === "PASS" && (
-                            <ResultIcon result={strategy.result} />
-                          )}
-                        </>
-                      )}
-                    </Stack>
-                  </Grid2>
-                  <Grid2 size={2} className="text-right">
-                    Details
-                  </Grid2>
-                </>
-              )}
+              <strong className="text-uppercase">{riskRating.title}</strong>
             </Grid2>
           </AccordionSummary>
           <AccordionDetails>
             <Grid2 container>
-              {strategy.data.map((data, i) => (
+              <Grid2 size={4}>
+                <Typography variant="subtitle1">
+                  {riskRating.header.title}
+                </Typography>
+              </Grid2>
+              <Grid2 size={6}>
+                <Typography variant="subtitle1">
+                  <Stack
+                    direction={"row"}
+                    justifyContent={"space-between"}
+                    className="pr-5"
+                  >
+                    <Typography>LOW</Typography>
+                    <Typography>HIGH</Typography>
+                  </Stack>
+                </Typography>
+              </Grid2>
+              <Grid2 size={2}>
+                <Typography variant="subtitle1">
+                  {riskRating.header.result}
+                </Typography>
+              </Grid2>
+              {riskRating.data.map((data, i) => (
                 <React.Fragment key={i}>
                   <Grid2 size={4}>
-                    <Typography sx={{ ml: data.isChild ? 4 : 0 }}>
+                    <Typography
+                      sx={{ ml: data.isChild ? 4 : 0 }}
+                      variant="caption"
+                    >
                       {data.text}:
                     </Typography>
                   </Grid2>
-                  <Grid2 size={4} className="pr-5">
+                  <Grid2 size={6} className="pr-5">
                     {data.valueType === "range" ? (
                       <RangeDisplay number={data.value} />
                     ) : (
@@ -230,13 +220,8 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
                     <ResultIcon
                       result={data.result}
                       resultInfo={data.resultInfo}
+                      verified={data.verified}
                     />
-                  </Grid2>
-                  <Grid2 size={2}>
-                    <Stack direction={"row"} alignItems={"center"} spacing={1}>
-                      {!!data.verified && <ResultIcon result="PASS" />}
-                      <Typography>{data.verified}</Typography>
-                    </Stack>
                   </Grid2>
                 </React.Fragment>
               ))}
@@ -244,7 +229,66 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
           </AccordionDetails>
         </Accordion>
 
-        {/* The Recommendation Section */}
+        <Accordion
+          className="mb-2"
+          sx={{
+            backgroundColor:
+              compliance.result === "LOW RISK" ? Color.lightGreen : Color.amber,
+          }}
+          defaultExpanded
+        >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Grid2 container className="w-100">
+              <strong className="text-uppercase">{compliance.title}</strong>
+            </Grid2>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid2 container>
+              <Grid2 size={4}>
+                <Typography variant="subtitle1">
+                  {compliance.header.title}
+                </Typography>
+              </Grid2>
+              <Grid2 size={6}>
+                <Typography variant="subtitle1">
+                  {compliance.header.value}
+                </Typography>
+              </Grid2>
+              <Grid2 size={2}>
+                <Typography variant="subtitle1">
+                  {compliance.header.result}
+                </Typography>
+              </Grid2>
+              {compliance.data.map((data, i) => (
+                <React.Fragment key={i}>
+                  <Grid2 size={4}>
+                    <Typography
+                      sx={{ ml: data.isChild ? 4 : 0 }}
+                      variant="caption"
+                    >
+                      {data.text}:
+                    </Typography>
+                  </Grid2>
+                  <Grid2 size={6} className="pr-5">
+                    {data.valueType === "range" ? (
+                      <RangeDisplay number={data.value} />
+                    ) : (
+                      <Typography>{data.value}</Typography>
+                    )}
+                  </Grid2>
+                  <Grid2 size={2}>
+                    <ResultIcon
+                      result={data.result}
+                      resultInfo={data.resultInfo}
+                      verified={data.verified}
+                    />
+                  </Grid2>
+                </React.Fragment>
+              ))}
+            </Grid2>
+          </AccordionDetails>
+        </Accordion>
+
         <Paper sx={{ p: 2 }}>
           <Stack direction={"row"} justifyContent={"space-between"}>
             <div>
@@ -254,20 +298,20 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
               <Typography
                 sx={{
                   color:
-                    report.recommendation === "APPROVE"
+                    recommendation.result === "APPROVE"
                       ? Color.green
                       : Color.darkAmber,
                 }}
               >
-                <strong>{report.recommendation}:</strong>{" "}
-                {report.recommendationDetails}
+                <strong>{recommendation.result}:</strong>{" "}
+                {recommendation.details}
               </Typography>
             </div>
             <Stack direction={"row"} spacing={1} alignItems={"center"}>
               <Button onClick={handleClose} color="warning" variant="contained">
                 Review
               </Button>
-              {report.recommendation === "APPROVE" &&
+              {recommendation.result === "APPROVE" &&
                 status !== CreditStatus.Approved && (
                   <Button
                     onClick={() => {

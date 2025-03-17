@@ -50,6 +50,11 @@ export interface DetailFormProps {
 export interface ReportSection {
   title: string;
   result: string;
+  header: {
+    title: string;
+    value: string;
+    result: string;
+  };
   data: ReportData[];
 }
 
@@ -65,10 +70,17 @@ export interface ReportData {
 
 export interface Report {
   title: string;
-  applicant: ReportSection;
-  asset: ReportSection;
-  arrangement: ReportSection;
-  strategy: ReportSection;
-  recommendation: string;
-  recommendationDetails: string;
+  qualifiers: {
+    title: string;
+    result: string;
+    applicant: ReportSection;
+    asset: ReportSection;
+    arrangement: ReportSection;
+  };
+  riskRating: ReportSection;
+  compliance: ReportSection;
+  recommendation: {
+    result: string;
+    details: string;
+  };
 }
