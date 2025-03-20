@@ -40,7 +40,9 @@ const ResultIcon = ({
         ))}
 
       {["REVIEW", "MED RISK"].includes(result) && (
-        <InfoOutlinedIcon sx={{ color: Color.darkAmber }} fontSize="small" />
+        <Tooltip title={resultInfo}>
+          <InfoOutlinedIcon sx={{ color: Color.darkAmber }} fontSize="small" />
+        </Tooltip>
       )}
     </>
   );
