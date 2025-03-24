@@ -285,7 +285,7 @@ export const applications: Loan[] = [
     creditStatus: "Submitted",
     checklists: [
       {
-        checkpoint: "Applicant",
+        checkpoint: "Applicant - AML/KYC",
         outcome: "PASS",
         section: "mandatory",
         criteriaList: [
@@ -336,14 +336,6 @@ export const applications: Loan[] = [
             value: "Pass",
             result: "PASS",
             section: "biometrics",
-            isOverridden: false,
-          },
-          {
-            key: "AssetBacked",
-            text: "Property Backed",
-            value: "Yes",
-            result: "PASS",
-            section: "property",
             isOverridden: false,
           },
         ],
@@ -470,13 +462,48 @@ export const applications: Loan[] = [
           },
         ],
       },
+
       {
-        checkpoint: "ABN Registration",
+        checkpoint: "Applicant",
         outcome: "PASS",
-        section: "mandatory",
+        section: "goals",
         criteriaList: [
           {
-            key: "1",
+            key: "AssetBacked",
+            text: "Property Backed",
+            value: "Yes",
+            result: "PASS",
+            section: "property",
+            isOverridden: false,
+          },
+
+          {
+            key: "g1",
+            text: "GST Registration",
+            value: "Registered from 01 Jul 2024",
+            result: "PASS",
+            section: "gst",
+            isOverridden: false,
+          },
+          {
+            key: "g2",
+            text: "GST Registration Length",
+            value: "1 Year",
+            result: "FAIL",
+            section: "gst",
+            isOverridden: true,
+          },
+          {
+            key: "g3",
+            text: "Is ATO Portal Satisfactory?",
+            value: "No",
+            result: "FAIL",
+            section: "gst",
+            isOverridden: true,
+          },
+
+          {
+            key: "a1",
             text: "ABN",
             value: "42600819010",
             result: "",
@@ -484,7 +511,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "2",
+            key: "a2",
             text: "Status",
             value: "Active from 01 Jul 2024",
             result: "PASS",
@@ -492,7 +519,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "3",
+            key: "a3",
             text: "ABN Registration Length",
             value: "1 year",
             result: "FAIL",
@@ -500,7 +527,7 @@ export const applications: Loan[] = [
             isOverridden: true,
           },
           {
-            key: "4",
+            key: "a4",
             text: "Entity name",
             value: "BEN's BAKERY",
             result: "",
@@ -508,7 +535,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "5",
+            key: "a5",
             text: "Entity type",
             value: "Public Company",
             result: "",
@@ -516,7 +543,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "6",
+            key: "a6",
             text: "Main Business Location",
             value: "NSW 2000",
             result: "",
@@ -524,7 +551,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "a1",
+            key: "a7",
             text: "Is ASIC Extracted Date Present?",
             value: "Yes",
             result: "",
@@ -532,7 +559,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "a2",
+            key: "a8",
             text: "ASIC Extracted Date",
             value: "22 Jan 2023",
             valueType: "date",
@@ -541,7 +568,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "a3",
+            key: "a9",
             text: "ASIC Extracted Date",
             value: "22 Jan 2023",
             valueType: "date",
@@ -559,7 +586,7 @@ export const applications: Loan[] = [
             isOverridden: true,
           },
           {
-            key: "7",
+            key: "p1",
             text: "ABN",
             value: "42600819010",
             result: "",
@@ -567,7 +594,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "8",
+            key: "2",
             text: "Status",
             value: "Cancelled from 01 Jul 2003",
             result: "",
@@ -575,40 +602,12 @@ export const applications: Loan[] = [
             isOverridden: true,
           },
           {
-            key: "9",
+            key: "p3",
             text: "ABN Registration Length",
             value: "24 years",
             result: "",
             section: "previous",
             isOverridden: false,
-          },
-        ],
-      },
-      {
-        checkpoint: "GST Registration",
-        outcome: "PASS",
-        section: "mandatory",
-        criteriaList: [
-          {
-            key: "1",
-            text: "GST Registration",
-            value: "Registered from 01 Jul 2024",
-            result: "PASS",
-            isOverridden: false,
-          },
-          {
-            key: "2",
-            text: "GST Registration Length",
-            value: "1 Year",
-            result: "FAIL",
-            isOverridden: true,
-          },
-          {
-            key: "3",
-            text: "Is ATO Portal Satisfactory?",
-            value: "No",
-            result: "FAIL",
-            isOverridden: true,
           },
         ],
       },
@@ -654,7 +653,7 @@ export const applications: Loan[] = [
         section: "goals",
         criteriaList: [
           {
-            key: "1",
+            key: "l1",
             text: "Assessment Type",
             value: "Low Doc",
             result: "",
@@ -662,7 +661,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "2",
+            key: "l2",
             text: "Customer Strategy",
             value: "Standard",
             result: "",
@@ -670,7 +669,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "3",
+            key: "l3",
             text: "Is Private Sale?",
             value: "Yes",
             result: "",
@@ -678,7 +677,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "5",
+            key: "l4",
             text: "Deposit amount",
             value: "2000",
             valueType: "currency",
@@ -696,7 +695,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "4",
+            key: "l5",
             text: "Total financed amount",
             value: "20000",
             valueType: "currency",
@@ -705,7 +704,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "6",
+            key: "l6",
             text: "Current obligor exposure",
             value: "1250",
             valueType: "currency",
@@ -714,7 +713,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "7",
+            key: "l7",
             text: "Total obligor exposure",
             value: "20250",
             valueType: "currency",
@@ -722,56 +721,50 @@ export const applications: Loan[] = [
             section: "exposure",
             isOverridden: true,
           },
-        ],
-      },
-      {
-        checkpoint: "Serviceability Evident",
-        outcome: "PASS",
-        section: "goals",
-        criteriaList: [
+
           {
-            key: "1",
+            key: "s1",
             text: "Number of adults in household",
             value: "2",
             valueType: "",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
-            key: "2",
+            key: "s2",
             text: "Number of dependents",
             value: "2",
             valueType: "",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
-            key: "3",
+            key: "s3",
             text: "Expected weekly repayment",
             value: "689",
             valueType: "currency",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
-            key: "4",
+            key: "s4",
             text: "Expected weekly income from work letter",
             value: "56557",
             valueType: "currency",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
-            key: "5",
+            key: "s5",
             text: "BrokerFlow document ID",
             value: "A312314",
             valueType: "",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
@@ -780,36 +773,26 @@ export const applications: Loan[] = [
             value: "No history",
             valueType: "dropdown",
             result: "PASS",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
-        ],
-      },
-      {
-        checkpoint: "Loan to Value Ratio",
-        outcome: "PASS",
-        section: "goals",
-        criteriaList: [
+
           {
             key: "LVR",
             text: "Loan to Value Ratio",
             value: "73.67%",
             result: "PASS",
+            section: "lvr",
             isOverridden: false,
           },
-        ],
-      },
-      {
-        checkpoint: "Debt Service Coverage Ratio",
-        outcome: "PASS",
-        section: "goals",
-        criteriaList: [
+
           {
             key: "DSCR",
             text: "DSCR",
             value: "20.02",
             valueType: "decimal",
             result: "PASS",
+            section: "dscr",
             isOverridden: false,
           },
         ],
@@ -1328,7 +1311,7 @@ export const applications: Loan[] = [
     creditStatus: "Submitted",
     checklists: [
       {
-        checkpoint: "Applicant",
+        checkpoint: "Applicant - AML/KYC",
         outcome: "FAIL",
         section: "mandatory",
         criteriaList: [
@@ -1379,14 +1362,6 @@ export const applications: Loan[] = [
             value: "Fail",
             result: "FAIL",
             section: "biometrics",
-            isOverridden: false,
-          },
-          {
-            key: "AssetBacked",
-            text: "Property Backed",
-            value: "No",
-            result: "FAIL",
-            section: "property",
             isOverridden: false,
           },
         ],
@@ -1513,13 +1488,48 @@ export const applications: Loan[] = [
           },
         ],
       },
+
       {
-        checkpoint: "ABN Registration",
+        checkpoint: "Applicant",
         outcome: "FAIL",
-        section: "mandatory",
+        section: "goals",
         criteriaList: [
           {
-            key: "1",
+            key: "AssetBacked",
+            text: "Property Backed",
+            value: "No",
+            result: "FAIL",
+            section: "property",
+            isOverridden: false,
+          },
+
+          {
+            key: "g1",
+            text: "GST Registration",
+            value: "Registered from 01 Jul 2024",
+            result: "PASS",
+            section: "gst",
+            isOverridden: false,
+          },
+          {
+            key: "g2",
+            text: "GST Registration Length",
+            value: "1 Year",
+            result: "FAIL",
+            section: "gst",
+            isOverridden: false,
+          },
+          {
+            key: "g3",
+            text: "Is ATO Portal Satisfactory?",
+            value: "No",
+            result: "FAIL",
+            section: "gst",
+            isOverridden: false,
+          },
+
+          {
+            key: "a1",
             text: "ABN",
             value: "42600819010",
             result: "",
@@ -1527,7 +1537,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "2",
+            key: "a2",
             text: "Status",
             value: "Active from 01 Jul 2024",
             result: "PASS",
@@ -1535,7 +1545,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "3",
+            key: "a3",
             text: "ABN Registration Length",
             value: "1 year",
             result: "FAIL",
@@ -1543,7 +1553,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "4",
+            key: "a4",
             text: "Entity name",
             value: "BEN's BAKERY",
             result: "",
@@ -1551,7 +1561,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "5",
+            key: "a5",
             text: "Entity type",
             value: "Public Company",
             result: "",
@@ -1559,7 +1569,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "6",
+            key: "a6",
             text: "Main Business Location",
             value: "NSW 2000",
             result: "",
@@ -1567,7 +1577,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "a1",
+            key: "a7",
             text: "Is ASIC Extracted Date Present?",
             value: "Yes",
             result: "",
@@ -1575,7 +1585,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "a2",
+            key: "a8",
             text: "ASIC Extracted Date",
             value: "22 Jan 2023",
             valueType: "date",
@@ -1584,7 +1594,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "a3",
+            key: "a9",
             text: "ASIC Extracted Date",
             value: "22 Jan 2023",
             valueType: "date",
@@ -1602,7 +1612,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "7",
+            key: "p1",
             text: "ABN",
             value: "42600819010",
             result: "",
@@ -1610,7 +1620,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "8",
+            key: "p2",
             text: "Status",
             value: "Cancelled from 01 Jul 2003",
             result: "",
@@ -1618,39 +1628,11 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "9",
+            key: "p3",
             text: "ABN Registration Length",
             value: "24 years",
             result: "",
             section: "previous",
-            isOverridden: false,
-          },
-        ],
-      },
-      {
-        checkpoint: "GST Registration",
-        outcome: "FAIL",
-        section: "mandatory",
-        criteriaList: [
-          {
-            key: "1",
-            text: "GST Registration",
-            value: "Registered from 01 Jul 2024",
-            result: "PASS",
-            isOverridden: false,
-          },
-          {
-            key: "2",
-            text: "GST Registration Length",
-            value: "1 Year",
-            result: "FAIL",
-            isOverridden: false,
-          },
-          {
-            key: "3",
-            text: "Is ATO Portal Satisfactory?",
-            value: "No",
-            result: "FAIL",
             isOverridden: false,
           },
         ],
@@ -1697,7 +1679,7 @@ export const applications: Loan[] = [
         section: "goals",
         criteriaList: [
           {
-            key: "1",
+            key: "L1",
             text: "Assessment Type",
             value: "Low Doc",
             result: "",
@@ -1705,7 +1687,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "2",
+            key: "L2",
             text: "Customer Strategy",
             value: "Standard",
             result: "",
@@ -1713,7 +1695,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "3",
+            key: "L3",
             text: "Is Private Sale?",
             value: "Yes",
             result: "",
@@ -1721,7 +1703,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "5",
+            key: "L4",
             text: "Deposit amount",
             value: "2000",
             valueType: "currency",
@@ -1739,7 +1721,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "4",
+            key: "L5",
             text: "Total financed amount",
             value: "20000",
             valueType: "currency",
@@ -1748,7 +1730,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "6",
+            key: "L6",
             text: "Current obligor exposure",
             value: "1250",
             valueType: "currency",
@@ -1757,7 +1739,7 @@ export const applications: Loan[] = [
             isOverridden: false,
           },
           {
-            key: "7",
+            key: "L7",
             text: "Total obligor exposure",
             value: "20250",
             valueType: "currency",
@@ -1765,56 +1747,50 @@ export const applications: Loan[] = [
             section: "exposure",
             isOverridden: false,
           },
-        ],
-      },
-      {
-        checkpoint: "Serviceability Evident",
-        outcome: "PASS",
-        section: "goals",
-        criteriaList: [
+
           {
-            key: "1",
+            key: "s1",
             text: "Number of adults in household",
             value: "2",
             valueType: "",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
-            key: "2",
+            key: "s2",
             text: "Number of dependents",
             value: "2",
             valueType: "",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
-            key: "3",
+            key: "s3",
             text: "Expected weekly repayment",
             value: "689",
             valueType: "currency",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
-            key: "4",
+            key: "s4",
             text: "Expected weekly income from work letter",
             value: "56557",
             valueType: "currency",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
-            key: "5",
+            key: "s5",
             text: "BrokerFlow document ID",
             value: "A312314",
             valueType: "",
             result: "",
-            section: "",
+            section: "serviceability",
             isOverridden: false,
           },
           {
@@ -1826,33 +1802,23 @@ export const applications: Loan[] = [
             section: "",
             isOverridden: false,
           },
-        ],
-      },
-      {
-        checkpoint: "Loan to Value Ratio",
-        outcome: "PASS",
-        section: "goals",
-        criteriaList: [
+
           {
             key: "LVR",
             text: "Loan to Value Ratio",
             value: "73.67%",
             result: "PASS",
+            section: "lvr",
             isOverridden: false,
           },
-        ],
-      },
-      {
-        checkpoint: "Debt Service Coverage Ratio",
-        outcome: "PASS",
-        section: "goals",
-        criteriaList: [
+
           {
             key: "DSCR",
             text: "DSCR",
             value: "20.02",
             valueType: "decimal",
             result: "PASS",
+            section: "dcsr",
             isOverridden: false,
           },
         ],

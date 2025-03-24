@@ -5,9 +5,7 @@ import { Criteria } from "../../../models/interfaces";
 import CriteriaRow from "./Criteria";
 
 const DSCRDetails = () => {
-  const { checklist, updateCriteria } = useChecklist(
-    "Debt Service Coverage Ratio"
-  );
+  const { checklist, updateCriteria } = useChecklist("Arrangement Check");
 
   const [dscr, setDSCR] = useState(1.1);
 
@@ -27,18 +25,24 @@ const DSCRDetails = () => {
 
   return (
     <Box>
-      {checklist.criteriaList.map((ac) => (
-        <CriteriaRow key={ac.key} criteria={ac} updateCriteria={updateCriteria}>
-          <TextField
-            variant="outlined"
-            size="small"
-            value={dscr}
-            onChange={(e) =>
-              handleChange(e as ChangeEvent<HTMLInputElement>, ac)
-            }
-          ></TextField>
-        </CriteriaRow>
-      ))}
+      {checklist.criteriaList
+        .filter((c) => c.section === "dscr")
+        .map((ac) => (
+          <CriteriaRow
+            key={ac.key}
+            criteria={ac}
+            updateCriteria={updateCriteria}
+          >
+            <TextField
+              variant="outlined"
+              size="small"
+              value={dscr}
+              onChange={(e) =>
+                handleChange(e as ChangeEvent<HTMLInputElement>, ac)
+              }
+            ></TextField>
+          </CriteriaRow>
+        ))}
     </Box>
   );
 };

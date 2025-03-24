@@ -22,11 +22,9 @@ import React from "react";
 import CardTitleHeader from "../../../components/CardTitleHeader";
 import { Checklist } from "../../../models/loan.models";
 import { useLoanStore } from "../../../state";
+import ApplicantQualifierCheckpoint from "./ApplicantQualifierCheckpoint";
 import ArrangementCheck from "./ArrangementCheck";
 import AssetQualification from "./AssetQualification";
-import DSCRDetails from "./DSCRDetails";
-import LoanValuationReportDetails from "./LoanValuationReportDetails";
-import ServiceabilityEvidentDetails from "./ServiceabilityEvidentDetails";
 
 const GoalsChecklist = () => {
   const loan = useLoanStore((state) => state.loan);
@@ -43,7 +41,7 @@ const GoalsChecklist = () => {
       <Card variant="outlined" className="mb-2">
         <CardContent sx={{ pt: 1 }}>
           <div className="d-flex justify-content-between mb-2">
-            <CardTitleHeader title="OA Goals Checklist" />
+            <CardTitleHeader title="OA Qualifiers Checklist" />
 
             <GradingIcon />
           </div>
@@ -94,25 +92,19 @@ const GoalsChecklist = () => {
         open={openDialog}
         onClose={() => toggleDialog(false)}
       >
-        <DialogTitle>OA Goals Checklist</DialogTitle>
+        <DialogTitle>OA Qualifiers Checklist</DialogTitle>
         <DialogContent>
           <Typography gutterBottom>
             Checkpoint - {checklist?.checkpoint}
           </Typography>
+          {checklist?.checkpoint === "Applicant" && (
+            <ApplicantQualifierCheckpoint />
+          )}
           {checklist?.checkpoint === "Asset Qualification" && (
             <AssetQualification />
           )}
           {checklist?.checkpoint === "Arrangement Check" && (
             <ArrangementCheck />
-          )}
-          {checklist?.checkpoint === "Serviceability Evident" && (
-            <ServiceabilityEvidentDetails />
-          )}
-          {checklist?.checkpoint === "Loan to Value Ratio" && (
-            <LoanValuationReportDetails />
-          )}
-          {checklist?.checkpoint === "Debt Service Coverage Ratio" && (
-            <DSCRDetails />
           )}
         </DialogContent>
         <DialogActions>

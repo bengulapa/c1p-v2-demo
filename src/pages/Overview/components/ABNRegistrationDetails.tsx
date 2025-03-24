@@ -17,7 +17,7 @@ import CriteriaRow from "./Criteria";
 
 const ABNRegistrationDetails = () => {
   const loan = useLoanStore((state) => state.loan)!;
-  const { checklist, updateCriteria } = useChecklist("ABN Registration");
+  const { checklist, updateCriteria } = useChecklist("Applicant");
 
   const skilledTradeCriteria = checklist.criteriaList.find(
     (cl) => cl.key === "SkilledTrade"
@@ -27,8 +27,8 @@ const ABNRegistrationDetails = () => {
   return (
     <>
       <Grid2 container spacing={1}>
-        <Grid2 size={9}>
-          <Typography gutterBottom>CURRENT</Typography>
+        <Grid2 size={10}>
+          <Typography gutterBottom>CURRENT ABN</Typography>
           <div className="ml-3 mb-3">
             {checklist.criteriaList
               .filter((c) => c.section === "abn")
@@ -68,7 +68,7 @@ const ABNRegistrationDetails = () => {
             </CriteriaRow>
           </div>
 
-          <Typography gutterBottom>PREVIOUS</Typography>
+          <Typography gutterBottom>PREVIOUS ABN</Typography>
           <div className="ml-3">
             {checklist.criteriaList
               .filter((c) => c.section === "previous")
@@ -82,8 +82,8 @@ const ABNRegistrationDetails = () => {
           </div>
         </Grid2>
 
-        <Grid2 size={3}>
-          <Button className="ml-5" endIcon={<LaunchIcon />}>
+        <Grid2 size={2}>
+          <Button endIcon={<LaunchIcon />}>
             <Link
               target="_blank"
               to={`https://abr.business.gov.au/ABN/View?id=${loan.abn}`}

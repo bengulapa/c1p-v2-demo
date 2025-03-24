@@ -22,11 +22,9 @@ import React from "react";
 import CardTitleHeader from "../../../components/CardTitleHeader";
 import { Checklist } from "../../../models/loan.models";
 import { useLoanStore } from "../../../state";
-import ABNRegistrationDetails from "./ABNRegistrationDetails";
 import ApplicantCheckpoint from "./ApplicantCheckpoint";
 import FraudAssessmentDetails from "./FraudAssessmentDetails";
 import VedaDetails from "./VedaDetails";
-import GSTRegistrationDetails from "./GSTRegistrationDetails";
 
 const MandatoryChecklist = () => {
   const loan = useLoanStore((state) => state.loan);
@@ -49,7 +47,7 @@ const MandatoryChecklist = () => {
           </div>
 
           <TableContainer component={Paper}>
-            <Table size="small" aria-label="a dense table">
+            <Table size="small">
               <TableHead>
                 <TableRow>
                   <TableCell>Checkpoint</TableCell>
@@ -99,17 +97,13 @@ const MandatoryChecklist = () => {
           <Typography gutterBottom>
             Checkpoint - {checklist?.checkpoint}
           </Typography>
-          {checklist?.checkpoint === "Applicant" && <ApplicantCheckpoint />}
+          {checklist?.checkpoint === "Applicant - AML/KYC" && (
+            <ApplicantCheckpoint />
+          )}
           {checklist?.checkpoint === "Fraud Assessment" && (
             <FraudAssessmentDetails />
           )}
           {checklist?.checkpoint === "Veda" && <VedaDetails />}
-          {checklist?.checkpoint === "GST Registration" && (
-            <GSTRegistrationDetails />
-          )}
-          {checklist?.checkpoint === "ABN Registration" && (
-            <ABNRegistrationDetails />
-          )}
         </DialogContent>
         <DialogActions>
           <Button

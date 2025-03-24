@@ -7,19 +7,21 @@ import CriteriaRow from "./Criteria";
 
 const LoanValuationReportDetails = () => {
   const loan = useLoanStore((state) => state.loan)!;
-  const { checklist, updateCriteria } = useChecklist("Loan to Value Ratio");
+  const { checklist, updateCriteria } = useChecklist("Arrangement Check");
 
   return (
     <>
       <Typography>ACCEPTANCE CRITERIA</Typography>
       <Box className="mb-3">
-        {checklist.criteriaList.map((ac) => (
-          <CriteriaRow
-            key={ac.key}
-            criteria={ac}
-            updateCriteria={updateCriteria}
-          />
-        ))}
+        {checklist.criteriaList
+          .filter((c) => c.section === "lvr")
+          .map((ac) => (
+            <CriteriaRow
+              key={ac.key}
+              criteria={ac}
+              updateCriteria={updateCriteria}
+            />
+          ))}
       </Box>
 
       <Typography>ASSET</Typography>

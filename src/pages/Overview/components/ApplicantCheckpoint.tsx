@@ -15,7 +15,7 @@ import { Criteria } from "../../../models/interfaces";
 import CriteriaRow from "./Criteria";
 
 const ApplicantCheckpoint = () => {
-  const { checklist, updateCriteria } = useChecklist("Applicant");
+  const { checklist, updateCriteria } = useChecklist("Applicant - AML/KYC");
   const creditShoppedCriteria = checklist.criteriaList.find(
     (cl) => cl.key === "CreditShopped"
   );
@@ -126,23 +126,6 @@ const ApplicantCheckpoint = () => {
             </Button>
           </div>
         </Grid2>
-      </Grid2>
-      <Grid2 container spacing={1}>
-        <Grid2 size={9}>
-          <Typography>PROPERTY</Typography>
-          <div className="ml-3">
-            {checklist.criteriaList
-              .filter((c) => c.section === "property")
-              .map((c) => (
-                <CriteriaRow
-                  key={c.key}
-                  criteria={c}
-                  updateCriteria={updateCriteria}
-                />
-              ))}
-          </div>
-        </Grid2>
-        <Grid2 size={3}></Grid2>
       </Grid2>
     </>
   );

@@ -9,6 +9,9 @@ import {
 import { useState } from "react";
 import { useChecklist } from "../../../hooks/useChecklist";
 import CriteriaRow from "./Criteria";
+import DSCRDetails from "./DSCRDetails";
+import LoanValuationReportDetails from "./LoanValuationReportDetails";
+import ServiceabilityEvidentDetails from "./ServiceabilityEvidentDetails";
 
 const ArrangementCheck = () => {
   const { checklist, updateCriteria } = useChecklist("Arrangement Check");
@@ -63,6 +66,12 @@ const ArrangementCheck = () => {
             </CriteriaRow>
           ))}
       </Box>
+
+      <ServiceabilityEvidentDetails />
+
+      <LoanValuationReportDetails />
+
+      <DSCRDetails />
     </>
   );
 };
