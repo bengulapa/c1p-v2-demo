@@ -810,7 +810,7 @@ export const applications: Loan[] = [
           header: {
             title: "Applicant",
             value: "Value",
-            result: "Pass",
+            result: "Status",
           },
           data: [
             {
@@ -934,7 +934,7 @@ export const applications: Loan[] = [
         header: {
           title: "Strategy",
           value: "LOW HIGH",
-          result: "Pass",
+          result: "Status",
         },
         data: [
           {
@@ -988,7 +988,7 @@ export const applications: Loan[] = [
         header: {
           title: "Applicant",
           value: "Value",
-          result: "Pass",
+          result: "Status",
         },
         data: [
           {
@@ -1835,7 +1835,7 @@ export const applications: Loan[] = [
           header: {
             title: "Applicant",
             value: "Value",
-            result: "Pass",
+            result: "Status",
           },
           data: [
             {
@@ -1963,7 +1963,7 @@ export const applications: Loan[] = [
         header: {
           title: "Strategy",
           value: "LOW HIGH",
-          result: "Pass",
+          result: "Status",
         },
         data: [
           {
@@ -2022,7 +2022,7 @@ export const applications: Loan[] = [
         header: {
           title: "Applicant",
           value: "Value",
-          result: "Pass",
+          result: "Status",
         },
         data: [
           {

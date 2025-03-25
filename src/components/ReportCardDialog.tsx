@@ -290,7 +290,7 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
         </Accordion>
 
         <Paper sx={{ p: 2 }}>
-          <Stack direction={"row"} justifyContent={"space-between"}>
+          <Stack direction={"row"} justifyContent={"space-between"} spacing={4}>
             <div>
               <Typography variant="subtitle1">
                 <strong>The Recommendation</strong>
