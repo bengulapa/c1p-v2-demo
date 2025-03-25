@@ -103,7 +103,7 @@ const MandatoryChecklist = () => {
           {checklist?.checkpoint === "Fraud Assessment" && (
             <FraudAssessmentDetails />
           )}
-          {checklist?.checkpoint === "Veda" && <VedaDetails />}
+          {checklist?.checkpoint === "Credit Score" && <VedaDetails />}
         </DialogContent>
         <DialogActions>
           <Button

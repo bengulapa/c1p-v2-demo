@@ -5,7 +5,7 @@ import { Criteria } from "../../../models/interfaces";
 import CriteriaRow from "./Criteria";
 
 const VedaDetails = () => {
-  const { checklist, updateCriteria } = useChecklist("Veda");
+  const { checklist, updateCriteria } = useChecklist("Credit Score");
 
   const cwScoreCriteria = checklist.criteriaList.find(
     (cl) => cl.key === "cwScore"

@@ -376,7 +376,7 @@ export const applications: Loan[] = [
         ],
       },
       {
-        checkpoint: "Veda",
+        checkpoint: "Credit Score",
         outcome: "PASS",
         section: "mandatory",
         criteriaList: [
@@ -1402,7 +1402,7 @@ export const applications: Loan[] = [
         ],
       },
       {
-        checkpoint: "Veda",
+        checkpoint: "Credit Score",
         outcome: "PASS",
         section: "mandatory",
         criteriaList: [
