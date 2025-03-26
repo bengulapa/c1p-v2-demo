@@ -13,6 +13,7 @@ import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { DetailFormProps } from "../../../models/interfaces";
 import IdentityValidationDialog from "./IdentityValidationDialog";
+import AssetAndLiabilitiesTab from "./AssetAndLiabilitiesTab";
 
 const GuarantorForm = ({
   index,
@@ -34,7 +35,7 @@ const GuarantorForm = ({
           justifyContent={"space-between"}
           className="mb-2"
         >
-          <Typography variant="subtitle2">Details</Typography>
+          <Typography variant="subtitle1">{guarantor.name}</Typography>
           <div>
             <IconButton
               color="primary"
@@ -54,12 +55,6 @@ const GuarantorForm = ({
           </div>
         </Stack>
 
-        <div>
-          <Typography variant="caption" className="list-label">
-            Name:
-          </Typography>
-          <span className="list-value">{guarantor.name}</span>
-        </div>
         <div>
           <Typography variant="caption" className="list-label">
             Date of birth:
@@ -118,7 +113,7 @@ const GuarantorForm = ({
         </div>
 
         {index === 0 && guarantor.alternateContact && (
-          <>
+          <div className="mb-2">
             <Typography variant="subtitle2">Alternate Contact</Typography>
             <div>
               <Typography variant="caption" className="list-label">
@@ -152,8 +147,10 @@ const GuarantorForm = ({
                 {guarantor.alternateContact.relationship}
               </span>
             </div>
-          </>
+          </div>
         )}
+
+        <AssetAndLiabilitiesTab />
 
         <Divider className="my-3" />
       </Box>

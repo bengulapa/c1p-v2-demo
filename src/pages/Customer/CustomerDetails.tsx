@@ -2,13 +2,12 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Paper, Tab } from "@mui/material";
 import React from "react";
 import PageTitle from "../../components/PageTitle";
-import AssetAndLiabilitiesTab from "./components/AssetAndLiabilitiesTab";
 import ApplicantTab from "./components/ApplicantTab";
-import GuarantorsTab from "./components/GuarantorsTab";
 import BeneficialOwnersTab from "./components/BeneficialOwnersTab";
+import GuarantorsTab from "./components/GuarantorsTab";
 
 const CustomerDetails = () => {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState("applicant");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -24,21 +23,17 @@ const CustomerDetails = () => {
           textColor="primary"
           indicatorColor="secondary"
         >
-          <Tab label="Applicant" value="1" />
-          <Tab label="Assets & Liabilities" value="2" />
-          <Tab label="Guarantors" value="3" />
-          <Tab label="Beneficial Owners" value="4" />
+          <Tab label="Applicant" value="applicant" />
+          <Tab label="Guarantors" value="guarantors" />
+          <Tab label="Beneficial Owners" value="owners" />
         </TabList>
-        <TabPanel className="px-0" value="1">
+        <TabPanel className="px-0" value="applicant">
           <ApplicantTab />
         </TabPanel>
-        <TabPanel className="px-0" value="2">
-          <AssetAndLiabilitiesTab />
-        </TabPanel>
-        <TabPanel className="px-0" value="3">
+        <TabPanel className="px-0" value="guarantors">
           <GuarantorsTab />
         </TabPanel>
-        <TabPanel className="px-0" value="4">
+        <TabPanel className="px-0" value="owners">
           <BeneficialOwnersTab />
         </TabPanel>
       </TabContext>

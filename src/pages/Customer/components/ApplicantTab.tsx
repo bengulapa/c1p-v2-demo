@@ -2,6 +2,10 @@ import {
   Button,
   Card,
   CardContent,
+  Checkbox,
+  Divider,
+  FormControlLabel,
+  FormGroup,
   Grid2,
   MenuItem,
   TextField,
@@ -42,7 +46,7 @@ const ApplicantTab = () => {
         <Card variant="outlined" className="mb-3">
           <CardContent>
             <DetailCardHeader
-              title="Applicant"
+              title="Current ABN"
               showEdit={true}
               onEdit={() => setIsEditMode({ key: "applicant", edit: true })}
             ></DetailCardHeader>
@@ -150,12 +154,9 @@ const ApplicantTab = () => {
                 </div>
               </>
             )}
-          </CardContent>
-        </Card>
-      </Grid2>
-      <Grid2 size={6}>
-        <Card variant="outlined" className="mb-3">
-          <CardContent>
+
+            <Divider className="my-3" />
+
             <DetailCardHeader
               title="Previous ABN"
               showEdit={true}
@@ -254,6 +255,68 @@ const ApplicantTab = () => {
                 </div>
               </>
             )}
+          </CardContent>
+        </Card>
+      </Grid2>
+      <Grid2 size={6}>
+        <Card variant="outlined" className="mb-3">
+          <CardContent>
+            <DetailCardHeader title="Mortgage Statements"></DetailCardHeader>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox defaultChecked size="small" sx={{ py: 0 }} />
+                }
+                label="Loan running 6 months+"
+              />
+              <FormControlLabel
+                control={<Checkbox size="small" sx={{ py: 0 }} />}
+                label="Good payment history"
+              />
+            </FormGroup>
+
+            <TextField
+              className="w-100 my-2"
+              label="Details"
+              multiline
+              rows={2}
+              variant="outlined"
+            />
+
+            <Divider className="my-2" />
+
+            <DetailCardHeader title="Asset Finance Credit Reference"></DetailCardHeader>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox defaultChecked size="small" sx={{ py: 0 }} />
+                }
+                label="Loan running 6 months+"
+              />
+              <FormControlLabel
+                control={<Checkbox size="small" sx={{ py: 0 }} />}
+                label="Comparable in loan size"
+              />
+              <FormControlLabel
+                required
+                control={<Checkbox size="small" sx={{ py: 0 }} />}
+                label="Good payment history"
+              />
+            </FormGroup>
+
+            <TextField
+              className="w-100 mt-2 mb-3"
+              label="Details"
+              multiline
+              rows={2}
+              variant="outlined"
+            />
+
+            <div className="text-center">
+              <Button className="mx-auto" variant="contained">
+                Save
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </Grid2>

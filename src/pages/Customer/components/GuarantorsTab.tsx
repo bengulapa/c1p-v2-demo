@@ -11,7 +11,7 @@ const GuarantorsTab = () => {
     defaultValues: {
       guarantors: [
         {
-          name: "Ben Gula",
+          name: "Red Velvet",
           dateOfBirth: "1991-01-01",
           nationality: "Australian",
           email: "ben.gula@agp.com",
@@ -27,16 +27,27 @@ const GuarantorsTab = () => {
             relationship: "Cousin",
           },
         },
+        {
+          name: "Black Forest",
+          dateOfBirth: "1991-01-01",
+          nationality: "Australian",
+          email: "ben.gula@agp.com",
+          phone: "041235647878",
+          address: "11 BAKER ST, MELBOURNE VIC 2074",
+          homeStatus: "Owning",
+          propertiesCount: 5,
+          identityValidationReport: "",
+        },
       ],
       coSupport: [
         {
           abn: "22605215227",
           acn: "605215227",
-          entityName: "GULA PATISSERIE",
-          legalName: "GULA PATISSERIE",
+          entityName: "SAL DE PAN",
+          legalName: "SAL DE PAN",
           incorporationDate: "2023-06-05",
           entityType: "Private Company",
-          businessAddress: "11 BAKER ST, MELBOURNE VIC 2074",
+          businessAddress: "12 BAKER ST, MELBOURNE VIC 2074",
         },
       ],
     },

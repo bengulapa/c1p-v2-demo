@@ -1253,8 +1253,8 @@ export const applications: Loan[] = [
     dateSubmitted: "2024-10-01T06:03:26.963",
     docFee: 0,
     abn: "42600819010",
-    entityName: "Middle Earth Store",
-    legalName: "Middle Earth Store Inc.",
+    entityName: "GULA PATISSERIE",
+    legalName: "GULA PATISSERIE",
     isAssetBacked: true,
     contributionAmount: 5000,
     hasDefaults: false,
@@ -1825,7 +1825,7 @@ export const applications: Loan[] = [
       },
     ],
     report: {
-      title: "CA02 - Middle Earth Store",
+      title: "CA02 - GULA PATISSERIE",
       qualifiers: {
         title: "Qualifiers",
         result: "FAIL",
@@ -1840,7 +1840,7 @@ export const applications: Loan[] = [
           data: [
             {
               text: "Legal name",
-              value: "Middle Earth Store PTY LTD",
+              value: "GULA PATISSERIE PTY LTD",
               result: "",
               verified: "ABR",
             },
