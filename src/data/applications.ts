@@ -826,13 +826,7 @@ export const applications: Loan[] = [
               verified: "ANZSIC",
             },
             {
-              text: "Organisation Credit Score",
-              value: "520",
-              result: "PASS",
-              verified: "Equifax",
-            },
-            {
-              text: "Guarantor 1 Credit Score",
+              text: "Guarantor's Credit Score",
               value: "510",
               result: "PASS",
               verified: "Equifax",
@@ -1851,16 +1845,11 @@ export const applications: Loan[] = [
               verified: "ANZSIC",
             },
             {
-              text: "Organisation Credit Score",
-              value: "520",
-              result: "PASS",
-              verified: "Equifax",
-            },
-            {
-              text: "Guarantor 1 Credit Score",
-              value: "490",
+              text: "Guarantor's Credit Score",
+              value: "499",
               result: "FAIL",
-              resultInfo: "Credit score < 500",
+              resultInfo:
+                "At least one obligors' credit score is below threshold.",
               verified: "Equifax",
             },
             {

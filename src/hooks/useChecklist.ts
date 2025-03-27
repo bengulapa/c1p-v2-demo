@@ -8,7 +8,6 @@ export function useChecklist(checkpoint: string) {
   const updateCriteria = (dirty: Criteria) => {
     const updatedCriteriaList = checklist.criteriaList.map((c) => {
       if (c.key === dirty.key) {
-        console.log(dirty);
         if (dirty.isOverridden && dirty.overrideReason) {
           log(
             `${currentUser.name} has overridden ${c.text}. Reason ${dirty.overrideReason}`

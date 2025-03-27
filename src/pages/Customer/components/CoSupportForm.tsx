@@ -22,8 +22,6 @@ const CoSupportForm = ({
   const { control, getValues } = useFormContext();
   const coSupport = getValues(`coSupport.${index}`);
 
-  console.log(isNew);
-
   if (!isEditing) {
     return (
       <Box>
