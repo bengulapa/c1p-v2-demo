@@ -17,18 +17,12 @@ import { AssetLiability, AssetLiabilityType } from ".";
 import { formatCurrency } from "../../../utils/formatters";
 import FormDialog from "./FormDialog";
 
-function createData(name: string, description: string, value: number) {
-  return { name, description, value };
+interface IProps {
+  assets: AssetLiability[];
+  liabilities: AssetLiability[];
 }
 
-const assetsRows = [
-  createData("Cash at Bank", "Lorem ipsum", 120612.0),
-  createData("Property-Occupied", "House and lot", 222126.0),
-];
-
-const liabilityRows = [createData("Mortgage", "Lorem ipsum", 61212.0)];
-
-const AssetAndLiabilitiesTab = () => {
+const AssetAndLiabilitiesTab = ({ assets, liabilities }: IProps) => {
   const [open, setOpen] = useState(false);
   const [assetLiability, setAssetLiability] = useState<AssetLiability | null>(
     null
@@ -66,7 +60,7 @@ const AssetAndLiabilitiesTab = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {assetsRows.map((row) => (
+            {assets.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{
@@ -90,6 +84,11 @@ const AssetAndLiabilitiesTab = () => {
                 </TableCell>
               </TableRow>
             ))}
+            {assets.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={4}>No asset found</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -120,7 +119,7 @@ const AssetAndLiabilitiesTab = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {liabilityRows.map((row) => (
+            {liabilities.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{
@@ -144,11 +143,16 @@ const AssetAndLiabilitiesTab = () => {
                 </TableCell>
               </TableRow>
             ))}
+            {liabilities.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={4}>No liability found</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
 
-      <div className="text-right mt-3">
+      <div className="text-right my-3">
         <Button
           className="mx-auto"
           variant="outlined"

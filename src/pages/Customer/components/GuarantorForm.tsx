@@ -150,7 +150,10 @@ const GuarantorForm = ({
           </div>
         )}
 
-        <AssetAndLiabilitiesTab />
+        <AssetAndLiabilitiesTab
+          assets={guarantor.assets}
+          liabilities={guarantor.liabilities}
+        />
 
         <Divider className="my-3" />
       </Box>
@@ -163,7 +166,13 @@ const GuarantorForm = ({
         name={`guarantors.${index}.name`}
         control={control}
         render={({ field }) => (
-          <TextField {...field} label="Name" fullWidth margin="normal" />
+          <TextField
+            {...field}
+            label="Name"
+            fullWidth
+            margin="normal"
+            size="small"
+          />
         )}
       />
       <Controller
@@ -176,6 +185,7 @@ const GuarantorForm = ({
             type="text"
             fullWidth
             margin="normal"
+            size="small"
           />
         )}
       />
@@ -189,6 +199,7 @@ const GuarantorForm = ({
             label="Nationality"
             fullWidth
             margin="normal"
+            size="small"
           >
             <MenuItem value="Australian">Australian</MenuItem>
             {/* Add more options as needed */}
@@ -199,21 +210,39 @@ const GuarantorForm = ({
         name={`guarantors.${index}.email`}
         control={control}
         render={({ field }) => (
-          <TextField {...field} label="Email" fullWidth margin="normal" />
+          <TextField
+            {...field}
+            label="Email"
+            fullWidth
+            margin="normal"
+            size="small"
+          />
         )}
       />
       <Controller
         name={`guarantors.${index}.phone`}
         control={control}
         render={({ field }) => (
-          <TextField {...field} label="Phone" fullWidth margin="normal" />
+          <TextField
+            {...field}
+            label="Phone"
+            fullWidth
+            margin="normal"
+            size="small"
+          />
         )}
       />
       <Controller
         name={`guarantors.${index}.address`}
         control={control}
         render={({ field }) => (
-          <TextField {...field} label="Address" fullWidth margin="normal" />
+          <TextField
+            {...field}
+            label="Address"
+            fullWidth
+            margin="normal"
+            size="small"
+          />
         )}
       />
       <Controller
@@ -226,6 +255,7 @@ const GuarantorForm = ({
             label="Home Status"
             fullWidth
             margin="normal"
+            size="small"
           >
             <MenuItem value="Owning">Owning</MenuItem>
             {/* Add more options as needed */}
@@ -242,6 +272,7 @@ const GuarantorForm = ({
             type="number"
             fullWidth
             margin="normal"
+            size="small"
           />
         )}
       />
@@ -254,11 +285,14 @@ const GuarantorForm = ({
             label="Identity Validation Report"
             fullWidth
             margin="normal"
+            size="small"
+            className="mb-3"
           />
         )}
       />
+
       {index === 0 && guarantor.alternateContact && (
-        <>
+        <div className="mb-2">
           <Typography className="mt-1" variant="subtitle1">
             Alternate Contact
           </Typography>
@@ -300,8 +334,13 @@ const GuarantorForm = ({
               />
             )}
           />
-        </>
+        </div>
       )}
+
+      <AssetAndLiabilitiesTab
+        assets={guarantor.assets}
+        liabilities={guarantor.liabilities}
+      />
 
       <Stack spacing={1} direction={"row"} justifyContent={"end"}>
         <Button
@@ -310,15 +349,15 @@ const GuarantorForm = ({
           onClick={() => remove(index)}
           size="small"
         >
-          Remove
+          Remove Guarantor
         </Button>
         <Button
-          variant="outlined"
+          variant="contained"
           color="secondary"
           onClick={() => toggleEditMode(index)}
           size="small"
         >
-          Save
+          Save guarantor
         </Button>
       </Stack>
       <Divider className="my-3" />

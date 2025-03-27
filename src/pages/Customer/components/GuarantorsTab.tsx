@@ -26,6 +26,25 @@ const GuarantorsTab = () => {
             phone: "041235647878",
             relationship: "Cousin",
           },
+          assets: [
+            {
+              name: "Cash at Bank",
+              description: "Lorem ipsum",
+              value: 120612.0,
+            },
+            {
+              name: "Property-Occupied",
+              description: "House and lot",
+              value: 222126.0,
+            },
+          ],
+          liabilities: [
+            {
+              name: "Mortgage",
+              description: "Lorem ipsum",
+              value: 61212.0,
+            },
+          ],
         },
         {
           name: "Black Forest",
@@ -37,6 +56,25 @@ const GuarantorsTab = () => {
           homeStatus: "Owning",
           propertiesCount: 5,
           identityValidationReport: "",
+          assets: [
+            {
+              name: "Cash at Bank",
+              description: "Lorem ipsum",
+              value: 20612.0,
+            },
+            {
+              name: "Property-Occupied",
+              description: "House and lot",
+              value: 22126.0,
+            },
+          ],
+          liabilities: [
+            {
+              name: "Mortgage",
+              description: "Lorem ipsum",
+              value: 1212.0,
+            },
+          ],
         },
       ],
       coSupport: [
@@ -106,6 +144,8 @@ const GuarantorsTab = () => {
         phone: "",
         relationship: "",
       },
+      assets: [],
+      liabilities: [],
     });
     setEditIndex(newIndex);
   };
