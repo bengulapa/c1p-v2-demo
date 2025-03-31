@@ -150,10 +150,12 @@ const GuarantorForm = ({
           </div>
         )}
 
-        <AssetAndLiabilitiesTab
-          assets={guarantor.assets}
-          liabilities={guarantor.liabilities}
-        />
+        {guarantor.assets && guarantor.liabilities && (
+          <AssetAndLiabilitiesTab
+            assets={guarantor.assets}
+            liabilities={guarantor.liabilities}
+          />
+        )}
 
         <Divider className="my-3" />
       </Box>
@@ -337,10 +339,12 @@ const GuarantorForm = ({
         </div>
       )}
 
-      <AssetAndLiabilitiesTab
-        assets={guarantor.assets}
-        liabilities={guarantor.liabilities}
-      />
+      {guarantor.assets && guarantor.liabilities && (
+        <AssetAndLiabilitiesTab
+          assets={guarantor.assets}
+          liabilities={guarantor.liabilities}
+        />
+      )}
 
       <Stack spacing={1} direction={"row"} justifyContent={"end"}>
         <Button
