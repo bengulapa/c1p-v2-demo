@@ -16,7 +16,6 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import React from "react";
 import AccountSettings from "../components/AccountSettings";
 import AuditLogs from "../components/AuditLogs";
-import ProcessList from "../components/ProcessList";
 import ReportCardDialog from "../components/ReportCardDialog";
 
 const drawerWidth = 220;
@@ -51,13 +50,8 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
-  const [openDrawer, setOpenDrawer] = React.useState(false);
   const [openAuditLogs, setOpenAuditLogs] = React.useState(false);
   const [openReportCard, setOpenCard] = React.useState(false);
-
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpenDrawer(newOpen);
-  };
 
   const toggleAuditLogs = (newOpen: boolean) => () => {
     setOpenAuditLogs(newOpen);
@@ -124,15 +118,11 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
         open={openReportCard}
         handleClose={() => setOpenCard(false)}
       />
-      <Drawer open={openDrawer} onClose={toggleDrawer(false)} anchor="right">
-        <Box
-          sx={{ width: 320, mt: 5, pt: 5, px: 1, height: "100%" }}
-          role="presentation"
-        >
-          <ProcessList />
-        </Box>
-      </Drawer>
-      <Drawer open={openAuditLogs} onClose={toggleDrawer(false)} anchor="right">
+      <Drawer
+        open={openAuditLogs}
+        onClose={toggleAuditLogs(false)}
+        anchor="right"
+      >
         <Box
           sx={{ width: 320, mt: 5, pt: 5, px: 1, height: "100%" }}
           role="presentation"
