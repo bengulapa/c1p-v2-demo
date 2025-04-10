@@ -27,7 +27,7 @@ import FraudAssessmentDetails from "./FraudAssessmentDetails";
 import VedaDetails from "./VedaDetails";
 
 const MandatoryChecklist = () => {
-  const loan = useLoanStore((state) => state.loan);
+  const checklists = useLoanStore((state) => state.checklists);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [checklist, setChecklist] = React.useState<Checklist | null>(null);
 
@@ -56,7 +56,7 @@ const MandatoryChecklist = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {loan?.checklists
+                {checklists
                   .filter((c) => c.section === "mandatory")
                   .map((row, index) => (
                     <TableRow

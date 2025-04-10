@@ -27,7 +27,7 @@ import ArrangementCheck from "./ArrangementCheck";
 import AssetQualification from "./AssetQualification";
 
 const GoalsChecklist = () => {
-  const loan = useLoanStore((state) => state.loan);
+  const checklists = useLoanStore((state) => state.checklists);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [checklist, setChecklist] = React.useState<Checklist | null>(null);
 
@@ -56,7 +56,7 @@ const GoalsChecklist = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {loan?.checklists
+                {checklists
                   .filter((c) => c.section === "goals")
                   .map((row, index) => (
                     <TableRow

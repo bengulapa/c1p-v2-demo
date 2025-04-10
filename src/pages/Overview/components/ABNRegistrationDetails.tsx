@@ -86,7 +86,7 @@ const ABNRegistrationDetails = () => {
           <Button endIcon={<LaunchIcon />}>
             <Link
               target="_blank"
-              to={`https://abr.business.gov.au/ABN/View?id=${loan.abn}`}
+              to={`https://abr.business.gov.au/ABN/View?id=${loan.applicant.abn}`}
             >
               VIEW ABN Lookup
             </Link>

@@ -1,14 +1,17 @@
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import { Application } from "../models/Application";
 import { CreditStatus, Recommendation } from "../models/enums";
-import { AuditLog, Criteria, UserData } from "../models/interfaces";
-import { Loan } from "../models/loan.models";
+import { AuditLog, Criteria, Report, UserData } from "../models/interfaces";
+import { Checklist } from "../models/loan.models";
 import { Task } from "../models/task.model";
 import { newGuid } from "../utils/uuid";
 
 interface State {
-  loan: Loan | null;
-  setLoan: (newLoan: Loan) => void;
+  loan: Application | null;
+  setLoan: (newLoan: Application) => void;
+  report: Report | null;
+  setReport: (report: Report) => void;
   tasks: Task[];
   setTasks: (tasks: Task[]) => void;
   addTask: (task: Task) => void;
@@ -23,6 +26,8 @@ interface State {
     updatedCriteriaList: Criteria[]
   ) => void;
   currentUser: UserData;
+  checklists: Checklist[];
+  setChecklists: (checklists: Checklist[]) => void;
 }
 
 export const useLoanStore = create<State>()(
@@ -41,6 +46,10 @@ export const useLoanStore = create<State>()(
         ],
         status: CreditStatus.Submitted,
         tasks: [],
+        report: null,
+        setReport: (report: Report) => set({ report }),
+        checklists: [],
+        setChecklists: (checklists: Checklist[]) => set({ checklists }),
         recommendation: Recommendation.Review,
         setRecommendation: (recommendation: Recommendation) =>
           set({ recommendation }),
@@ -63,7 +72,7 @@ export const useLoanStore = create<State>()(
               ...state.auditLogs,
             ],
           })),
-        setLoan: (newLoan: Loan) => set({ loan: newLoan }),
+        setLoan: (newLoan: Application) => set({ loan: newLoan }),
         log: (message: string) =>
           set((state) => ({
             auditLogs: [new AuditLog(message), ...state.auditLogs],
@@ -75,7 +84,7 @@ export const useLoanStore = create<State>()(
           set((state) => ({
             loan: {
               ...state.loan,
-              checklists: state.loan?.checklists.map((c) =>
+              checklists: state.checklists?.map((c) =>
                 c.checkpoint === checkpoint
                   ? {
                       ...c,
@@ -89,12 +98,12 @@ export const useLoanStore = create<State>()(
                     }
                   : c
               ),
-            } as Loan,
+            } as Application,
           }));
         },
       }),
       {
-        version: 1,
+        version: 2,
         name: "loanStore",
         storage: createJSONStorage(() => sessionStorage),
       }

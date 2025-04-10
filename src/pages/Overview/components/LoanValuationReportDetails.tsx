@@ -30,19 +30,19 @@ const LoanValuationReportDetails = () => {
           <div className="d-flex justify-content-between">
             <Typography variant="caption">Make:</Typography>
             <Typography variant="body2" color="secondary">
-              {loan.assetDetails.make}
+              {loan.asset.make}
             </Typography>
           </div>
           <div className="d-flex justify-content-between">
             <Typography variant="caption">Model:</Typography>
             <Typography variant="body2" color="secondary">
-              {loan.assetDetails.model}
+              {loan.asset.model}
             </Typography>
           </div>
           <div className="d-flex justify-content-between">
             <Typography variant="caption">Description:</Typography>
             <Typography variant="body2" color="secondary">
-              {loan.assetDetails.description}
+              {loan.asset.description}
             </Typography>
           </div>
         </Grid2>

@@ -28,7 +28,7 @@ const ReportCardDialog: React.FC<ReportCardDialogProps> = ({
   open,
   handleClose,
 }) => {
-  const report = useLoanStore((state) => state.loan!.report);
+  const report = useLoanStore((state) => state.report!);
   const { status, setStatus } = useLoanStore();
   const { qualifiers, riskRating, compliance, recommendation } = report;
   const { applicant, asset, arrangement } = qualifiers;

@@ -17,13 +17,14 @@ import React from "react";
 import AccountSettings from "../components/AccountSettings";
 import AuditLogs from "../components/AuditLogs";
 import ReportCardDialog from "../components/ReportCardDialog";
+import { Application } from "../models/Application";
 
 const drawerWidth = 220;
 
 interface AppBarProps extends MuiAppBarProps {
   open: boolean;
   handleDrawerOpen?: () => void;
-  loan?: any;
+  loan?: Application;
 }
 
 const AppBar = styled(MuiAppBar, {
@@ -76,7 +77,7 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
         </IconButton>
         <div className="d-flex justify-content-between align-items-center w-100">
           <Typography variant="h6">
-            {loan.creditArrangementId} - {loan.entityName}
+            {loan?.creditArrangementId} - {loan?.applicant.entityName}
           </Typography>
 
           <div className="d-flex align-items-center">
@@ -95,19 +96,19 @@ const Header = ({ open, handleDrawerOpen, loan }: AppBarProps) => {
               </IconButton>
             </Tooltip>
             <Typography variant="caption" className="mr-3">
-              Broker: Ben Gulapa{" "}
+              Broker: {loan?.brokerInfo.brokerName}{" "}
               <Tooltip title="Email">
-                <a href="tel:0400000000">
+                <a href={"tel:" + loan?.brokerInfo.brokerMobile}>
                   <CallSharpIcon sx={{ fontSize: 12 }} />
                 </a>
               </Tooltip>{" "}
               <Tooltip title="Call">
-                <a href="email:mr.fool@lotm.com">
+                <a href={"email:" + loan?.brokerInfo.brokerName}>
                   <AlternateEmailSharpIcon sx={{ fontSize: 12 }} />
                 </a>
               </Tooltip>
               <br />
-              BDM: Klein Moretti
+              BDM: {loan?.brokerInfo.bdmNames.join(", ")}
             </Typography>
 
             <AccountSettings />

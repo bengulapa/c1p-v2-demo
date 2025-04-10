@@ -20,19 +20,21 @@ import { Color } from "../styles/colors";
 import { formatCurrency } from "../utils/formatters";
 import CardTitleHeader from "./CardTitleHeader";
 import GaugeChart from "./GaugeChart";
+import { Application } from "../models/Application";
 
 interface IProps {
-  loan: Loan;
+  loan: Application;
   tasks: Task[];
 }
 
 const PageHeader = ({ loan, tasks }: IProps) => {
   const [score, setScore] = useState(0);
   const [scoreColor, setScoreColor] = useState(Color.textGray);
-  const { recommendation, setRecommendation } = useLoanStore();
+  const { recommendation, setRecommendation, checklists } = useLoanStore();
+  const { applicant, arrangement, asset, strategy } = loan;
 
   useEffect(() => {
-    const allCriteria = loan.checklists
+    const allCriteria = checklists
       .map((cl) => cl.criteriaList)
       .flat()
       .filter((clc) => !!clc.result);
@@ -83,12 +85,13 @@ const PageHeader = ({ loan, tasks }: IProps) => {
           >
             <Box className="w-100">
               <Typography variant="h6" color="primary">
-                {loan.entityName}
+                {applicant.entityName}
               </Typography>
               <Box sx={{ color: Color.lightGray }}>
-                <Typography variant="body2">{loan.entityType}</Typography>
-                <Typography variant="body2">Ben Gula</Typography>
-                <Typography variant="body2">Sal de Pan - Co Support</Typography>
+                <Typography variant="body2">{applicant.entityType}</Typography>
+                <Typography variant="body2">
+                  {applicant.guarantors[0]}
+                </Typography>
               </Box>
             </Box>
           </CardContent>
@@ -103,20 +106,23 @@ const PageHeader = ({ loan, tasks }: IProps) => {
           />
           <CardContent sx={{ pt: 1 }}>
             <Typography variant="h6">
-              {formatCurrency(loan.financeAmount)}
+              {formatCurrency(arrangement.financeAmount)}
             </Typography>
             <Box>
               <Typography variant="caption" component="p">
-                {formatCurrency(loan.repaymentAmount)} {loan.repaymentFrequency}
+                {formatCurrency(arrangement.repaymentAmount)}{" "}
+                {arrangement.repaymentFrequency}
               </Typography>
               <Typography variant="caption" component="p">
-                {loan.loanInterestRate}% Base interest rate
+                {arrangement.interestRate}% Base interest rate
               </Typography>
               <Typography variant="caption" component="p">
-                5 Years Term, In Advance
+                {arrangement.termInYears} Years Term,{" "}
+                {arrangement.repaymentTiming}
               </Typography>
               <Typography variant="caption" component="p">
-                $794,442.75 total obligor exposure
+                {formatCurrency(arrangement.totalObligorExposure)} total obligor
+                exposure
               </Typography>
             </Box>
           </CardContent>
@@ -132,11 +138,12 @@ const PageHeader = ({ loan, tasks }: IProps) => {
           <CardContent sx={{ pt: 1 }}>
             <div className="w-100">
               <Typography variant="h6" color="primary">
-                Motor vehicle
+                {asset.type}
               </Typography>
-              <Typography variant="caption">(up to 4.5t)</Typography>
-              <Typography variant="body2">Primary</Typography>
-              <Typography variant="body2">Toyota Hilux 2020</Typography>
+              <Typography variant="body2">{asset.class}</Typography>
+              <Typography variant="body2">
+                {asset.make} {asset.model} {asset.year}
+              </Typography>
             </div>
           </CardContent>
         </Card>
@@ -168,10 +175,14 @@ const PageHeader = ({ loan, tasks }: IProps) => {
               </Typography>
               <Stack>
                 <Typography variant="body1" color="primary">
-                  Low Risk
+                  {strategy.riskLevel}
                 </Typography>
-                <Typography variant="caption">{loan.assessmentType}</Typography>
-                <Typography variant="caption">A+ / Partner</Typography>
+                <Typography variant="caption">
+                  {strategy.assessmentType}
+                </Typography>
+                <Typography variant="caption">
+                  {strategy.customerStrategy} / {strategy.program}
+                </Typography>
               </Stack>
             </div>
             <Box sx={{ width: "auto", height: 120 }}>

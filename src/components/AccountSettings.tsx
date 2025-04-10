@@ -1,6 +1,5 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Logout from "@mui/icons-material/Logout";
-import PaletteIcon from "@mui/icons-material/Palette";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -48,12 +47,6 @@ const AccountSettings = () => {
           ben.gulapa@anglefinance.com.au
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PaletteIcon fontSize="small" />
-          </ListItemIcon>
-          Toggle Theme
-        </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Logout fontSize="small" />
