@@ -18,7 +18,6 @@ const AccountSettings = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
-    authService.logout();
     setAnchorEl(null);
   };
 
@@ -41,7 +40,6 @@ const AccountSettings = () => {
         id="account-menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
       >
         <MenuItem>
           <ListItemIcon>
@@ -50,7 +48,12 @@ const AccountSettings = () => {
           {authService.getAuthToken()}
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            setAnchorEl(null);
+            authService.logout();
+          }}
+        >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

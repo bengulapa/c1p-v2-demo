@@ -10,16 +10,16 @@ export default class ApplicationService {
     {
       creditArrangementId: "CA01",
       brokerInfo: {
-        brokerName: "Ben Gula",
-        brokerEmail: "ben.gulapa@anglefinance.com.au",
+        brokerName: "Bro Ker",
+        brokerEmail: "bro.ker@angle.com.au",
         brokerMobile: "0412345678",
         bdmNames: ["Klein Moretti"],
       },
       applicant: {
         abn: "01234567890",
-        entityName: "BENS BAKERY",
+        entityName: "Le Fake Bakery",
         entityType: "Public Company",
-        guarantors: ["Ben Guta", "Sol de Pain - Co Support"],
+        guarantors: ["Grant Thor", "Sol de Pain - Co Support"],
       },
       arrangement: {
         financeAmount: 10000.0,
@@ -60,8 +60,8 @@ export default class ApplicationService {
     {
       creditArrangementId: "CA02",
       brokerInfo: {
-        brokerName: "Ben Gula",
-        brokerEmail: "ben.gulapa@anglefinance.com.au",
+        brokerName: "Bro Ker II",
+        brokerEmail: "bro.ker@angle.com.au",
         brokerMobile: "0412345678",
         bdmNames: ["Klein Moretti"],
       },

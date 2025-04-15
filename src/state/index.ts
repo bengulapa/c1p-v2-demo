@@ -37,8 +37,8 @@ export const useLoanStore = create<State>()(
         loan: null,
         currentUser: {
           id: newGuid(),
-          name: "Ben Gulapa",
-          email: "ben@anglefinance.com.au",
+          name: "Cred Itor",
+          email: "cred.itanalyst@angle.com.au",
           role: "CreditAnalyst",
         },
         auditLogs: [

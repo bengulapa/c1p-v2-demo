@@ -32,6 +32,6 @@ export const creditAnalysts = [
   },
   {
     id: 11,
-    name: "Ben Gulapa",
+    name: "Cred Itor",
   },
 ];
