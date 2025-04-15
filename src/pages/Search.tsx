@@ -1,5 +1,16 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { Alert, Box, IconButton, InputBase, Paper } from "@mui/material";
+import {
+  Alert,
+  Box,
+  IconButton,
+  InputBase,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Paper,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { applications } from "../data/applications";
@@ -14,17 +25,30 @@ const Search = () => {
       sx={{
         width: "50%",
         mx: "auto",
+        p: 5,
       }}
     >
+      <Typography>Recent Searches</Typography>
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton color="secondary" component="a" href="/CA01/overview">
+            <ListItemText primary="CA01" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="/CA02/overview">
+            <ListItemText primary="CA02" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+
       <Paper
-        className="mb-4"
         component="form"
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-
-          mt: 5,
+          my: 5,
         }}
       >
         <InputBase

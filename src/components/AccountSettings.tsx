@@ -8,14 +8,17 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import * as React from "react";
+import AuthService from "../data/api/AuthService";
 
 const AccountSettings = () => {
+  const authService = new AuthService();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    authService.logout();
     setAnchorEl(null);
   };
 
@@ -44,7 +47,7 @@ const AccountSettings = () => {
           <ListItemIcon>
             <AccountCircleIcon fontSize="small" />
           </ListItemIcon>
-          ben.gulapa@anglefinance.com.au
+          {authService.getAuthToken()}
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
