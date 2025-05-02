@@ -1,4 +1,4 @@
-import { Alert, Box, Button, InputBase, Paper } from "@mui/material";
+import { Alert, Box, Button, InputBase, Paper, TextField } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../data/api/AuthService";
@@ -21,8 +21,13 @@ const Login = () => {
   return (
     <Box
       sx={{
-        width: "30%",
         mx: "auto",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "40%",
       }}
     >
       <Paper
@@ -32,18 +37,29 @@ const Login = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          mt: 5,
+          mb: 4,
+          width: "100%",
         }}
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Enter your email"
+          placeholder="Enter your AngleFinance email"
           value={email}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setEmail(event.target.value);
           }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleLogin();
+            }
+          }}
         />
-        <Button type="button" sx={{ p: "10px" }} onClick={handleLogin}>
+        <Button
+          type="button"
+          sx={{ p: "10px" }}
+          disabled={!email.includes("anglefinance.com.au")}
+          onClick={handleLogin}
+        >
           Login
         </Button>
       </Paper>

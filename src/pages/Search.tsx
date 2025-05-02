@@ -20,6 +20,16 @@ const Search = () => {
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
 
+  const handleSearch = () => {
+    const loan = applications.find((a) => a.creditArrangementId === value);
+
+    if (!loan) {
+      setError("No application found with that ID. Please try another.");
+    } else {
+      navigate(`/${value}/overview`, { state: loan });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -59,24 +69,17 @@ const Search = () => {
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setValue(event.target.value);
           }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
         <IconButton
           type="button"
           sx={{ p: "10px" }}
           aria-label="search"
-          onClick={() => {
-            const loan = applications.find(
-              (a) => a.creditArrangementId === value
-            );
-
-            if (!loan) {
-              setError(
-                "No application found with that ID. Please try another."
-              );
-            } else {
-              navigate(`/${value}/overview`, { state: loan });
-            }
-          }}
+          onClick={handleSearch}
         >
           <SearchIcon />
         </IconButton>

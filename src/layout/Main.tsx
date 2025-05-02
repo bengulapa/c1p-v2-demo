@@ -4,7 +4,6 @@ import * as React from "react";
 import { Outlet, useParams } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import ApplicationService from "../data/api/ApplicationService";
-import { applications } from "../data/applications";
 import { useLoanStore } from "../state";
 import { Color } from "../styles/colors";
 import { DrawerHeader } from "./DrawerHeader";
@@ -21,11 +20,6 @@ const Main = () => {
 
   React.useEffect(() => {
     const fetchLoanData = async () => {
-      const loan = await service.getApplication(loanId!);
-      if (loan) {
-        setLoan(loan);
-      }
-
       const checklists = await service.getChecklists(loanId!);
       if (checklists) {
         setChecklists(checklists);
@@ -39,6 +33,11 @@ const Main = () => {
       const tasks = await service.getTasks(loanId!);
       if (tasks) {
         setTasks(tasks);
+      }
+
+      const loan = await service.getApplication(loanId!);
+      if (loan) {
+        setLoan(loan);
       }
     };
 

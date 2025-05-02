@@ -103,7 +103,7 @@ export const useLoanStore = create<State>()(
         },
       }),
       {
-        version: 2,
+        version: 3,
         name: "loanStore",
         storage: createJSONStorage(() => sessionStorage),
       }
